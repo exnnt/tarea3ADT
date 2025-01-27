@@ -21,21 +21,22 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="600.0" prefWidth="1000.0" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.luisdbb.tarea3AD2024base.controller.UserController">
+<BorderPane prefHeight="600.0" prefWidth="1000.0" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" 
+fx:controller="com.luisdbb.tarea3AD2024base.controller.UserController">
    <top>
       <MenuBar BorderPane.alignment="TOP_LEFT">
         <menus>
-          <Menu mnemonicParsing="false" text="Archivos">
+          <Menu mnemonicParsing="false" text="File">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#exit" text="Exit" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Editar">
+          <Menu mnemonicParsing="false" text="Edit">
             <items>
               <MenuItem mnemonicParsing="false" text="Delete" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Ayuda">
+          <Menu mnemonicParsing="false" text="Help">
             <items>
               <MenuItem mnemonicParsing="false" text="About" />
             </items>
@@ -46,7 +47,7 @@
    <left>
       <VBox prefHeight="571.0" prefWidth="306.0" spacing="10.0" styleClass="background" stylesheets="@../styles/Styles.css" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Añadir Usuario" textFill="WHITE">
+            <Label text="Add New User" textFill="WHITE">
                <font>
                   <Font size="20.0" />
                </font>
@@ -56,7 +57,7 @@
             </Label>
             <HBox prefHeight="30.0" prefWidth="265.0">
                <children>
-                  <Label text="ID Usuario -" textFill="#f8f7f7">
+                  <Label text="User ID - " textFill="#f8f7f7">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -71,27 +72,27 @@
                   <Insets left="25.0" />
                </VBox.margin>
             </HBox>
-            <TextField fx:id="firstName" prefHeight="30.0" prefWidth="246.0" promptText="Nombre">
+            <TextField fx:id="firstName" prefHeight="30.0" prefWidth="246.0" promptText="First Name">
                <VBox.margin>
                   <Insets left="25.0" right="25.0" />
                </VBox.margin></TextField>
-            <TextField fx:id="lastName" prefHeight="30.0" prefWidth="246.0" promptText="Apellidos">
+            <TextField fx:id="lastName" prefHeight="30.0" prefWidth="246.0" promptText="Last Name">
                <VBox.margin>
                   <Insets left="25.0" right="25.0" />
                </VBox.margin></TextField>
-            <DatePicker fx:id="dob" editable="false" prefHeight="30.0" prefWidth="245.0" promptText="Fecha Nacimiento">
+            <DatePicker fx:id="dob" editable="false" prefHeight="30.0" prefWidth="245.0" promptText="Date of Birth">
                <VBox.margin>
                   <Insets left="25.0" />
                </VBox.margin>
             </DatePicker>
             <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="255.0" spacing="15.0">
                <children>
-                  <RadioButton fx:id="rbMale" mnemonicParsing="false" selected="true" text="Hombre" textFill="WHITE">
+                  <RadioButton fx:id="rbMale" mnemonicParsing="false" selected="true" text="Male" textFill="WHITE">
                      <toggleGroup>
                         <ToggleGroup fx:id="gender" />
                      </toggleGroup>
                   </RadioButton>
-                  <RadioButton fx:id="rbFemale" mnemonicParsing="false" text="Mujer" textFill="WHITE" toggleGroup="$gender">
+                  <RadioButton fx:id="rbFemale" mnemonicParsing="false" text="Female" textFill="WHITE" toggleGroup="$gender">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>
@@ -101,7 +102,7 @@
                   <Insets left="25.0" right="25.0" />
                </VBox.margin>
             </HBox>
-            <ComboBox fx:id="cbRole" prefHeight="30.0" prefWidth="246.0" promptText="Rol">
+            <ComboBox fx:id="cbRole" prefHeight="30.0" prefWidth="246.0" promptText="Select Role">
                <VBox.margin>
                   <Insets left="25.0" />
                </VBox.margin>
@@ -110,7 +111,7 @@
                <VBox.margin>
                   <Insets left="25.0" right="25.0" />
                </VBox.margin></TextField>
-            <PasswordField fx:id="password" prefHeight="30.0" prefWidth="246.0" promptText="Contraseña">
+            <PasswordField fx:id="password" prefHeight="30.0" prefWidth="246.0" promptText="Password">
                <VBox.margin>
                   <Insets left="25.0" right="25.0" />
                </VBox.margin>
@@ -122,7 +123,7 @@
                         <DropShadow blurType="ONE_PASS_BOX" color="#1965d0" />
                      </effect>
                   </Button>
-                  <Button fx:id="saveUser" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saveUser" prefHeight="30.0" prefWidth="75.0" styleClass="btnGreen" text="Guardar" textFill="WHITE">
+                  <Button fx:id="saveUser" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saveUser" prefHeight="30.0" prefWidth="75.0" styleClass="btnGreen" text="Save" textFill="WHITE">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -168,11 +169,11 @@
             <TableView fx:id="userTable" prefHeight="300.0" prefWidth="679.0" tableMenuButtonVisible="true">
               <columns>
                 <TableColumn fx:id="colUserId" maxWidth="700.0" prefWidth="20.0" text="ID" />
-                <TableColumn fx:id="colFirstName" maxWidth="4000.0" prefWidth="75.0" text="Nombre" />
-                  <TableColumn fx:id="colLastName" maxWidth="4000.0" prefWidth="75.0" text="Apellidos" />
-                  <TableColumn fx:id="colDOB" maxWidth="4000.0" prefWidth="75.0" text="Fecha" />
-                  <TableColumn fx:id="colGender" maxWidth="4000.0" prefWidth="60.0" text="Genero" />
-                  <TableColumn fx:id="colRole" maxWidth="4000.0" prefWidth="75.0" text="Rol" />
+                <TableColumn fx:id="colFirstName" maxWidth="4000.0" prefWidth="75.0" text="First Name" />
+                  <TableColumn fx:id="colLastName" maxWidth="4000.0" prefWidth="75.0" text="Last Name" />
+                  <TableColumn fx:id="colDOB" maxWidth="4000.0" prefWidth="75.0" text="Date of Birth" />
+                  <TableColumn fx:id="colGender" maxWidth="4000.0" prefWidth="60.0" text="Gender" />
+                  <TableColumn fx:id="colRole" maxWidth="4000.0" prefWidth="75.0" text="Role" />
                   <TableColumn fx:id="colEmail" maxWidth="6000.0" prefWidth="130.0" text="Email" />
                   <TableColumn fx:id="colEdit" maxWidth="3500.0" prefWidth="75.0" text="Edit" />
               </columns>
