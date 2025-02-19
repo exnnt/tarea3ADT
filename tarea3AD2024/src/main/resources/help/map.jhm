@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0">
+    <mapID target="admin" url="html/admin.html"/>
+    <mapID target="invitado" url="html/invitado.html"/>
+    <mapID target="parada" url="html/parada.html"/>
+    <mapID target="login" url="html/login.html"/>
+</map>

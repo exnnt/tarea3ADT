@@ -1,0 +1,7 @@
+menú admin - done 
+crear parada
+implement user parada
+test créate peregrino
+menú peregrino
+menú parada 
+
