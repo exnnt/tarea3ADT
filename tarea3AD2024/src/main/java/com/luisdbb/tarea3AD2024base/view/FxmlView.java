@@ -14,6 +14,28 @@ public enum FxmlView {
 			return "/fxml/MenuInvitado.fxml";
 		}
 	},
+	ADMIN1 {
+		@Override
+		public String getTitle() {
+			return getStringFromResourceBundle("admin.title");
+		}
+
+		@Override
+		public String getFxmlFile() {
+			return "/fxml/MenuParada2.fxml";
+		}
+	},
+	ADMIN2 {
+		@Override
+		public String getTitle() {
+			return getStringFromResourceBundle("admin.title");
+		}
+
+		@Override
+		public String getFxmlFile() {
+			return "/fxml/ServiciosSeVen.fxml";
+		}
+	},
 	LOGIN {
 		@Override
 		public String getTitle() {

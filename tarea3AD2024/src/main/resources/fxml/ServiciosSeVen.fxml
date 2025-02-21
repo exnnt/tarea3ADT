@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="root" prefHeight="415.0" prefWidth="575.0" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.luisdbb.tarea3AD2024base.controller.ServiController">
+   <children>
+      <Rectangle fill="DODGERBLUE" height="456.0" stroke="#ffffff8b" strokeType="INSIDE" width="605.0" />
+      <Label fx:id="lblLogin" layoutX="83.0" layoutY="14.0" text="Servicios" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="name" layoutX="28.0" layoutY="351.0" prefHeight="36.0" prefWidth="141.0" promptText="Nombre" />
+      <Button fx:id="btnLogin" layoutX="28.0" layoutY="411.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: #4967EB;" text="Crear" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+         <effect>
+            <DropShadow blurType="ONE_PASS_BOX" />
+         </effect></Button>
+      <Button fx:id="btnLogout" layoutX="505.0" layoutY="411.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: #4967EB;" styleClass="btnGreen" text="Volver" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+         <effect>
+            <DropShadow blurType="ONE_PASS_BOX" />
+         </effect>
+      </Button>
+      <ImageView fitHeight="30.0" fitWidth="31.0" layoutX="357.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/images/icone-point-d-interrogation-question-orange.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="btnAyuda" layoutX="549.0" layoutY="11.0" mnemonicParsing="false" onAction="#mostrarAyuda" opacity="0.0" prefHeight="36.0" prefWidth="30.0" textFill="TRANSPARENT" />
+      <TextField fx:id="precio" layoutX="192.0" layoutY="351.0" prefHeight="36.0" prefWidth="141.0" promptText="Precio" />
+      <Label fx:id="lblLogin1" layoutX="420.0" layoutY="14.0" text="Paradas" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="edit" layoutX="271.0" layoutY="411.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: #4967EB;" text="Editar" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+         <effect>
+            <DropShadow blurType="ONE_PASS_BOX" />
+         </effect>
+      </Button>
+      <Button fx:id="edit1" layoutX="357.0" layoutY="354.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="86.0" style="-fx-background-color: #4967EB;" text="Añadir" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+         <effect>
+            <DropShadow blurType="ONE_PASS_BOX" />
+         </effect>
+      </Button>
+      <Button fx:id="edit11" layoutX="478.0" layoutY="354.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: #4967EB;" text="Quitar" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+         <effect>
+            <DropShadow blurType="ONE_PASS_BOX" />
+         </effect>
+      </Button>
+   </children>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+</AnchorPane>

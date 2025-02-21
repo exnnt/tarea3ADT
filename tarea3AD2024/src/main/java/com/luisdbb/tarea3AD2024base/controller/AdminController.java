@@ -36,7 +36,10 @@ public class AdminController implements Initializable {
 
 	
 	   
-
+	@FXML
+	Button btnParadas;
+	@FXML
+	Button btnServicios;
 	@FXML
 	private Label lblAdmin;
 	@FXML
@@ -61,13 +64,30 @@ public class AdminController implements Initializable {
 		private ParadaService paradaService;
 	        
 	@FXML
+	private void back(ActionEvent event) throws IOException {
+		System.out.println("test");
+	
+		stageManager.switchScene(FxmlView.ADMIN1);
+	}
+	@FXML
+	private void paradas(ActionEvent event) throws IOException {
+		System.out.println("test paradas");
+	
+		stageManager.switchScene(FxmlView.ADMIN);
+	}
+	@FXML
+	private void servicios(ActionEvent event) throws IOException {
+		System.out.println("test lo otro");
+	
+		stageManager.switchScene(FxmlView.ADMIN2);
+	}
+	@FXML
 	private void logout(ActionEvent event) throws IOException {
 		System.out.println("test");
-		Tarea3Ad2024baseApplication.useractivo.setId(0);
-		Tarea3Ad2024baseApplication.useractivo.setNombre("Invitado");
 		Tarea3Ad2024baseApplication.useractivo.setPerfil(Perfil.INVITADO);
 		stageManager.switchScene(FxmlView.INVITADO);
 	}
+	 
 	public void mostrarAyuda() {
         try {
             

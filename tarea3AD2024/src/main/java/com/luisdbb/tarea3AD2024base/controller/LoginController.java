@@ -78,7 +78,7 @@ public class LoginController implements Initializable{
     		switch(usr) {
     		case 1:
     			Tarea3Ad2024baseApplication.useractivo.setPerfil(Perfil.ADMIN);
-    			stageManager.switchScene(FxmlView.ADMIN);
+    			stageManager.switchScene(FxmlView.ADMIN1);
     			break;
     		case 2:
     			Parada p = paradaService.findbyrespons(getUsername())

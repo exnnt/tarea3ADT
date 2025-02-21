@@ -1,22 +1,19 @@
 package com.luisdbb.tarea3AD2024base.modelo;
 
+import java.io.Serializable;
 
-import java.util.List;
+public class Servicio implements Serializable {
+	private Long id;
+	private String nombre;
+	private double precio;
 
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+	public Servicio() {
+	}
 
-@Entity
-public class Servicio {
-    public Servicio(Long id, String nombre, double precio, List<Long> paradasDisponibles) {
-		super();
+	public Servicio(Long id, String nombre, double precio) {
 		this.id = id;
 		this.nombre = nombre;
 		this.precio = precio;
-		this.paradasDisponibles = paradasDisponibles;
 	}
 
 	public Long getId() {
@@ -42,22 +39,4 @@ public class Servicio {
 	public void setPrecio(double precio) {
 		this.precio = precio;
 	}
-
-	public List<Long> getParadasDisponibles() {
-		return paradasDisponibles;
-	}
-
-	public void setParadasDisponibles(List<Long> paradasDisponibles) {
-		this.paradasDisponibles = paradasDisponibles;
-	}
-
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private String nombre;
-    private double precio;
-
-    @ElementCollection
-    private List<Long> paradasDisponibles;
 }
