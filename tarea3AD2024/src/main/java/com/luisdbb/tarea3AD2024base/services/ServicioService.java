@@ -16,40 +16,65 @@ public class ServicioService {
 		this.db4o = db4o;
 	}
 
-	// id null si es nuevo
-	public Servicio serviciear(Long id, String nombre, double precio) {
-		Servicio s = null;
+	public Servicio serviciar(String nombre, double precio) {
 
-		if (id != null) {
-
-			Servicio temp = new Servicio();
-			temp.setId(id);
-
-			List<Servicio> resultados = db4o.queryByExample(temp);
-			if (!resultados.isEmpty()) {
-				s = resultados.get(0);
-			}
-		}
-
-		if (s == null) {
-			s = new Servicio();
-
-			s.setId(nuevoid());
-		}
-
+		Servicio s = new Servicio();
+		s.setId(nuevoId());
 		s.setNombre(nombre);
 		s.setPrecio(precio);
-
+		System.out.println(nombre);
+		System.out.println(s.getId());
 		db4o.store(s);
 		return s;
+	}
+
+	public Servicio editar(Long id, String nombre, double precio) {
+		Servicio temp = new Servicio();
+		temp.setId(id);
+
+		List<Servicio> resultados = db4o.queryByExample(temp);
+
+		if (!resultados.isEmpty()) {
+			Servicio s = resultados.get(0);
+			s.setNombre(nombre);
+			s.setPrecio(precio);
+
+			db4o.store(s);
+			return s;
+		} else {
+			throw new RuntimeException("servicio con id " + id + " no encontrado");
+		}
+	}
+
+	public Servicio editar2(Long id, String nombre, double precio, List<Long> xd) {
+		Servicio temp = new Servicio();
+		temp.setId(id);
+
+		List<Servicio> resultados = db4o.queryByExample(temp);
+
+		if (!resultados.isEmpty()) {
+			Servicio s = resultados.get(0);
+			s.setNombre(nombre);
+			s.setPrecio(precio);
+
+			db4o.store(s);
+			return s;
+		} else {
+			throw new RuntimeException("servicio con id " + id + " no encontrado");
+		}
+	}
+
+	public void editar1(Servicio s) {
+
+		db4o.store(s);
+		
 	}
 
 	public List<Servicio> listarServicios() {
 		return db4o.queryAll(Servicio.class);
 	}
 
-	private Long nuevoid() {
-
+	private Long nuevoId() {
 		List<Servicio> todos = db4o.queryAll(Servicio.class);
 		long max = 0;
 		for (Servicio s : todos) {
