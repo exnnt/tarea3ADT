@@ -38,30 +38,23 @@ public class DB4Onosecuantos {
 	        return db;
 	    }
 
-	public void store(Object obj) {
-		open();
-		db.store(obj);
-		db.commit();
-		System.out.println((Servicio) obj);
+		public void store(Object obj) {
+			open();
+			db.store(obj);
+			db.commit();
+			System.out.println((Servicio) obj);
+			
+		}
 		
-	}
-	
+		public <T> List<T> queryByExample(T example) {
+			open();
+			return db.queryByExample(example);
+		}
 
-	public <T> List<T> queryByExample(T example) {
-		open();
-		return db.queryByExample(example);
-	}
-
-	public <T> List<T> queryAll(Class<T> clase) {
-		open();
-		return db.query(clase);
-	}
-
-	public <T> List<T> queryNative(Predicate<T> predicate) {
-		open();
-		return db.query(predicate);
-	}
-	
+		public <T> List<T> queryNative(Predicate<T> predicate) {
+			open();
+			return db.query(predicate);
+		}
 
 		public void close() {
 		if (!db.ext().isClosed()) {

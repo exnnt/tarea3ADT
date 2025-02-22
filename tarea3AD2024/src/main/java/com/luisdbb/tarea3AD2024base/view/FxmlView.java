@@ -47,6 +47,18 @@ public enum FxmlView {
 			return "/fxml/Login.fxml";
 		}
 	},
+	CONJUNTO {
+		@Override
+		public String getTitle() {
+			return getStringFromResourceBundle("login.title");
+		}
+
+		@Override
+		public String getFxmlFile() {
+			return "/fxml/ConjuntoServicios.fxml";
+		}
+	},
+	
 	
 	ADMIN{
 		@Override

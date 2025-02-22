@@ -96,7 +96,7 @@ public class CU3and5Controller implements Initializable {
 
 	@FXML
 	private TableColumn<Estancia, String> vips;
-
+	private Long idEstancia;
 	@FXML
 	private void Sellar(ActionEvent event) throws IOException {
 		try {
@@ -110,10 +110,12 @@ public class CU3and5Controller implements Initializable {
 				Estanciar(p);
 			}else {
 				sellaAlert(p);
+				pcontrol.cu3=false;
+				stageManager.switchScene(FxmlView.PARADA);
 			}
-		
-			pcontrol.cu3=false;
-			stageManager.switchScene(FxmlView.PARADA);
+		//esto en conjunto?
+			
+			
 		} else {
 			saveAlert();
 			clearFields();
@@ -179,8 +181,10 @@ public class CU3and5Controller implements Initializable {
 	private void Estanciar(Peregrino p) {
 		boolean viper = vip.isSelected();
 		// maybe aqui?
-		estanciaService.creaEstancia(p, Tarea3Ad2024baseApplication.inicial, viper);
-		estanciaAlert(p, viper);
+		 idEstancia = estanciaService.creaEstancia(p, Tarea3Ad2024baseApplication.inicial, viper).getId();
+		System.out.println(idEstancia);
+		stageManager.switchScene(FxmlView.CONJUNTO);
+		// esto lo delayeo y lo pongo en el confirm de conjunto estanciaAlert(p, viper);
 
 	};
 	public void mostrarAyuda() {
@@ -289,4 +293,7 @@ public class CU3and5Controller implements Initializable {
 	
 
 }
+	public Long getidEstancia() {
+		return idEstancia;
+	}
 }

@@ -1,20 +1,18 @@
 package com.luisdbb.tarea3AD2024base.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.luisdbb.tarea3AD2024base.config.db4o.DB4Onosecuantos;
 import com.luisdbb.tarea3AD2024base.modelo.Servicio;
+import com.luisdbb.tarea3AD2024base.repositorios.ServiceRepository;
 
 import java.util.List;
 
 @Service
 public class ServicioService {
-
-	private final DB4Onosecuantos db4o;
-
-	public ServicioService(DB4Onosecuantos db4o) {
-		this.db4o = db4o;
-	}
+	 @Autowired
+	private ServiceRepository serviceRepository;
 
 	public Servicio serviciar(String nombre, double precio) {
 
@@ -24,7 +22,7 @@ public class ServicioService {
 		s.setPrecio(precio);
 		System.out.println(nombre);
 		System.out.println(s.getId());
-		db4o.store(s);
+		serviceRepository.guardarservi(s);
 		return s;
 	}
 
@@ -32,14 +30,14 @@ public class ServicioService {
 		Servicio temp = new Servicio();
 		temp.setId(id);
 
-		List<Servicio> resultados = db4o.queryByExample(temp);
+		List<Servicio> resultados = serviceRepository.listservicios();
 
 		if (!resultados.isEmpty()) {
 			Servicio s = resultados.get(0);
 			s.setNombre(nombre);
 			s.setPrecio(precio);
 
-			db4o.store(s);
+			serviceRepository.guardarservi(s);
 			return s;
 		} else {
 			throw new RuntimeException("servicio con id " + id + " no encontrado");
@@ -50,14 +48,14 @@ public class ServicioService {
 		Servicio temp = new Servicio();
 		temp.setId(id);
 
-		List<Servicio> resultados = db4o.queryByExample(temp);
+		List<Servicio> resultados = serviceRepository.listservicios();
 
 		if (!resultados.isEmpty()) {
 			Servicio s = resultados.get(0);
 			s.setNombre(nombre);
 			s.setPrecio(precio);
 
-			db4o.store(s);
+			serviceRepository.guardarservi(s);
 			return s;
 		} else {
 			throw new RuntimeException("servicio con id " + id + " no encontrado");
@@ -66,14 +64,14 @@ public class ServicioService {
 
 	public void editar1(Servicio s) {
 
-		db4o.store(s);
+		serviceRepository.guardarservi(s);
 		
 		  System.out.println("guardaos te lo juro");
 		
 	}
 
 	public List<Servicio> listarServicios() {
-		 List<Servicio> servicios = db4o.queryAll(Servicio.class);
+		 List<Servicio> servicios = serviceRepository.listservicios();
 		 for (Servicio servicio : servicios) {
 			 servicio.getParadas().size();
 		        System.out.println("Servicio: " + servicio.getId() + " Paradas: " + servicio.getparadasString());
@@ -82,7 +80,7 @@ public class ServicioService {
 	}
 
 	private Long nuevoId() {
-		List<Servicio> todos = db4o.queryAll(Servicio.class);
+		List<Servicio> todos =serviceRepository.listservicios();
 		long max = 0;
 		for (Servicio s : todos) {
 			if (s.getId() != null && s.getId() > max) {
