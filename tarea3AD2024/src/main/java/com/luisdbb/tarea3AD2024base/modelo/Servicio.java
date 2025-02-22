@@ -13,15 +13,22 @@ public class Servicio implements Serializable {
 	private List<Long> paradas;
 
 	public Servicio() {
-
+	    this.paradas = new ArrayList<>();
 	}
 
 	public Servicio(Long id, String nombre, double precio) {
 		this.id = id;
 		this.nombre = nombre;
 		this.precio = precio;
-	}
+		this.paradas = (paradas != null) ? paradas : new ArrayList<>(); 
 
+	}
+	public Servicio(Long id, String nombre, double precio, List<Long> paradas) {
+		this.id = id;
+		this.nombre = nombre;
+		this.precio = precio;
+		this.paradas= paradas;
+	}
 	public Long getId() {
 		return id;
 	}
@@ -54,7 +61,7 @@ public class Servicio implements Serializable {
 		this.paradas = paradas;
 	}
 	public void addParada(Long id) {
-	 if (paradas == null) {
+	 if (paradas == null) {		 
             paradas = new ArrayList<>(); //inicializar pa q no rompa 
 	 }
 		paradas.add(id);
@@ -74,6 +81,9 @@ public class Servicio implements Serializable {
 		}
 
 		return result.toString();
+	}
+	public String toString() {
+		return getparadasString();
 	}
 
 }

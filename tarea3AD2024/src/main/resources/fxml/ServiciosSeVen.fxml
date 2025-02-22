@@ -49,7 +49,7 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Button fx:id="edit" layoutX="145.0" layoutY="339.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: #4967EB;" text="Editar" textFill="WHITE">
+      <Button fx:id="edit" layoutX="145.0" layoutY="339.0" mnemonicParsing="false" onAction="#cargaedit" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: #4967EB;" text="Editar" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
@@ -65,7 +65,7 @@
             <DropShadow blurType="ONE_PASS_BOX" />
          </effect>
       </Button>
-      <Button fx:id="edit11" layoutX="464.0" layoutY="284.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: #4967EB;" text="Quitar" textFill="WHITE">
+      <Button fx:id="edit11" layoutX="464.0" layoutY="284.0" mnemonicParsing="false" onAction="#deleteParada" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: #4967EB;" text="Quitar" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
@@ -75,10 +75,10 @@
       </Button>
       <TableView fx:id="tableServicios" layoutX="33.0" layoutY="63.0" onMouseClicked="#lastSelected" prefHeight="200.0" prefWidth="310.0">
         <columns>
-          <TableColumn fx:id="idservicio" prefWidth="75.0" text="Id" />
-          <TableColumn fx:id="nameservicio" prefWidth="101.0" text="Nombre" />
-            <TableColumn fx:id="precioservicio" prefWidth="70.0" text="Precio" />
-            <TableColumn fx:id="paradasservicio" prefWidth="63.0" text="Paradas" />
+          <TableColumn fx:id="idservicio" prefWidth="41.0" text="Id" />
+          <TableColumn fx:id="nameservicio" prefWidth="118.0" text="Nombre" />
+            <TableColumn fx:id="precioservicio" prefWidth="61.0" text="Precio" />
+            <TableColumn fx:id="paradasservicio" prefWidth="89.0" text="Paradas" />
         </columns>
       </TableView>
       <TableView fx:id="tableParadas" layoutX="364.0" layoutY="63.0" prefHeight="200.0" prefWidth="200.0">
@@ -87,7 +87,7 @@
           <TableColumn fx:id="colNombre" prefWidth="147.0" text="Nombre" />
         </columns>
       </TableView>
-      <Button fx:id="edit2" layoutX="260.0" layoutY="339.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: #4967EB;" text="Guardar Cambios" textFill="WHITE">
+      <Button fx:id="edit2" layoutX="260.0" layoutY="339.0" mnemonicParsing="false" onAction="#confirmaedit" prefHeight="31.0" prefWidth="181.0" style="-fx-background-color: #4967EB;" text="Guardar Cambios" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>

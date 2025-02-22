@@ -2,6 +2,7 @@ package com.luisdbb.tarea3AD2024base.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -66,7 +67,12 @@ public class ServiController implements Initializable {
 	private Button btnAyuda;
 	@FXML
 	private Button edit1;
-
+	@FXML
+	private Button edit11;
+	@FXML
+	private Button edit2;
+	@FXML
+	private Button edit;
 	@FXML
 	private AnchorPane root;
 	@FXML
@@ -80,7 +86,7 @@ public class ServiController implements Initializable {
 	@FXML
 	private TextField precio;
 	@FXML
-	private TableView<Servicio> tableServicios; 
+	private TableView<Servicio> tableServicios;
 	@FXML
 	private TableColumn<Servicio, Long> idservicio;
 	@FXML
@@ -88,10 +94,12 @@ public class ServiController implements Initializable {
 	@FXML
 	private TableColumn<Servicio, Double> precioservicio;
 	private Servicio serviciopasiempre;
+	private Long editId;
 	private ObservableList<Parada> paradas = FXCollections.observableArrayList();
 	private ObservableList<Servicio> servicios = FXCollections.observableArrayList();
 	@FXML
 	private TableColumn<Servicio, String> paradasservicio;
+
 	@FXML
 	private void back(ActionEvent event) throws IOException {
 		System.out.println("test");
@@ -137,71 +145,135 @@ public class ServiController implements Initializable {
 			alert.showAndWait();
 		}
 	}
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		 colId.setCellValueFactory(new PropertyValueFactory<>("id"));
-	     colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
-	     idservicio.setCellValueFactory(new PropertyValueFactory<>("id"));
-	     nameservicio.setCellValueFactory(new PropertyValueFactory<>("nombre"));
-	     precioservicio.setCellValueFactory(new PropertyValueFactory<>("precio"));
-	     paradasservicio.setCellValueFactory(cellData -> {
-	         return new SimpleStringProperty(cellData.getValue().getparadasString());
-	     });
-		  getparadas();
-		  getservicios();
+		colId.setCellValueFactory(new PropertyValueFactory<>("id"));
+		colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+		idservicio.setCellValueFactory(new PropertyValueFactory<>("id"));
+		nameservicio.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+		precioservicio.setCellValueFactory(new PropertyValueFactory<>("precio"));
+		paradasservicio.setCellValueFactory(cellData -> {
+			return new SimpleStringProperty(cellData.getValue().getparadasString());
+		});
+		getparadas();
+		getservicios();
 	}
-	 private void getparadas() {
-		 
-	        List<Parada> paradasFromDB = paradaService.findAll();
-	        
-	        paradas.setAll(paradasFromDB);
 
-	        tableParadas.setItems(paradas);
-	    }
-	 public void addservicios() {
-		 
-		 servicioService.serviciar(name.getText(), Double.parseDouble(precio.getText()));
-		 System.out.println("LETSGO");
-		 getservicios();
+	private void getparadas() {
 
-	 }
-	 public void getservicios() {
-		   
-		    List<Servicio> serviciosdb = servicioService.listarServicios();  
-		    servicios.setAll(serviciosdb);  
-		    tableServicios.setItems(servicios);  
-		}
-	
-	 @FXML
-	 public void addParada() {
-		 Parada sel = tableParadas.getSelectionModel().getSelectedItem();
-		 Long id =   sel.getId();
-		 System.out.println(id);
-		 
-		 if(id!=null) {
-			 if(serviciopasiempre.getParadas()!=null) {
-			for(Long x: serviciopasiempre.getParadas()) {
-				if(id==x) {
-					System.out.println("repe");
-					return;
-				}}}
+		List<Parada> paradasFromDB = paradaService.findAll();
+
+		paradas.setAll(paradasFromDB);
+
+		tableParadas.setItems(paradas);
+	}
+
+	public void addservicios() {
+
+		servicioService.serviciar(name.getText(), Double.parseDouble(precio.getText()));
+		System.out.println("LETSGO");
+		getservicios();
+
+	}
+
+	public void getservicios() {
+
+		List<Servicio> serviciosdb = servicioService.listarServicios();
+		servicios.setAll(serviciosdb);
+		tableServicios.setItems(servicios);
+	}
+
+	@FXML
+	public void addParada() {
+		Parada sel = tableParadas.getSelectionModel().getSelectedItem();
+		Long id = sel.getId();
+		System.out.println(id);
+
+		if (id != null) {
+			   if (serviciopasiempre.getParadas() == null) {
+		            serviciopasiempre.setParadas(new ArrayList<>()); 
+		        }
+			if (!serviciopasiempre.getparadasString().equals("")) {
+
+				for (Long x : serviciopasiempre.getParadas()) {
+					if (id.equals(x)) {
+						System.out.println("repe");
+						return;
+					}
+				}
+			}
+
 			System.out.println("no repe");
-				serviciopasiempre.addParada(id);
-				 System.out.println("Lista nueva");
-				 for(Long x: serviciopasiempre.getParadas())
-					 System.out.println(x);
-				 servicioService.editar1(serviciopasiempre);
-				
-				getservicios();
+			serviciopasiempre.addParada(id);
 			
-		 }
-	 }
-	 @FXML
-	 public void lastSelected() {
-		 Servicio sel = tableServicios.getSelectionModel().getSelectedItem();
-		 System.out.println(sel.getId());
-	     serviciopasiempre = sel;
-	 }
 
+			for (Long x : serviciopasiempre.getParadas()) {
+				System.out.println(x);
+			}
 
+			servicioService.editar1(serviciopasiempre);
+			getservicios();
+		}
+	}
+
+	@FXML
+	public void lastSelected() {
+		Servicio sel = tableServicios.getSelectionModel().getSelectedItem();
+		System.out.println(sel.getId());
+		System.out.println(sel.getparadasString());
+		serviciopasiempre = sel;
+	}
+	@FXML
+	public void deleteParada() {
+		Parada sel = tableParadas.getSelectionModel().getSelectedItem();
+		Long id = sel.getId();
+		System.out.println(id);
+		List<Long> paradas = serviciopasiempre.getParadas();
+		    if (paradas != null && paradas.contains(id)) {
+		    	System.out.println(serviciopasiempre.getparadasString());
+		        paradas.remove(id);
+		        serviciopasiempre.setParadas(paradas);
+		        servicioService.editar1(serviciopasiempre);
+		        System.out.println(id);
+		        System.out.println(serviciopasiempre.getparadasString());
+		    
+		       
+		        getservicios();
+	}
+	}
+	@FXML
+	public void cargaedit() {
+		name.setText(serviciopasiempre.getNombre());
+		precio.setText(String.valueOf(serviciopasiempre.getPrecio()));
+		editId=serviciopasiempre.getId();
+	}
+	@FXML
+	public void confirmaedit() {
+		 String nuevonombre = name.getText();
+		 String nuevoprecio = precio.getText();
+		 if (nuevonombre.isEmpty() || nuevoprecio.isEmpty()) {
+		       Alert alerta = new Alert(Alert.AlertType.ERROR,"Error");
+		       alerta.setContentText("No pueden estar vacoiss");
+		       alerta.showAndWait();
+		        return;
+		    }
+		 double nuevoPrecio;
+		    try {
+		        nuevoPrecio = Double.parseDouble(nuevoprecio);
+		    } catch (NumberFormatException e) {
+		    	Alert alerta = new Alert(Alert.AlertType.ERROR,"Error");
+			       alerta.setContentText("Formato no valido");
+			       alerta.showAndWait();
+		        return;
+		    }
+		    serviciopasiempre.setNombre(nuevonombre);
+		    serviciopasiempre.setPrecio(nuevoPrecio);
+		    System.out.println(serviciopasiempre.getNombre());
+		    name.setText("");
+		    precio.setText("");
+		    servicioService.editar1(serviciopasiempre);
+		    getservicios();
+		 	
+	}
 }

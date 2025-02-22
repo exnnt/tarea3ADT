@@ -68,10 +68,17 @@ public class ServicioService {
 
 		db4o.store(s);
 		
+		  System.out.println("guardaos te lo juro");
+		
 	}
 
 	public List<Servicio> listarServicios() {
-		return db4o.queryAll(Servicio.class);
+		 List<Servicio> servicios = db4o.queryAll(Servicio.class);
+		 for (Servicio servicio : servicios) {
+			 servicio.getParadas().size();
+		        System.out.println("Servicio: " + servicio.getId() + " Paradas: " + servicio.getparadasString());
+		    }
+		    return servicios;
 	}
 
 	private Long nuevoId() {
