@@ -97,35 +97,34 @@ public class CU3and5Controller implements Initializable {
 	@FXML
 	private TableColumn<Estancia, String> vips;
 	private Long idEstancia;
+
 	@FXML
 	private void Sellar(ActionEvent event) throws IOException {
 		try {
-		int usr = userService.authenticate(getUsername(), getPassword());
-		if (usr == 3) {
-			Peregrino p = peregrinoService.findbyiduser(userService.findByName(getUsername()).getId());
-			System.out.println(userService.findByName(getUsername()).getId());
-			System.out.println(p.getNombre());
-			rutaService.crearRuta(p.getId(), Tarea3Ad2024baseApplication.inicial.getId(), (float) 5.5);
-			if (estanciar.isSelected()) {
-				Estanciar(p);
-			}else {
-				sellaAlert(p);
-				pcontrol.cu3=false;
-				stageManager.switchScene(FxmlView.PARADA);
+			int usr = userService.authenticate(getUsername(), getPassword());
+			if (usr == 3) {
+				Peregrino p = peregrinoService.findbyiduser(userService.findByName(getUsername()).getId());
+				System.out.println(userService.findByName(getUsername()).getId());
+				System.out.println(p.getNombre());
+				rutaService.crearRuta(p.getId(), Tarea3Ad2024baseApplication.inicial.getId(), (float) 5.5);
+				if (estanciar.isSelected()) {
+					Estanciar(p);
+				} else {
+					sellaAlert(p);
+					pcontrol.cu3 = false;
+					stageManager.switchScene(FxmlView.PARADA);
+				}
+				// esto en conjunto?
+
+			} else {
+				saveAlert();
+				clearFields();
 			}
-		//esto en conjunto?
-			
-			
-		} else {
-			saveAlert();
-			clearFields();
+
+		} catch (Exception e) {
+			credencialesAlert();
 		}
-
-	}catch(Exception e) {
-		credencialesAlert();
 	}
-	}
-
 
 	@FXML
 	private LocalDate gIni() {
@@ -139,7 +138,7 @@ public class CU3and5Controller implements Initializable {
 
 	@FXML
 	private void volver(ActionEvent event) throws IOException {
-		pcontrol.cu3=false;
+		pcontrol.cu3 = false;
 		stageManager.switchScene(FxmlView.PARADA);
 	}
 
@@ -165,12 +164,13 @@ public class CU3and5Controller implements Initializable {
 			System.out.println(String.valueOf(e.getId()));
 			System.out.println(e.getFecha().toString());
 			System.out.println(e.isVip());
-			String vipStatus ="Normal";
-			if(e.isVip())
-				vipStatus= "VIP";
-		    Estancia row = new Estancia(e.getId(), e.getFecha().toString(), e.getPeregrinoId(), e.getParadaId(), vipStatus);
-		    
-		    System.out.println(row.getvipstring());
+			String vipStatus = "Normal";
+			if (e.isVip())
+				vipStatus = "VIP";
+			Estancia row = new Estancia(e.getId(), e.getFecha().toString(), e.getPeregrinoId(), e.getParadaId(),
+					vipStatus);
+
+			System.out.println(row.getvipstring());
 			tableEstancia.getItems().add(row);
 
 		}
@@ -181,56 +181,55 @@ public class CU3and5Controller implements Initializable {
 	private void Estanciar(Peregrino p) {
 		boolean viper = vip.isSelected();
 		// maybe aqui?
-		 idEstancia = estanciaService.creaEstancia(p, Tarea3Ad2024baseApplication.inicial, viper).getId();
+		idEstancia = estanciaService.creaEstancia(p, Tarea3Ad2024baseApplication.inicial, viper).getId();
 		System.out.println(idEstancia);
 		stageManager.switchScene(FxmlView.CONJUNTO);
 		// esto lo delayeo y lo pongo en el confirm de conjunto estanciaAlert(p, viper);
 
 	};
+
 	public void mostrarAyuda() {
-        try {
-            
-            WebView webView = new WebView();
+		try {
 
-            String url = getClass().getResource("/help/html/parada.html").toExternalForm();
-            System.out.println(url);
-            webView.getEngine().load(url);
+			WebView webView = new WebView();
 
-           
-            Stage helpStage = new Stage();
-            helpStage.setTitle("Ayuda");
+			String url = getClass().getResource("/help/html/parada.html").toExternalForm();
+			System.out.println(url);
+			webView.getEngine().load(url);
 
-          
-            StackPane root = new StackPane(webView);
-            Scene helpScene = new Scene(root, 600, 400);
-            helpStage.setScene(helpScene);
+			Stage helpStage = new Stage();
+			helpStage.setTitle("Ayuda");
 
-          
-            helpStage.initModality(Modality.APPLICATION_MODAL);
-            helpStage.setResizable(true);
-            helpStage.show();
-            
-        } catch (NullPointerException e) {
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Archivo de Ayuda no encontrado");
-        
-            alert.showAndWait();
-        }
-    }
+			StackPane root = new StackPane(webView);
+			Scene helpScene = new Scene(root, 600, 400);
+			helpStage.setScene(helpScene);
+
+			helpStage.initModality(Modality.APPLICATION_MODAL);
+			helpStage.setResizable(true);
+			helpStage.show();
+
+		} catch (NullPointerException e) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Error");
+			alert.setHeaderText("Archivo de Ayuda no encontrado");
+
+			alert.showAndWait();
+		}
+	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		lblLogin1.setText("Sellar/Estanciar: " + Tarea3Ad2024baseApplication.inicial.getNombre());
-		//esto es por no hacer otro controller nsq pq lo hice asi pero bueno mb
-		
-		if(pcontrol.cu3){
-		eId.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getId()));
-		eFecha.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getFestring()));
-		peid.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getPeregrinoId()));
-		pid.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getParadaId()));
-		 vips.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getvipstring())); }
+		// esto es por no hacer otro controller nsq pq lo hice asi pero bueno mb
+
+		if (pcontrol.cu3) {
+			eId.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getId()));
+			eFecha.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getFestring()));
+			peid.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getPeregrinoId()));
+			pid.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getParadaId()));
+			vips.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getvipstring()));
+		}
 	}
 
 	public String getPassword() {
@@ -263,6 +262,7 @@ public class CU3and5Controller implements Initializable {
 		alert.setContentText(mensaje);
 		alert.showAndWait();
 	}
+
 	private void credencialesAlert() {
 
 		Alert alert = new Alert(AlertType.ERROR);
@@ -270,29 +270,29 @@ public class CU3and5Controller implements Initializable {
 		alert.setHeaderText(null);
 		alert.setContentText("Alguno de los campos esta vacio ");
 		alert.showAndWait();
-	
 
-}
+	}
+
 	private void sellaAlert(Peregrino p) {
 
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Sellado confirmado");
 		alert.setHeaderText(null);
-		alert.setContentText("Peregrino "+p.getNombre()+" sellado. Buen camino!");
+		alert.setContentText("Peregrino " + p.getNombre() + " sellado. Buen camino!");
 		alert.showAndWait();
-	
 
-}
+	}
+
 	private void estanciaAlert(Peregrino p, boolean vip) {
 
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Estancia confirmada");
 		alert.setHeaderText(null);
-		alert.setContentText("Peregrino "+p.getNombre()+" sellado y estanciado. Vip: "+vip);
+		alert.setContentText("Peregrino " + p.getNombre() + " sellado y estanciado. Vip: " + vip);
 		alert.showAndWait();
-	
 
-}
+	}
+
 	public Long getidEstancia() {
 		return idEstancia;
 	}
