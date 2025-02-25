@@ -139,46 +139,50 @@ public class ExportController implements Initializable {
 }
 	public void informe(Peregrino peregrino) {
 		Connection conexion = null;
+		String name= p.getNombre().replaceAll(" ", "");
 		try {
 			
+			System.out.println("url");
+			URL url2 = getClass().getResource("/template/CarnetPregrino.jasper");
+			System.out.println(url2);
 
-			URL url = getClass().getClassLoader().getResource("/template/CarnetPregrino.jasper");
-
-			if (url == null) {
+			if (url2 == null) {
 				System.err.println("No se encontró el archivo Carnet.jasper");
 				return;
 			}
-			JasperReport reporte = (JasperReport) JRLoader.loadObject(url);
-
+			System.out.println("before");
+			JasperReport reporte = (JasperReport) JRLoader.loadObject(url2);
+			System.out.println("after");
 			Long idPeregrino = peregrino.getId();
+
 			System.out.println("Valor de PEREGRINO_ID: " + idPeregrino);
 
 			Map<String, Object> parametros = new HashMap<>();
-			parametros.put("id", idPeregrino);
+			parametros.put("Id", idPeregrino);
 			
-
+			
 			DataSource ds = getDataSource();
 			conexion = ds.getConnection();
-
+			System.out.println("conectao");
 			JasperPrint print = JasperFillManager.fillReport(reporte, parametros, conexion);
 
-			String rutaSalida = "src/main/resources/escritura/" + peregrino.getNombre().replace(" ", "")
-					+ "_peregrino.pdf";
-
+			String rutaSalida = "src/main/resources/escritura/" +name+ "_peregrino.pdf";
+			System.out.println(rutaSalida);
 			JasperExportManager.exportReportToPdfFile(print, rutaSalida);
-
 			System.out.println("Informe generado correctamente en: " + rutaSalida);
 
 			abrirPDF(rutaSalida);
 
 		} catch (JRException | SQLException e) {
 			System.out.println(e.getMessage());
+			System.out.println(e.getCause());
+			System.out.println(e.getStackTrace());
 		} finally {
 			if (conexion != null) {
 				try {
 					conexion.close();
 				} catch (SQLException e) {
-					System.out.println("Error2");
+					System.out.println(e.getMessage());
 				}
 			}
 		}
@@ -192,6 +196,7 @@ public class ExportController implements Initializable {
 		}
 		try {
 			Runtime.getRuntime().exec(new String[] { "cmd", "/c", "start", "", archivoPDF.getAbsolutePath() });
+			System.out.println("workin");
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.err.println("Error al abrir el archivo PDF ");
