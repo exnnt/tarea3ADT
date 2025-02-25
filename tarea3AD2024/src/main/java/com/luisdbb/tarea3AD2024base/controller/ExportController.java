@@ -1,12 +1,20 @@
 package com.luisdbb.tarea3AD2024base.controller;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
+import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
+
+import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.stereotype.Controller;
 
 import com.luisdbb.tarea3AD2024base.Tarea3Ad2024baseApplication;
@@ -22,14 +30,20 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.web.WebView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
 
 @Controller
 public class ExportController implements Initializable {
@@ -105,6 +119,7 @@ public class ExportController implements Initializable {
 		try {
 			carnetService.exportCarnet(p);
 			exportaAlert(p);
+			informe(p);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -122,4 +137,73 @@ public class ExportController implements Initializable {
 	
 
 }
+	public void informe(Peregrino peregrino) {
+		Connection conexion = null;
+		try {
+			
+
+			URL url = getClass().getClassLoader().getResource("/template/CarnetPregrino.jasper");
+
+			if (url == null) {
+				System.err.println("No se encontró el archivo Carnet.jasper");
+				return;
+			}
+			JasperReport reporte = (JasperReport) JRLoader.loadObject(url);
+
+			Long idPeregrino = peregrino.getId();
+			System.out.println("Valor de PEREGRINO_ID: " + idPeregrino);
+
+			Map<String, Object> parametros = new HashMap<>();
+			parametros.put("id", idPeregrino);
+			
+
+			DataSource ds = getDataSource();
+			conexion = ds.getConnection();
+
+			JasperPrint print = JasperFillManager.fillReport(reporte, parametros, conexion);
+
+			String rutaSalida = "src/main/resources/escritura/" + peregrino.getNombre().replace(" ", "")
+					+ "_peregrino.pdf";
+
+			JasperExportManager.exportReportToPdfFile(print, rutaSalida);
+
+			System.out.println("Informe generado correctamente en: " + rutaSalida);
+
+			abrirPDF(rutaSalida);
+
+		} catch (JRException | SQLException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if (conexion != null) {
+				try {
+					conexion.close();
+				} catch (SQLException e) {
+					System.out.println("Error2");
+				}
+			}
+		}
+	}
+
+	public void abrirPDF(String rutaSalida) {
+		File archivoPDF = new File(rutaSalida);
+		if (!archivoPDF.exists()) {
+			System.err.println("El archivo no existe: " + rutaSalida);
+			return;
+		}
+		try {
+			Runtime.getRuntime().exec(new String[] { "cmd", "/c", "start", "", archivoPDF.getAbsolutePath() });
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.err.println("Error al abrir el archivo PDF ");
+		}
+	}
+
+	private DataSource getDataSource() {
+		DriverManagerDataSource ds = new DriverManagerDataSource();
+		ds.setUrl("jdbc:mysql://localhost:3306/bdtarea3ad?useSSL=false");
+		ds.setUsername("root");
+		ds.setPassword("");
+		ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
+		return ds;
+	}
 }

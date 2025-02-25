@@ -32,7 +32,7 @@ public class Estancia {
 
 	@Column(name = "vip", nullable = false, columnDefinition = "TINYINT(1)")
 	private boolean vip = false;
-
+	
 	private String vipStatus;
 	public String getvipstring() {
 		return vipStatus;

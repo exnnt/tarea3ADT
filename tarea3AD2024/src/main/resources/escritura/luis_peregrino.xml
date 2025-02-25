@@ -7,8 +7,8 @@
     <nombre>luis</nombre>
     <nacionalidad>Austria</nacionalidad>
   </peregrino>
-  <hoy>20-02-2025</hoy>
-  <distanciatotal>11,0</distanciatotal>
+  <hoy>25-02-2025</hoy>
+  <distanciatotal>16,5</distanciatotal>
   <paradas>
     <parada>
       <orden>1</orden>
@@ -17,13 +17,18 @@
     </parada>
     <parada>
       <orden>2</orden>
+      <nombre>Aviles</nombre>
+      <region>A</region>
+    </parada>
+    <parada>
+      <orden>3</orden>
       <nombre>Gijon</nombre>
       <region>G</region>
     </parada>
     <parada>
-      <orden>3</orden>
-      <nombre>Aviles</nombre>
-      <region>A</region>
+      <orden>4</orden>
+      <nombre>Gijon</nombre>
+      <region>G</region>
     </parada>
   </paradas>
   <estancias>
@@ -32,6 +37,11 @@
       <fecha>05-02-2025</fecha>
       <parada>Gijon</parada>
       <vip/>
+    </estancia>
+    <estancia>
+      <id>10</id>
+      <fecha>25-02-2025</fecha>
+      <parada>Gijon</parada>
     </estancia>
   </estancias>
 </carnet>
