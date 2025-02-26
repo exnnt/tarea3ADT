@@ -6,7 +6,7 @@ import jakarta.persistence.Persistence;
 
 public class ObjectDBnsq {
 	private static final EntityManagerFactory emf = Persistence
-			.createEntityManagerFactory("objectdb:src/main/resources/escritura/db/ODBPeregrinos.odb");
+			.createEntityManagerFactory("objectdb://localhost:6136/ODBPeregrinos.odb;user=admin;password=admin");
 
 	public static EntityManager getEntityManager() {
 		return emf.createEntityManager();
