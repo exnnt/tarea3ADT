@@ -22,14 +22,14 @@
          </font>
       </Label>
       <TextField fx:id="name" layoutX="33.0" layoutY="281.0" prefHeight="36.0" prefWidth="181.0" promptText="Nombre" />
-      <Button fx:id="btnLogin" layoutX="33.0" layoutY="339.0" mnemonicParsing="false" onAction="#addservicios" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: #4967EB;" text="Crear" textFill="WHITE">
+      <Button fx:id="btnLogin" layoutX="33.0" layoutY="339.0" onAction="#addservicios" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: #4967EB;" text="_Crear" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
          <effect>
             <DropShadow blurType="ONE_PASS_BOX" />
          </effect></Button>
-      <Button fx:id="btnLogout" layoutX="464.0" layoutY="339.0" mnemonicParsing="false" onAction="#back" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: #4967EB;" styleClass="btnGreen" text="Volver" textFill="WHITE">
+      <Button fx:id="btnLogout" layoutX="464.0" layoutY="339.0" onAction="#back" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: #4967EB;" styleClass="btnGreen" text="_Volver" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
@@ -49,7 +49,7 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Button fx:id="edit" layoutX="145.0" layoutY="339.0" mnemonicParsing="false" onAction="#cargaedit" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: #4967EB;" text="Editar" textFill="WHITE">
+      <Button fx:id="edit" layoutX="145.0" layoutY="339.0" onAction="#cargaedit" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: #4967EB;" text="_Editar" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
@@ -57,7 +57,7 @@
             <DropShadow blurType="ONE_PASS_BOX" />
          </effect>
       </Button>
-      <Button fx:id="edit1" layoutX="364.0" layoutY="284.0" mnemonicParsing="false" onAction="#addParada" prefHeight="31.0" prefWidth="86.0" style="-fx-background-color: #4967EB;" text="Añadir" textFill="WHITE">
+      <Button fx:id="edit1" layoutX="364.0" layoutY="284.0" onAction="#addParada" prefHeight="31.0" prefWidth="86.0" style="-fx-background-color: #4967EB;" text="_Añadir" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
@@ -65,7 +65,7 @@
             <DropShadow blurType="ONE_PASS_BOX" />
          </effect>
       </Button>
-      <Button fx:id="edit11" layoutX="464.0" layoutY="284.0" mnemonicParsing="false" onAction="#deleteParada" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: #4967EB;" text="Quitar" textFill="WHITE">
+      <Button fx:id="edit11" layoutX="464.0" layoutY="284.0" onAction="#deleteParada" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: #4967EB;" text="_Quitar" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
@@ -87,7 +87,7 @@
           <TableColumn fx:id="colNombre" prefWidth="147.0" text="Nombre" />
         </columns>
       </TableView>
-      <Button fx:id="edit2" layoutX="260.0" layoutY="339.0" mnemonicParsing="false" onAction="#confirmaedit" prefHeight="31.0" prefWidth="181.0" style="-fx-background-color: #4967EB;" text="Guardar Cambios" textFill="WHITE">
+      <Button fx:id="edit2" layoutX="260.0" layoutY="339.0" onAction="#confirmaedit" prefHeight="31.0" prefWidth="181.0" style="-fx-background-color: #4967EB;" text="_Guardar Cambios" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>

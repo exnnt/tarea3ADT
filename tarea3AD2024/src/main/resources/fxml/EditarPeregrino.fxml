@@ -23,7 +23,7 @@
       </Label>
       <TextField fx:id="userId" layoutX="14.0" layoutY="44.0" prefHeight="36.0" prefWidth="204.0" promptText="Usuario" />
       <PasswordField fx:id="pass" layoutX="14.0" layoutY="153.0" onAction="#login" prefHeight="36.0" prefWidth="204.0" promptText="Contraseña" />
-      <Button fx:id="btnSignIn" layoutX="17.0" layoutY="204.0" mnemonicParsing="false" onAction="#registraUser" prefHeight="31.0" prefWidth="95.0" style="-fx-background-color: #4967EB;" styleClass="btnGreen" text="Registrarse" textFill="WHITE">
+      <Button fx:id="btnSignIn" layoutX="17.0" layoutY="204.0" onAction="#registraUser" prefHeight="31.0" prefWidth="95.0" style="-fx-background-color: #4967EB;" styleClass="btnGreen" text="_Registrarse" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
@@ -36,7 +36,7 @@
          <image>
             <Image url="@/images/4.png" />
          </image></ImageView>
-      <Button fx:id="btnLogIn" layoutX="130.0" layoutY="204.0" mnemonicParsing="false" onAction="#login" prefHeight="31.0" prefWidth="88.0" style="-fx-background-color: #4967EB;" styleClass="btnGreen" text="Acceder" textFill="WHITE">
+      <Button fx:id="btnLogIn" layoutX="130.0" layoutY="204.0" onAction="#login" prefHeight="31.0" prefWidth="88.0" style="-fx-background-color: #4967EB;" styleClass="btnGreen" text="_Acceder" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>

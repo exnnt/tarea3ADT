@@ -22,7 +22,7 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Button fx:id="btnConfirm" layoutX="470.0" layoutY="320.0" mnemonicParsing="false" onAction="#confirm" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: #4967EB;" styleClass="btnGreen" text="Confirmar" textFill="WHITE">
+      <Button fx:id="btnConfirm" layoutX="470.0" layoutY="320.0" onAction="#confirm" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: #4967EB;" styleClass="btnGreen" text="_Confirmar" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
@@ -41,7 +41,7 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Button fx:id="edit1" layoutX="27.0" layoutY="320.0" mnemonicParsing="false" onAction="#addServicios" prefHeight="31.0" prefWidth="86.0" style="-fx-background-color: #4967EB;" text="Añadir" textFill="WHITE">
+      <Button fx:id="edit1" layoutX="27.0" layoutY="320.0" onAction="#addServicios" prefHeight="31.0" prefWidth="86.0" style="-fx-background-color: #4967EB;" text="_Añadir" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
@@ -49,7 +49,7 @@
             <DropShadow blurType="ONE_PASS_BOX" />
          </effect>
       </Button>
-      <Button fx:id="edit11" layoutX="376.0" layoutY="320.0" mnemonicParsing="false" onAction="#deleteServicio" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: #4967EB;" text="Quitar" textFill="WHITE">
+      <Button fx:id="edit11" layoutX="376.0" layoutY="320.0" onAction="#deleteServicio" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: #4967EB;" text="_Quitar" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
@@ -70,9 +70,9 @@
             <TableColumn fx:id="precioservicio1" prefWidth="84.0" text="Precio" />
          </columns>
       </TableView>
-      <RadioButton fx:id="Tarjeta" layoutX="134.0" layoutY="327.0" mnemonicParsing="false" text="Tarjeta" textFill="WHITE" />
-      <RadioButton fx:id="Efectivo" layoutX="225.0" layoutY="327.0" mnemonicParsing="false" text="Efectivo" textFill="WHITE" />
-      <RadioButton fx:id="Bizum" layoutX="303.0" layoutY="327.0" mnemonicParsing="false" text="Bizum" textFill="WHITE" />
+      <RadioButton fx:id="Tarjeta" layoutX="134.0" layoutY="327.0" text="_Tarjeta" textFill="WHITE" />
+      <RadioButton fx:id="Efectivo" layoutX="225.0" layoutY="327.0" text="_Efectivo" textFill="WHITE" />
+      <RadioButton fx:id="Bizum" layoutX="303.0" layoutY="327.0" text="_Bizum" textFill="WHITE" />
       <TextField fx:id="estra" layoutX="315.0" layoutY="265.0" prefHeight="36.0" prefWidth="247.0" promptText="Extras" />
    </children>
    <opaqueInsets>

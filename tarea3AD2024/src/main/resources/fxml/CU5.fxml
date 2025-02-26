@@ -18,14 +18,14 @@
       <Rectangle fill="DODGERBLUE" height="250.0" stroke="#ffffff8b" strokeType="INSIDE" width="400.0" />
       <TextField fx:id="userId" layoutX="10.0" layoutY="54.0" prefHeight="36.0" prefWidth="204.0" promptText="Usuario" />
       <PasswordField fx:id="pass" layoutX="10.0" layoutY="107.0" prefHeight="36.0" prefWidth="204.0" promptText="Contraseña" />
-      <Button fx:id="btnConfirm" layoutX="17.0" layoutY="188.0" mnemonicParsing="false" onAction="#Sellar" prefHeight="31.0" prefWidth="95.0" style="-fx-background-color: #4967EB;" styleClass="btnGreen" text="Confirmar" textFill="WHITE">
+      <Button fx:id="btnConfirm" layoutX="17.0" layoutY="188.0" onAction="#Sellar" prefHeight="31.0" prefWidth="95.0" style="-fx-background-color: #4967EB;" styleClass="btnGreen" text="_Confirmar" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
          <effect>
             <DropShadow blurType="ONE_PASS_BOX" />
          </effect></Button>
-      <Button fx:id="btnVolver" layoutX="255.0" layoutY="188.0" mnemonicParsing="false" onAction="#volver" prefHeight="31.0" prefWidth="88.0" style="-fx-background-color: #4967EB;" styleClass="btnGreen" text="Volver" textFill="WHITE">
+      <Button fx:id="btnVolver" layoutX="255.0" layoutY="188.0" onAction="#volver" prefHeight="31.0" prefWidth="88.0" style="-fx-background-color: #4967EB;" styleClass="btnGreen" text="_Volver" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
@@ -38,8 +38,8 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <CheckBox fx:id="estanciar" layoutX="241.0" layoutY="52.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="122.0" text="Estanciar" textFill="WHITE" />
-      <CheckBox fx:id="vip" layoutX="238.0" layoutY="107.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="122.0" text="Vip" textFill="WHITE" />
+      <CheckBox fx:id="estanciar" layoutX="241.0" layoutY="52.0" prefHeight="36.0" prefWidth="122.0" text="_Estanciar" textFill="WHITE" />
+      <CheckBox fx:id="vip" layoutX="238.0" layoutY="107.0" prefHeight="36.0" prefWidth="122.0" text="Vi_p" textFill="WHITE" />
       <Label layoutX="17.0" layoutY="158.0" prefHeight="18.0" prefWidth="364.0" text="*Selecciona las casillas deseadas antes de presionar Confirmar" textFill="WHITE" />
       <ImageView fitHeight="30.0" fitWidth="31.0" layoutX="360.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>

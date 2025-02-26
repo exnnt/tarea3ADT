@@ -16,14 +16,14 @@
 <AnchorPane stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.luisdbb.tarea3AD2024base.controller.CU3and5Controller">
    <children>
       <Rectangle fill="DODGERBLUE" height="250.0" stroke="#ffffff8b" strokeType="INSIDE" width="400.0" />
-      <Button fx:id="btnBusc" layoutX="14.0" layoutY="203.0" mnemonicParsing="false" onAction="#export" prefHeight="31.0" prefWidth="67.0" style="-fx-background-color: #4967EB;" styleClass="btnGreen" text="Buscar" textFill="WHITE">
+      <Button fx:id="btnBusc" layoutX="14.0" layoutY="203.0" onAction="#export" prefHeight="31.0" prefWidth="67.0" style="-fx-background-color: #4967EB;" styleClass="btnGreen" text="_Buscar" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
          <effect>
             <DropShadow blurType="ONE_PASS_BOX" />
          </effect></Button>
-      <Button fx:id="btnVolver" layoutX="317.0" layoutY="204.0" mnemonicParsing="false" onAction="#volver" prefHeight="31.0" prefWidth="67.0" style="-fx-background-color: #4967EB;" styleClass="btnGreen" text="Volver" textFill="WHITE">
+      <Button fx:id="btnVolver" layoutX="317.0" layoutY="204.0" onAction="#volver" prefHeight="31.0" prefWidth="67.0" style="-fx-background-color: #4967EB;" styleClass="btnGreen" text="_Volver" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>

@@ -21,7 +21,7 @@
          </font>
       </Label>
       <TextField fx:id="address" layoutX="14.0" layoutY="56.0" prefHeight="36.0" prefWidth="228.0" promptText="Direccion Completa" />
-      <Button fx:id="btnConfirm" layoutX="157.0" layoutY="199.0" mnemonicParsing="false" onAction="#crea" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: #4967EB;" text="Confirmar" textFill="WHITE">
+      <Button fx:id="btnConfirm" layoutX="157.0" layoutY="199.0" onAction="#crea" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: #4967EB;" text="_Confirmar" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
@@ -44,7 +44,7 @@
       <TextField fx:id="ancho" layoutX="76.0" layoutY="143.0" prefHeight="36.0" prefWidth="49.0" promptText="Ancho" />
       <TextField fx:id="alto" layoutX="142.0" layoutY="144.0" prefHeight="36.0" prefWidth="43.0" promptText="Alto" />
       <TextField fx:id="peso" layoutX="200.0" layoutY="143.0" prefHeight="36.0" prefWidth="43.0" promptText="Peso" />
-      <CheckBox fx:id="urgente" layoutX="14.0" layoutY="206.0" mnemonicParsing="false" text="Envio Urgente" textFill="WHITE" />
+      <CheckBox fx:id="urgente" layoutX="14.0" layoutY="206.0" text="_Envio Urgente" textFill="WHITE" />
    </children>
    <opaqueInsets>
       <Insets />

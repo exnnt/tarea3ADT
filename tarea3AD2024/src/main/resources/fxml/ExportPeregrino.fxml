@@ -13,7 +13,7 @@
 <AnchorPane stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.luisdbb.tarea3AD2024base.controller.ExportController">
 	<children>
 		<Rectangle fill="DODGERBLUE" height="250.0" stroke="#ffffff8b" strokeType="INSIDE" width="400.0" />
-		<Button fx:id="btnExportar" layoutX="85.0" layoutY="203.0" mnemonicParsing="false" onAction="#exportCarnet" prefHeight="31.0" prefWidth="95.0" style="-fx-background-color: #4967EB;" styleClass="btnGreen" text="Exportar" textFill="WHITE">
+		<Button fx:id="btnExportar" layoutX="85.0" layoutY="203.0" onAction="#exportCarnet" prefHeight="31.0" prefWidth="95.0" style="-fx-background-color: #4967EB;" styleClass="btnGreen" text="_Exportar" textFill="WHITE">
 			<font>
 				<Font size="15.0" />
 			</font>
@@ -21,7 +21,7 @@
 				<DropShadow blurType="ONE_PASS_BOX" />
 			</effect>
 		</Button>
-		<Button fx:id="btnVolver" layoutX="211.0" layoutY="203.0" mnemonicParsing="false" onAction="#volver" prefHeight="31.0" prefWidth="88.0" style="-fx-background-color: #4967EB;" styleClass="btnGreen" text="Log Out" textFill="WHITE">
+		<Button fx:id="btnVolver" layoutX="211.0" layoutY="203.0" onAction="#volver" prefHeight="31.0" prefWidth="88.0" style="-fx-background-color: #4967EB;" styleClass="btnGreen" text="_Log Out" textFill="WHITE">
 			<font>
 				<Font size="15.0" />
 			</font>
