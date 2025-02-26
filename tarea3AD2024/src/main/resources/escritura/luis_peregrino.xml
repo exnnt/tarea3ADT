@@ -17,8 +17,8 @@
     </parada>
     <parada>
       <orden>2</orden>
-      <nombre>Aviles</nombre>
-      <region>A</region>
+      <nombre>Gijon</nombre>
+      <region>G</region>
     </parada>
     <parada>
       <orden>3</orden>
@@ -27,8 +27,8 @@
     </parada>
     <parada>
       <orden>4</orden>
-      <nombre>Gijon</nombre>
-      <region>G</region>
+      <nombre>Aviles</nombre>
+      <region>A</region>
     </parada>
   </paradas>
   <estancias>
