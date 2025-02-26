@@ -160,7 +160,7 @@ public class ExportController implements Initializable {
 			System.out.println("Valor de PEREGRINO_ID: " + idPeregrino);
 
 			Map<String, Object> parametros = new HashMap<>();
-			parametros.put("Id", idPeregrino);
+			parametros.put("id", idPeregrino);
 
 			DataSource ds = getDataSource();
 			conexion = ds.getConnection();
