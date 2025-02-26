@@ -53,7 +53,7 @@ public class ExportController implements Initializable {
 	@Autowired
 	private CarnetService carnetService;
 	@Autowired
-	private PeregrinoService peregrinoService;	
+	private PeregrinoService peregrinoService;
 	@FXML
 	private Label lblMecachis;
 	@FXML
@@ -63,59 +63,60 @@ public class ExportController implements Initializable {
 	@FXML
 	private ImageView image;
 	private Peregrino p = null;
+
 	@Override
-	public void initialize(URL location, ResourceBundle resources) {	
+	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		System.out.println("now we export");
-		p = peregrinoService.findbyiduser( Tarea3Ad2024baseApplication.useractivo.getId());
+		p = peregrinoService.findbyiduser(Tarea3Ad2024baseApplication.useractivo.getId());
 		System.out.println(p.getId_user());
-		lblMecachis.setText("Bienvenido "+p.getNombre());
-		
+		lblMecachis.setText("Bienvenido " + p.getNombre());
+
 	}
+
 	@FXML
 	private void volver(ActionEvent event) throws IOException {
-	
+
 		System.out.println("test");
 		Tarea3Ad2024baseApplication.useractivo.setId(0);
 		Tarea3Ad2024baseApplication.useractivo.setNombre("Invitado");
 		Tarea3Ad2024baseApplication.useractivo.setPerfil(Perfil.INVITADO);
 		stageManager.switchScene(FxmlView.INVITADO);
 	}
+
 	public void mostrarAyuda() {
-        try {
-            
-            WebView webView = new WebView();
+		try {
 
-            String url = getClass().getResource("/help/html/peregrino.html").toExternalForm();
-            System.out.println(url);
-            webView.getEngine().load(url);
+			WebView webView = new WebView();
 
-           
-            Stage helpStage = new Stage();
-            helpStage.setTitle("Ayuda");
+			String url = getClass().getResource("/help/html/peregrino.html").toExternalForm();
+			System.out.println(url);
+			webView.getEngine().load(url);
 
-          
-            StackPane root = new StackPane(webView);
-            Scene helpScene = new Scene(root, 600, 400);
-            helpStage.setScene(helpScene);
+			Stage helpStage = new Stage();
+			helpStage.setTitle("Ayuda");
 
-          
-            helpStage.initModality(Modality.APPLICATION_MODAL);
-            helpStage.setResizable(true);
-            helpStage.show();
-            
-        } catch (NullPointerException e) {
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Archivo de Ayuda no encontrado");
-        
-            alert.showAndWait();
-        }
-    }
+			StackPane root = new StackPane(webView);
+			Scene helpScene = new Scene(root, 600, 400);
+			helpStage.setScene(helpScene);
+
+			helpStage.initModality(Modality.APPLICATION_MODAL);
+			helpStage.setResizable(true);
+			helpStage.show();
+
+		} catch (NullPointerException e) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Error");
+			alert.setHeaderText("Archivo de Ayuda no encontrado");
+
+			alert.showAndWait();
+		}
+	}
+
 	@FXML
 	private void exportCarnet(ActionEvent event) throws IOException {
-	//logic aqui
-		
+		// logic aqui
+
 		try {
 			carnetService.exportCarnet(p);
 			exportaAlert(p);
@@ -124,24 +125,25 @@ public class ExportController implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("coming soon xd");
+	
 		// alert con info?
 	}
+
 	private void exportaAlert(Peregrino p) {
-		String name= p.getNombre().replaceAll(" ", "");
+		String name = p.getNombre().replaceAll(" ", "");
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Carnet exportado");
 		alert.setHeaderText(null);
-		alert.setContentText("Carnet exportado, esta en /src/main/resources/escritura/" +name+ "_peregrino.xml");
+		alert.setContentText("Carnet exportado, esta en /src/main/resources/escritura/" + name + "_peregrino.xml");
 		alert.showAndWait();
-	
 
-}
+	}
+
 	public void informe(Peregrino peregrino) {
 		Connection conexion = null;
-		String name= p.getNombre().replaceAll(" ", "");
+		String name = p.getNombre().replaceAll(" ", "");
 		try {
-			
+
 			System.out.println("url");
 			URL url2 = getClass().getResource("/template/CarnetPregrino.jasper");
 			System.out.println(url2);
@@ -159,14 +161,13 @@ public class ExportController implements Initializable {
 
 			Map<String, Object> parametros = new HashMap<>();
 			parametros.put("Id", idPeregrino);
-			
-			
+
 			DataSource ds = getDataSource();
 			conexion = ds.getConnection();
 			System.out.println("conectao");
 			JasperPrint print = JasperFillManager.fillReport(reporte, parametros, conexion);
 
-			String rutaSalida = "src/main/resources/escritura/" +name+ "_peregrino.pdf";
+			String rutaSalida = "src/main/resources/escritura/" + name + "_peregrino.pdf";
 			System.out.println(rutaSalida);
 			JasperExportManager.exportReportToPdfFile(print, rutaSalida);
 			System.out.println("Informe generado correctamente en: " + rutaSalida);

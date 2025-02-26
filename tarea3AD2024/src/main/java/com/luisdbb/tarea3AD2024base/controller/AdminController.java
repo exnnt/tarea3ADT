@@ -31,11 +31,10 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.web.WebView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
 @Controller
 public class AdminController implements Initializable {
 
-	
-	   
 	@FXML
 	Button btnParadas;
 	@FXML
@@ -53,96 +52,94 @@ public class AdminController implements Initializable {
 	@FXML
 	private Button btnLogout;
 	@FXML
-	private Button btnLogin
-	;
+	private Button btnLogin;
 	@FXML
 	private ImageView img;
-	  @Lazy
-	    @Autowired
-	    private StageManager stageManager;
-	  @Autowired
-		private ParadaService paradaService;
-	        
+	@Lazy
+	@Autowired
+	private StageManager stageManager;
+	@Autowired
+	private ParadaService paradaService;
+
 	@FXML
 	private void back(ActionEvent event) throws IOException {
 		System.out.println("test");
-	
+
 		stageManager.switchScene(FxmlView.ADMIN1);
 	}
+
 	@FXML
 	private void paradas(ActionEvent event) throws IOException {
 		System.out.println("test paradas");
-	
+
 		stageManager.switchScene(FxmlView.ADMIN);
 	}
+
 	@FXML
 	private void servicios(ActionEvent event) throws IOException {
 		System.out.println("test lo otro");
-	
+
 		stageManager.switchScene(FxmlView.ADMIN2);
 	}
+
 	@FXML
 	private void logout(ActionEvent event) throws IOException {
 		System.out.println("test");
 		Tarea3Ad2024baseApplication.useractivo.setPerfil(Perfil.INVITADO);
 		stageManager.switchScene(FxmlView.INVITADO);
 	}
-	 
+
 	public void mostrarAyuda() {
-        try {
-            
-            WebView webView = new WebView();
-
-            String url = getClass().getResource("/help/html/admin.html").toExternalForm();
-            System.out.println(url);
-            webView.getEngine().load(url);
-
-           
-            Stage helpStage = new Stage();
-            helpStage.setTitle("Ayuda");
-
-          
-            StackPane root = new StackPane(webView);
-            Scene helpScene = new Scene(root, 600, 400);
-            helpStage.setScene(helpScene);
-
-          
-            helpStage.initModality(Modality.APPLICATION_MODAL);
-            helpStage.setResizable(true);
-            helpStage.show();
-            
-        } catch (NullPointerException e) {
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Archivo de Ayuda no encontrado");
-        
-            alert.showAndWait();
-        }
-    }
-	@FXML
-	private void crea(ActionEvent event) throws IOException{
 		try {
-		String nombre = name.getText();
-		char r = reg.getText().charAt(0);
-		String responsable = respons.getText();
-		String passw= pass.getText();
-		Parada temp = new Parada(nombre, r, responsable);
-		paradaService.crearParada(temp	, passw);
-		System.out.println("");
-		System.out.println(temp.getNombre());
-		Tarea3Ad2024baseApplication.cambiarParada(temp);
-		Tarea3Ad2024baseApplication.useractivo.setNombre(temp.getNombre());
-		System.out.println(Tarea3Ad2024baseApplication.inicial.getNombre());
-		Tarea3Ad2024baseApplication.useractivo.setPerfil(Perfil.PARADA);
-		
-		stageManager.switchScene(FxmlView.PARADA);
+
+			WebView webView = new WebView();
+
+			String url = getClass().getResource("/help/html/admin.html").toExternalForm();
+			System.out.println(url);
+			webView.getEngine().load(url);
+
+			Stage helpStage = new Stage();
+			helpStage.setTitle("Ayuda");
+
+			StackPane root = new StackPane(webView);
+			Scene helpScene = new Scene(root, 600, 400);
+			helpStage.setScene(helpScene);
+
+			helpStage.initModality(Modality.APPLICATION_MODAL);
+			helpStage.setResizable(true);
+			helpStage.show();
+
+		} catch (NullPointerException e) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Error");
+			alert.setHeaderText("Archivo de Ayuda no encontrado");
+
+			alert.showAndWait();
 		}
-		catch(Exception e) {
+	}
+
+	@FXML
+	private void crea(ActionEvent event) throws IOException {
+		try {
+			String nombre = name.getText();
+			char r = reg.getText().charAt(0);
+			String responsable = respons.getText();
+			String passw = pass.getText();
+			Parada temp = new Parada(nombre, r, responsable);
+			paradaService.crearParada(temp, passw);
+			System.out.println("");
+			System.out.println(temp.getNombre());
+			Tarea3Ad2024baseApplication.cambiarParada(temp);
+			Tarea3Ad2024baseApplication.useractivo.setNombre(temp.getNombre());
+			System.out.println(Tarea3Ad2024baseApplication.inicial.getNombre());
+			Tarea3Ad2024baseApplication.useractivo.setPerfil(Perfil.PARADA);
+
+			stageManager.switchScene(FxmlView.PARADA);
+		} catch (Exception e) {
 			System.out.println(e.getLocalizedMessage());
-			// lo handeleo luego 
+			// lo handeleo luego
 		}
-		
-		
+
 	}
 
 	@Override

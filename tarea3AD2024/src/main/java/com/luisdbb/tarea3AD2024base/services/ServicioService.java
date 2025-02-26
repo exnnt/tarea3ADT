@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 public class ServicioService {
-	 @Autowired
+	@Autowired
 	private ServiceRepository serviceRepository;
 
 	public Servicio serviciar(String nombre, double precio) {
@@ -65,22 +65,22 @@ public class ServicioService {
 	public void editar1(Servicio s) {
 
 		serviceRepository.guardarservi(s);
-		
-		  System.out.println("guardaos te lo juro");
-		
+
+		System.out.println("guardaos te lo juro");
+
 	}
 
 	public List<Servicio> listarServicios() {
-		 List<Servicio> servicios = serviceRepository.listservicios();
-		 for (Servicio servicio : servicios) {
-			 servicio.getParadas().size();
-		        System.out.println("Servicio: " + servicio.getId() + " Paradas: " + servicio.getparadasString());
-		    }
-		    return servicios;
+		List<Servicio> servicios = serviceRepository.listservicios();
+		for (Servicio servicio : servicios) {
+			servicio.getParadas().size();
+			System.out.println("Servicio: " + servicio.getId() + " Paradas: " + servicio.getparadasString());
+		}
+		return servicios;
 	}
 
 	private Long nuevoId() {
-		List<Servicio> todos =serviceRepository.listservicios();
+		List<Servicio> todos = serviceRepository.listservicios();
 		long max = 0;
 		for (Servicio s : todos) {
 			if (s.getId() != null && s.getId() > max) {

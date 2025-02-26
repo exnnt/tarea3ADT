@@ -31,7 +31,7 @@
             <DropShadow blurType="ONE_PASS_BOX" />
          </effect>
       </Button>
-      <Label fx:id="lblLogin1" layoutX="112.0" layoutY="14.0" prefHeight="30.0" prefWidth="162.0" text="Parada: temporal" textFill="WHITE">
+      <Label fx:id="lblLogin1" layoutX="90.0" layoutY="14.0" prefHeight="30.0" prefWidth="236.0" text="Parada: temporal" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font>

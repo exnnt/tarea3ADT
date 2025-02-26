@@ -36,6 +36,17 @@ public enum FxmlView {
 			return "/fxml/ServiciosSeVen.fxml";
 		}
 	},
+	ENVIAR{
+		@Override
+		public String getTitle() {
+			return getStringFromResourceBundle("paradas.title");
+		}
+
+		@Override
+		public String getFxmlFile() {
+			return "/fxml/EnvioCasa.fxml";
+		}
+	},
 	LOGIN {
 		@Override
 		public String getTitle() {

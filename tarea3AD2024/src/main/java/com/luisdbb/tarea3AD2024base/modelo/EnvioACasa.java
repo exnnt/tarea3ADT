@@ -9,77 +9,94 @@ import jakarta.persistence.OneToOne;
 
 @Entity
 public class EnvioACasa {
-    public EnvioACasa(Long id, Direccion direccion, double peso, int largo, int ancho, int alto, boolean urgente,
+	public EnvioACasa() {
+		this.volumen = new int[3];
+	}
+
+	public EnvioACasa(Long id, Direccion direccion, double peso, int largo, int ancho, int alto, boolean urgente,
 			Long idParada) {
 		super();
 		this.id = id;
 		this.direccion = direccion;
 		this.peso = peso;
-		this.largo = largo;
-		this.ancho = ancho;
-		this.alto = alto;
+		this.volumen = new int[] { largo, ancho, alto };
 		this.urgente = urgente;
 		this.idParada = idParada;
 	}
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public Direccion getDireccion() {
 		return direccion;
 	}
+
 	public void setDireccion(Direccion direccion) {
 		this.direccion = direccion;
 	}
+
 	public double getPeso() {
 		return peso;
 	}
+
 	public void setPeso(double peso) {
 		this.peso = peso;
 	}
+
 	public int getLargo() {
-		return largo;
+		return volumen[0];
 	}
+
 	public void setLargo(int largo) {
-		this.largo = largo;
+		this.volumen[0] = largo;
 	}
+
 	public int getAncho() {
-		return ancho;
+		return volumen[1];
 	}
+
 	public void setAncho(int ancho) {
-		this.ancho = ancho;
+		this.volumen[1] = ancho;
 	}
+
 	public int getAlto() {
-		return alto;
+		return volumen[2];
 	}
+
 	public void setAlto(int alto) {
-		this.alto = alto;
+		this.volumen[2] = alto;
 	}
+
 	public boolean isUrgente() {
 		return urgente;
 	}
+
 	public void setUrgente(boolean urgente) {
 		this.urgente = urgente;
 	}
+
 	public Long getIdParada() {
 		return idParada;
 	}
+
 	public void setIdParada(Long idParada) {
 		this.idParada = idParada;
 	}
+
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Direccion direccion;
+	@OneToOne(cascade = CascadeType.ALL)
+	private Direccion direccion;
 
-    private double peso; 
-    private int largo;
-    private int ancho;
-    private int alto;
-    private boolean urgente;
-    private Long idParada;
+	private double peso;
+	private int[] volumen;
+	private boolean urgente;
+	private Long idParada;
 }

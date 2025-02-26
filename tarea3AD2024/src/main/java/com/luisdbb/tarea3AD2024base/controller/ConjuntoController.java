@@ -13,16 +13,11 @@ import org.springframework.stereotype.Controller;
 import com.luisdbb.tarea3AD2024base.Tarea3Ad2024baseApplication;
 import com.luisdbb.tarea3AD2024base.config.StageManager;
 import com.luisdbb.tarea3AD2024base.modelo.ConjuntoContratado;
-import com.luisdbb.tarea3AD2024base.modelo.Parada;
 import com.luisdbb.tarea3AD2024base.modelo.Servicio;
 import com.luisdbb.tarea3AD2024base.services.ConjuntoService;
-import com.luisdbb.tarea3AD2024base.services.ParadaService;
-import com.luisdbb.tarea3AD2024base.services.Perfil;
 import com.luisdbb.tarea3AD2024base.services.ServicioService;
-import com.luisdbb.tarea3AD2024base.services.UserService;
 import com.luisdbb.tarea3AD2024base.view.FxmlView;
 
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -30,9 +25,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -40,8 +34,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.web.WebView;
@@ -113,6 +105,7 @@ public class ConjuntoController implements Initializable {
 	@FXML
 	private TextField estra;
 	ToggleGroup grupoo = new ToggleGroup();
+	private boolean Envio = false;
 
 	@FXML
 	private void back(ActionEvent event) throws IOException {
@@ -166,14 +159,15 @@ public class ConjuntoController implements Initializable {
 
 	public void getservicios() {
 		// xddd System.out.println(idEstancia);
-		System.out.println(main.inicial.getId());
+
 		List<Servicio> serviciosdb = servicioService.listarServicios();
 		List<Servicio> disponible = new ArrayList<>();
 		for (Servicio s : serviciosdb) {
-			System.out.println(s.getparadasString());
 			if (s.getparadasString().contains(String.valueOf(main.inicial.getId()))) {
 				System.out.println(s.getNombre());
 				disponible.add(s);
+				
+
 			}
 			System.out.println("next");
 		}
@@ -240,11 +234,16 @@ public class ConjuntoController implements Initializable {
 	public void confirm() {
 		// calcula precio
 		// confirma radiobutton selected if not empty list2
-		// nsq nosecuantos esq queria poner 3 comentarios auqi mb
+
 		if (!servicios2.isEmpty()) {
+			// esto a method y call envio if true
 			double preciofinal = 0.0;
 			for (Servicio s : servicios2) {
 				preciofinal += s.getPrecio();
+				if (s.getNombre().equals("Envio a Casa")) {
+					Envio = true;
+					System.out.println("asies");
+				}
 			}
 			temp.setPrecioTotal(preciofinal);
 			Toggle radio = grupoo.getSelectedToggle();
@@ -257,21 +256,19 @@ public class ConjuntoController implements Initializable {
 				} else {
 					pago = 'B';
 				}
-				String extra = estra.getText();
-				temp.setExtras(extra);
 				temp.setModoPago(pago);
-				conjuntoService.guardarconjunto(temp);
-
-				System.out.println(temp.toString());
-				stageManager.switchScene(FxmlView.PARADA);
-				List<ConjuntoContratado> s = conjuntoService.listarConjuntosContratados();
-				for (ConjuntoContratado t : s) {
-					System.out.println(t.toString2());
+				if (Envio) {
+					stageManager.switchScene(FxmlView.ENVIAR);
+					//llamar a pago desde envio por si cancela el envio q pague menos
+					// ye mucha movida rn 
+				} else {
+					fuera();
+					stageManager.switchScene(FxmlView.PARADA);
 				}
-
 			} else {
 				System.out.println("pago cant be null try again");
 			}
+			
 
 			// ahora syso pa debug luego alerta pa qeste guapo
 		} else {
@@ -279,4 +276,20 @@ public class ConjuntoController implements Initializable {
 		}
 
 	}
-}
+
+	public void fuera() {
+		String extra = estra.getText();
+		temp.setExtras(extra);
+		
+		conjuntoService.guardarconjunto(temp);
+
+		System.out.println(temp.toString());
+		List<ConjuntoContratado> s = conjuntoService.listarConjuntosContratados();
+		for (ConjuntoContratado t : s) {
+			System.out.println(t.toString2());
+		}
+	}
+		
+	}
+	
+
