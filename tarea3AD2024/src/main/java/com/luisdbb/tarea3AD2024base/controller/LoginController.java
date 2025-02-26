@@ -1,6 +1,5 @@
 package com.luisdbb.tarea3AD2024base.controller;
 
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -29,6 +28,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.StackPane;
 import javafx.scene.web.WebView;
@@ -41,73 +43,77 @@ import javafx.stage.Stage;
  */
 
 @Controller
-public class LoginController implements Initializable{
+public class LoginController implements Initializable {
 
 	@FXML
-    private Button btnLogIn;
+	private Button btnLogin;
 	@FXML
-    private Button btnVolver;
-
-    @FXML
-    private PasswordField password;
-    
-    @FXML
-    private TextField username;
-
-    @FXML
-    private Label lblLogin;
-    
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private PeregrinoService peregrinoService;
-    @Autowired 
-    private ParadaService paradaService;
-    @Lazy
-    @Autowired
-    private StageManager stageManager;
-        
+	private Button btnvolver;
 	@FXML
-    private void login(ActionEvent event) throws IOException{
+	private ImageView imgpass;
+	@FXML
+	private ToggleButton viewtoggle;
+	@FXML
+	private PasswordField password;
+	@FXML
+	private TextField passwordvisible;
+	@FXML
+	private TextField username;
+	@FXML
+	private Label lblLogin;
+	@FXML
+	private Button btnAyuda;
+
+	@Autowired
+	private UserService userService;
+	@Autowired
+	private PeregrinoService peregrinoService;
+	@Autowired
+	private ParadaService paradaService;
+	@Lazy
+	@Autowired
+	private StageManager stageManager;
+
+	@FXML
+	private void login(ActionEvent event) throws IOException {
 		int usr = userService.authenticate(getUsername(), getPassword());
-    	if(usr>0){
-    		if(usr>1) {
-    		Usuario u = userService.findByName(getUsername());
-    		Tarea3Ad2024baseApplication.useractivo.setId(u.getId());   		
-    		System.out.println(u.getId());}
-    		switch(usr) {
-    		case 1:
-    			Tarea3Ad2024baseApplication.useractivo.setPerfil(Perfil.ADMIN);
-    			stageManager.switchScene(FxmlView.ADMIN1);
-    			break;
-    		case 2:
-    			Parada p = paradaService.findbyrespons(getUsername())
-    			;    			
-    			    			
-    			    			Tarea3Ad2024baseApplication.setPinicial(p);
-    			    			System.out.println(p.getNombre());
-    			stageManager.switchScene(FxmlView.PARADA);
-    			
-    			Tarea3Ad2024baseApplication.useractivo.setPerfil(Perfil.PARADA);
-    			break;
-    		case 3:
-    			System.out.println("before ");
-    			Peregrino pp = peregrinoService.findbyiduser( Tarea3Ad2024baseApplication.useractivo.getId());
-    				
-    			System.out.println(pp.getNombre());
-    			System.out.println("after");
-    			 stageManager.switchScene(FxmlView.PEREGRINO);
-    			
-    			Tarea3Ad2024baseApplication.useractivo.setPerfil(Perfil.PEREGRINO);
-    			break;
-    		}
-    		
-    		
-    	}else{
-    		updateAlert();
-    	}
-    }
-	
+		if (usr > 0) {
+			if (usr > 1) {
+				Usuario u = userService.findByName(getUsername());
+				Tarea3Ad2024baseApplication.useractivo.setId(u.getId());
+				System.out.println(u.getId());
+			}
+			switch (usr) {
+			case 1:
+				Tarea3Ad2024baseApplication.useractivo.setPerfil(Perfil.ADMIN);
+				stageManager.switchScene(FxmlView.ADMIN1);
+				break;
+			case 2:
+				Parada p = paradaService.findbyrespons(getUsername());
+
+				Tarea3Ad2024baseApplication.setPinicial(p);
+				System.out.println(p.getNombre());
+				stageManager.switchScene(FxmlView.PARADA);
+
+				Tarea3Ad2024baseApplication.useractivo.setPerfil(Perfil.PARADA);
+				break;
+			case 3:
+				System.out.println("before ");
+				Peregrino pp = peregrinoService.findbyiduser(Tarea3Ad2024baseApplication.useractivo.getId());
+
+				System.out.println(pp.getNombre());
+				System.out.println("after");
+				stageManager.switchScene(FxmlView.PEREGRINO);
+
+				Tarea3Ad2024baseApplication.useractivo.setPerfil(Perfil.PEREGRINO);
+				break;
+			}
+
+		} else {
+			updateAlert();
+		}
+	}
+
 	public String getPassword() {
 		return password.getText();
 	}
@@ -118,17 +124,22 @@ public class LoginController implements Initializable{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
+		passwordvisible.setVisible(false);
+		String path = getClass().getResource("/images/nover.png").toExternalForm();
+		Image image = new Image(path);
+		imgpass.setImage(image);
 	}
+
 	@FXML
 	private void volver(ActionEvent event) throws IOException {
-	
+
 		System.out.println("test");
 		Tarea3Ad2024baseApplication.useractivo.setId(0);
 		Tarea3Ad2024baseApplication.useractivo.setNombre("Invitado");
 		Tarea3Ad2024baseApplication.useractivo.setPerfil(Perfil.INVITADO);
 		stageManager.switchScene(FxmlView.INVITADO);
 	}
+
 	private void updateAlert() {
 
 		Alert alert = new Alert(AlertType.ERROR);
@@ -137,36 +148,59 @@ public class LoginController implements Initializable{
 		alert.setContentText("Nombre de usuario o contraseña incorrectas");
 		alert.showAndWait();
 	}
+
+	public void toggleVisible() {
+
+		passwordvisible.textProperty().bindBidirectional(password.textProperty());
+
+		String path = getClass().getResource("/images/ver.png").toExternalForm();
+		Image image = new Image(path);
+		String path2 = getClass().getResource("/images/nover.png").toExternalForm();
+		Image image2 = new Image(path2);
+
+		if (viewtoggle.isSelected()) {
+			imgpass.setImage(image);
+			passwordvisible.setManaged(true);
+			passwordvisible.setVisible(true);
+			password.setManaged(false);
+			password.setVisible(false);
+		} else {
+			imgpass.setImage(image2);
+			password.setManaged(true);
+			password.setVisible(true);
+			passwordvisible.setManaged(false);
+			passwordvisible.setVisible(false);
+		}
+
+	}
+
 	public void mostrarAyuda() {
-        try {
-            
-            WebView webView = new WebView();
+		try {
 
-            String url = getClass().getResource("/help/html/login.html").toExternalForm();
-            System.out.println(url);
-            webView.getEngine().load(url);
+			WebView webView = new WebView();
 
-           
-            Stage helpStage = new Stage();
-            helpStage.setTitle("Ayuda");
+			String url = getClass().getResource("/help/html/login.html").toExternalForm();
+			System.out.println(url);
+			webView.getEngine().load(url);
 
-          
-            StackPane root = new StackPane(webView);
-            Scene helpScene = new Scene(root, 600, 400);
-            helpStage.setScene(helpScene);
+			Stage helpStage = new Stage();
+			helpStage.setTitle("Ayuda");
 
-          
-            helpStage.initModality(Modality.APPLICATION_MODAL);
-            helpStage.setResizable(true);
-            helpStage.show();
-            
-        } catch (NullPointerException e) {
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Archivo de Ayuda no encontrado");
-        
-            alert.showAndWait();
-        }
-    }
+			StackPane root = new StackPane(webView);
+			Scene helpScene = new Scene(root, 600, 400);
+			helpStage.setScene(helpScene);
+
+			helpStage.initModality(Modality.APPLICATION_MODAL);
+			helpStage.setResizable(true);
+			helpStage.show();
+
+		} catch (NullPointerException e) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Error");
+			alert.setHeaderText("Archivo de Ayuda no encontrado");
+
+			alert.showAndWait();
+		}
+	}
 
 }

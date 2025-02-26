@@ -83,16 +83,17 @@ public class EnvioController implements Initializable {
 		envioService.registrarEnvio(envio);
 		System.out.println("done id: " + envio.getId());
 		List<EnvioACasa> envios = envioService.getenvios();
-	    if (envios.isEmpty()) {
-	        System.out.println("No EnvioACasa objects found in the database.");
-	    } else {
-	        System.out.println("EnvioACasa objects in the database:");
-	        for (EnvioACasa e : envios) {
-	            System.out.println("ID: " + e.getId() + ", Localidad: " + e.getDireccion().getLocalidad());
-	        }
-		
+		if (envios.isEmpty()) {
+			System.out.println("No EnvioACasa objects found in the database.");
+		} else {
+			System.out.println("EnvioACasa objects in the database:");
+			for (EnvioACasa e : envios) {
+				System.out.println("ID: " + e.getId() + ", Localidad: " + e.getDireccion().getLocalidad());
+			}
+
+		}
+		stageManager.switchScene(FxmlView.PARADA);
 	}
-	    stageManager.switchScene(FxmlView.PARADA);}
 
 	public Long getLastEnvioId() {
 
@@ -103,7 +104,7 @@ public class EnvioController implements Initializable {
 		}
 
 		EnvioACasa lastEnvio = envios.stream().max((e1, e2) -> Long.compare(e1.getId(), e2.getId())).orElse(null);
-		Long id = lastEnvio.getId()+1;
+		Long id = lastEnvio.getId() + 1;
 		return lastEnvio != null ? id : 1L;
 	}
 
