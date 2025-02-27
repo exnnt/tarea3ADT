@@ -12,20 +12,20 @@
 
 <AnchorPane stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.luisdbb.tarea3AD2024base.controller.ParadasController">
    <children>
-      <Rectangle fill="DODGERBLUE" height="250.0" stroke="#ffffff8b" strokeType="INSIDE" width="400.0" />
+      <Rectangle fill="DODGERBLUE" height="250.0" stroke="#ffffff8b" strokeType="INSIDE" width="417.0" />
       <Label fx:id="lblLogin" layoutX="108.0" layoutY="14.0" text="Bienvenido a xxxx" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Button fx:id="btnLogin" layoutX="14.0" layoutY="195.0" onAction="#goExport" prefHeight="31.0" prefWidth="130.0" style="-fx-background-color: #4967EB;" styleClass="btnGreen" text="_Exportar Datos" textFill="WHITE">
+      <Button fx:id="btnLogin" layoutX="14.0" layoutY="195.0" onAction="#goExport" prefHeight="31.0" prefWidth="122.0" style="-fx-background-color: #4967EB;" styleClass="btnGreen" text="_Exportar Datos" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
          <effect>
             <DropShadow blurType="ONE_PASS_BOX" />
          </effect></Button>
-      <Button fx:id="btnLogout" layoutX="168.0" layoutY="195.0" onAction="#goSellar" prefHeight="31.0" prefWidth="86.0" style="-fx-background-color: #4967EB;" styleClass="btnGreen" text="_Sellar" textFill="WHITE">
+      <Button fx:id="btnLogout" layoutX="254.0" layoutY="195.0" onAction="#goSellar" prefHeight="31.0" prefWidth="65.0" style="-fx-background-color: #4967EB;" styleClass="btnGreen" text="_Sellar" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
@@ -38,7 +38,7 @@
             <Image url="@/images/3.png" />
          </image>
       </ImageView>
-      <Button fx:id="btnLogout1" layoutX="275.0" layoutY="195.0" onAction="#logout" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: Red;" styleClass="btnGreen" text="_LogOut" textFill="WHITE">
+      <Button fx:id="btnLogout1" layoutX="332.0" layoutY="195.0" onAction="#logout" prefHeight="31.0" prefWidth="71.0" style="-fx-background-color: Red;" styleClass="btnGreen" text="_LogOut" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
@@ -52,6 +52,14 @@
          </image>
       </ImageView>
       <Button fx:id="btnAyuda" layoutX="361.0" layoutY="11.0" mnemonicParsing="false" onAction="#mostrarAyuda" opacity="0.0" prefHeight="36.0" prefWidth="30.0" textFill="TRANSPARENT" />
+      <Button fx:id="btnVen" layoutX="151.0" layoutY="195.0" onAction="#gover" prefHeight="31.0" prefWidth="90.0" style="-fx-background-color: #4967EB;" styleClass="btnGreen" text="_Ver Envios" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+         <effect>
+            <DropShadow blurType="ONE_PASS_BOX" />
+         </effect>
+      </Button>
    </children>
    <opaqueInsets>
       <Insets />

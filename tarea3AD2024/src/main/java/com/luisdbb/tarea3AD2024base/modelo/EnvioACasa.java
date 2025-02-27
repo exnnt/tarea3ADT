@@ -87,6 +87,17 @@ public class EnvioACasa {
 	public void setIdParada(Long idParada) {
 		this.idParada = idParada;
 	}
+	public String volumenString() {
+		String stringVolumen = ""+getLargo()+"x"+getAncho()+"x"+getAlto();
+		return stringVolumen;
+		
+	}
+	public String urgenteString() {
+		String urgenteyesno= "N";
+		if(urgente)
+			urgenteyesno="Y";
+		return urgenteyesno;
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

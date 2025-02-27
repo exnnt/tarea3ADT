@@ -69,6 +69,17 @@ public enum FxmlView {
 			return "/fxml/ConjuntoServicios.fxml";
 		}
 	},
+	VERENVIOS {
+		@Override
+		public String getTitle() {
+			return getStringFromResourceBundle("login.title");
+		}
+
+		@Override
+		public String getFxmlFile() {
+			return "/fxml/VerEnvios.fxml";
+		}
+	},
 	
 	
 	ADMIN{
