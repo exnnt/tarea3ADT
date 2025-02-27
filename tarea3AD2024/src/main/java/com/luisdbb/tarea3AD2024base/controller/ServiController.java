@@ -94,7 +94,8 @@ public class ServiController implements Initializable {
 	@FXML
 	private TableColumn<Servicio, Double> precioservicio;
 	private Servicio serviciopasiempre;
-	private Long editId;
+	private Servicio editable;
+	private boolean editing = false;
 	private ObservableList<Parada> paradas = FXCollections.observableArrayList();
 	private ObservableList<Servicio> servicios = FXCollections.observableArrayList();
 	@FXML
@@ -170,10 +171,24 @@ public class ServiController implements Initializable {
 	}
 
 	public void addservicios() {
+		try {
+			if (name.getText().trim().isEmpty() || precio.getText().trim().isEmpty()) {
+				showAlert(Alert.AlertType.ERROR, "Error", null, "Los campos no pueden estar vacios");
+				return;
+			}
+			if (Double.parseDouble(precio.getText()) < 0)
+				throw new NumberFormatException();
+			servicioService.serviciar(name.getText(), Double.parseDouble(precio.getText()));
+			showAlert(Alert.AlertType.INFORMATION, "Operacion Completada", "Servicio añadido",
+					"Nombre: " + name.getText() + " Precio: " + precio.getText());
+			getservicios();
+			name.setText("");
+			precio.setText("");
 
-		servicioService.serviciar(name.getText(), Double.parseDouble(precio.getText()));
-		System.out.println("LETSGO");
-		getservicios();
+		} catch (Exception e) {
+			showAlert(Alert.AlertType.ERROR, "Error", "Formato no valido",
+					"El nombre debe ser un String y el precio un double con formato Numero.Numero");
+		}
 
 	}
 
@@ -186,94 +201,141 @@ public class ServiController implements Initializable {
 
 	@FXML
 	public void addParada() {
-		Parada sel = tableParadas.getSelectionModel().getSelectedItem();
-		Long id = sel.getId();
-		System.out.println(id);
+		try {
+			Parada sel = tableParadas.getSelectionModel().getSelectedItem();
+			if (sel == null) {
+				showAlert(Alert.AlertType.ERROR, "Error", null, "No se ha seleccionado ninguna parada.");
+				return;
+			}
+			Long id = sel.getId();
+			System.out.println(id);
 
-		if (id != null) {
-			   if (serviciopasiempre.getParadas() == null) {
-		            serviciopasiempre.setParadas(new ArrayList<>()); 
-		        }
-			if (!serviciopasiempre.getparadasString().equals("")) {
+			if (id != null) {
+				if (serviciopasiempre.getParadas() == null) {
+					serviciopasiempre.setParadas(new ArrayList<>());
+				}
+				if (!serviciopasiempre.getparadasString().equals("")) {
 
-				for (Long x : serviciopasiempre.getParadas()) {
-					if (id.equals(x)) {
-						System.out.println("repe");
-						return;
+					for (Long x : serviciopasiempre.getParadas()) {
+						if (id.equals(x)) {
+							if (id.equals(x)) {
+								showAlert(Alert.AlertType.WARNING, "Atención", null,
+										"El servicio " + serviciopasiempre.getNombre()+" ya esta displonible para esta parada");
+								return;
+							}
+						}
 					}
 				}
+
+				showAlert(Alert.AlertType.INFORMATION, "Éxito", null,
+						"El servicio " + serviciopasiempre.getNombre()+" ahora está disponible en " + sel.getNombre() + ".");
+
+				serviciopasiempre.addParada(id);
+
+				for (Long x : serviciopasiempre.getParadas()) {
+					System.out.println(x);
+				}
+
+				servicioService.editar1(serviciopasiempre);
+				getservicios();
 			}
+		} catch (Exception e) {
+			showAlert(Alert.AlertType.ERROR, "Error", "Servicio no seleccionado",
+					"Debe seleccionar un servicio al que agregar la parada");
 
-			System.out.println("no repe");
-			serviciopasiempre.addParada(id);
-			
-
-			for (Long x : serviciopasiempre.getParadas()) {
-				System.out.println(x);
-			}
-
-			servicioService.editar1(serviciopasiempre);
-			getservicios();
 		}
 	}
 
 	@FXML
 	public void lastSelected() {
 		Servicio sel = tableServicios.getSelectionModel().getSelectedItem();
+		if (sel == null) {
+			showAlert(Alert.AlertType.ERROR, "Error", null, "No se ha seleccionado ningún servicio.");
+			return;
+		}
 		System.out.println(sel.getId());
 		System.out.println(sel.getparadasString());
 		serviciopasiempre = sel;
 	}
+
 	@FXML
 	public void deleteParada() {
+		if (serviciopasiempre == null) {
+			showAlert(Alert.AlertType.ERROR, "Error", null, "No se ha seleccionado ningún servicio ");
+			return;
+		}
 		Parada sel = tableParadas.getSelectionModel().getSelectedItem();
+		if (sel == null) {
+			showAlert(Alert.AlertType.ERROR, "Error", null, "No se ha seleccionado ninguna parada.");
+			return;
+		}
 		Long id = sel.getId();
 		System.out.println(id);
 		List<Long> paradas = serviciopasiempre.getParadas();
-		    if (paradas != null && paradas.contains(id)) {
-		    	System.out.println(serviciopasiempre.getparadasString());
-		        paradas.remove(id);
-		        serviciopasiempre.setParadas(paradas);
-		        servicioService.editar1(serviciopasiempre);
-		        System.out.println(id);
-		        System.out.println(serviciopasiempre.getparadasString());
-		    
-		       
-		        getservicios();
+		if (paradas != null && paradas.contains(id)) {
+			System.out.println(serviciopasiempre.getparadasString());
+			paradas.remove(id);
+			serviciopasiempre.setParadas(paradas);
+			servicioService.editar1(serviciopasiempre);
+			System.out.println(id);
+			System.out.println(serviciopasiempre.getparadasString());
+
+			getservicios();
+		} else {
+			showAlert(Alert.AlertType.ERROR, "Error", null, "El servicio " + serviciopasiempre.getNombre()
+					+ " no esta disponible en " + sel.getNombre() + " asi que no lo puedes quitar");
+		}
 	}
-	}
+
 	@FXML
 	public void cargaedit() {
+		if (serviciopasiempre == null) {
+			showAlert(Alert.AlertType.ERROR, "Error", null, "No se ha seleccionado ningún servicio para editar.");
+			return;
+		}
 		name.setText(serviciopasiempre.getNombre());
 		precio.setText(String.valueOf(serviciopasiempre.getPrecio()));
-		editId=serviciopasiempre.getId();
+		editable = serviciopasiempre;
+		editing = true;
 	}
+
 	@FXML
 	public void confirmaedit() {
-		 String nuevonombre = name.getText();
-		 String nuevoprecio = precio.getText();
-		 if (nuevonombre.isEmpty() || nuevoprecio.isEmpty()) {
-		       Alert alerta = new Alert(Alert.AlertType.ERROR,"Error");
-		       alerta.setContentText("No pueden estar vacoiss");
-		       alerta.showAndWait();
-		        return;
-		    }
-		 double nuevoPrecio;
-		    try {
-		        nuevoPrecio = Double.parseDouble(nuevoprecio);
-		    } catch (NumberFormatException e) {
-		    	Alert alerta = new Alert(Alert.AlertType.ERROR,"Error");
-			       alerta.setContentText("Formato no valido");
-			       alerta.showAndWait();
-		        return;
-		    }
-		    serviciopasiempre.setNombre(nuevonombre);
-		    serviciopasiempre.setPrecio(nuevoPrecio);
-		    System.out.println(serviciopasiempre.getNombre());
-		    name.setText("");
-		    precio.setText("");
-		    servicioService.editar1(serviciopasiempre);
-		    getservicios();
-		 	
+		if (editing) {
+
+			String nuevonombre = name.getText();
+			String nuevoprecio = precio.getText();
+			if (name.getText().trim().isEmpty() || precio.getText().trim().isEmpty()) {
+				showAlert(Alert.AlertType.ERROR, "Error", null, "Los campos no pueden estar vacios");
+				return;
+			}
+			double nuevoPrecio;
+			try {
+				nuevoPrecio = Double.parseDouble(nuevoprecio);
+			} catch (NumberFormatException e) {
+				showAlert(Alert.AlertType.ERROR, "Error", "Formato no valido",
+						"El nombre debe ser un String y el precio un double con formato Numero.Numero");
+				return;
+			}
+			editable.setNombre(nuevonombre);
+			editable.setPrecio(nuevoPrecio);
+			showAlert(Alert.AlertType.INFORMATION, "Operacion completada", "Servicio editado",
+					"Nombre: " + nuevonombre + "Precio: " + nuevoPrecio);
+			name.setText("");
+			precio.setText("");
+			servicioService.editar1(editable);
+			getservicios();
+			editing = false;
+		} else {
+			showAlert(Alert.AlertType.ERROR, "ERROR", null, "No se ha seleccionado un servicio para editar");
+		}
+	}
+
+	private void showAlert(AlertType e, String title, String header, String content) {
+		Alert alert = new Alert(e);
+		alert.setTitle(title);
+		alert.setHeaderText(header);
+		alert.setContentText(content);
+		alert.showAndWait();
 	}
 }

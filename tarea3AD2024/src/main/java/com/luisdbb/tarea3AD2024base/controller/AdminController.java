@@ -121,21 +121,32 @@ public class AdminController implements Initializable {
 	@FXML
 	private void crea(ActionEvent event) throws IOException {
 		try {
+			if (name.getText().isEmpty() || reg.getText().isEmpty() || respons.getText().isEmpty()
+					|| pass.getText().isEmpty()) {
+
+				showAlert("Error de entrada", "Campos vacíos", "Todos los campos son obligatorios");
+				return;
+			}
+
 			String nombre = name.getText();
 			char r = reg.getText().charAt(0);
 			String responsable = respons.getText();
+			responsable = responsable.replace(" ", "");
 			String passw = pass.getText();
 			Parada temp = new Parada(nombre, r, responsable);
 			paradaService.crearParada(temp, passw);
 			System.out.println("");
 			System.out.println(temp.getNombre());
-			Tarea3Ad2024baseApplication.cambiarParada(temp);
-			Tarea3Ad2024baseApplication.useractivo.setNombre(temp.getNombre());
-			System.out.println(Tarea3Ad2024baseApplication.inicial.getNombre());
-			Tarea3Ad2024baseApplication.useractivo.setPerfil(Perfil.PARADA);
+			Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+			successAlert.setTitle("Parada creada");
+			successAlert.setHeaderText(null);
+			successAlert.setContentText("La parada " + temp.getNombre() + " con responsable " + responsable
+					+ " y contraseña " + passw + " ha sido creada.");
+			successAlert.showAndWait();		
 
-			stageManager.switchScene(FxmlView.PARADA);
+			stageManager.switchScene(FxmlView.ADMIN1);
 		} catch (Exception e) {
+			showAlert("Error de entrada", "Input missmatch", "Hay un error en algún campo");
 			System.out.println(e.getLocalizedMessage());
 			// lo handeleo luego
 		}
@@ -146,6 +157,14 @@ public class AdminController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 
+	}
+
+	private void showAlert(String title, String header, String content) {
+		Alert alert = new Alert(Alert.AlertType.ERROR);
+		alert.setTitle(title);
+		alert.setHeaderText(header);
+		alert.setContentText(content);
+		alert.showAndWait();
 	}
 
 }
