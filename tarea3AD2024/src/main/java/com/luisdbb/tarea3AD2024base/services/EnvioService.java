@@ -25,4 +25,7 @@ public class EnvioService {
 	public List<EnvioACasa> getenviosParada(Long idParada) {
 		return envioRepository.getenviosParada(idParada);
 	}
+	public void abrir() {
+		envioRepository.abrir();
+	}
 }

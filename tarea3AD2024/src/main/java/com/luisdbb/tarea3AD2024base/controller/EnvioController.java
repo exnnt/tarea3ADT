@@ -27,7 +27,6 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.web.WebView;
 import javafx.stage.Modality;
@@ -111,6 +110,7 @@ public class EnvioController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
+		envioService.abrir();
 
 	}
 
@@ -122,7 +122,7 @@ public class EnvioController implements Initializable {
 			String url = getClass().getResource("/help/html/admin.html").toExternalForm();
 			System.out.println(url);
 			webView.getEngine().load(url);
-
+			
 			Stage helpStage = new Stage();
 			helpStage.setTitle("Ayuda");
 

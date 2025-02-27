@@ -11,7 +11,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 @Repository
 public class EnvioRepository {
-
+		
 	public void guardarenvio(EnvioACasa envio) {
 
 		EntityManager em = ObjectDBnsq.getEntityManager();
@@ -43,5 +43,8 @@ public class EnvioRepository {
 		em.close();
 
 		return envios;
+	}
+	public void abrir() {
+		ObjectDBnsq.iniciaDB();
 	}
 }

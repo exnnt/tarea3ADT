@@ -1,0 +1,119 @@
+------------------------------------------------------------------------------------------------------------------------
+
+[2025-02-27 00:39:51 #1 server] 
+Server on port 6136 has started by 21992@DESKTOP-USV625L
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2025-02-27 00:40:16 #1 server] 
+java.net.BindException: Address already in use: bind
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Net.java:565)
+	at java.base/sun.nio.ch.Net.bind(Net.java:554)
+	at java.base/sun.nio.ch.NioSocketImpl.bind(NioSocketImpl.java:636)
+	at java.base/java.net.ServerSocket.bind(ServerSocket.java:389)
+	at java.base/java.net.ServerSocket.<init>(ServerSocket.java:276)
+	at java.base/java.net.ServerSocket.<init>(ServerSocket.java:221)
+	at com.objectdb.o.SMR.o(SMR.java:260)
+	at com.objectdb.o.SMR.f(SMR.java:160)
+	at com.objectdb.o.TOL.run(TOL.java:117)
+	at com.objectdb.Server.runCommand(Server.java:193)
+	at com.objectdb.Server.run(Server.java:102)
+	at com.objectdb.ServerRunner.main(ServerRunner.java:31)
+
+[2025-02-27 00:43:14 #2 store] 
+Database 'C:\Users\anton\Downloads\objectdb-2.9.2\objectdb-2.9.2\db\ODBPeregrinos.odb' is opened by 21992@DESKTOP-USV625L
+
+[2025-02-27 00:43:14 #3 store] 
+Configuration path: C:\Users\anton\Downloads\objectdb-2.9.2\objectdb-2.9.2\objectdb.conf
+
+[2025-02-27 00:48:21 #4 store] 
+Database 'C:\Users\anton\Downloads\objectdb-2.9.2\objectdb-2.9.2\db\ODBPeregrinos.odb' is closed by 21992@DESKTOP-USV625L
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2025-02-27 09:44:41 #1 server] 
+Server on port 6136 has started by 9764@DESKTOP-USV625L
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2025-02-27 09:45:06 #1 server] 
+java.net.BindException: Address already in use: bind
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Net.java:565)
+	at java.base/sun.nio.ch.Net.bind(Net.java:554)
+	at java.base/sun.nio.ch.NioSocketImpl.bind(NioSocketImpl.java:636)
+	at java.base/java.net.ServerSocket.bind(ServerSocket.java:389)
+	at java.base/java.net.ServerSocket.<init>(ServerSocket.java:276)
+	at java.base/java.net.ServerSocket.<init>(ServerSocket.java:221)
+	at com.objectdb.o.SMR.o(SMR.java:260)
+	at com.objectdb.o.SMR.f(SMR.java:160)
+	at com.objectdb.o.TOL.run(TOL.java:117)
+	at com.objectdb.Server.runCommand(Server.java:193)
+	at com.objectdb.Server.run(Server.java:102)
+	at com.objectdb.ServerRunner.main(ServerRunner.java:31)
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2025-02-27 10:23:02 #1 server] 
+Server on port 6136 has started by 10432@DESKTOP-USV625L
+
+[2025-02-27 10:25:11 #2 server] 
+Server on port 6136 has stopped by 10432@DESKTOP-USV625L
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2025-02-27 10:27:51 #1 server] 
+Server on port 6136 has started by 21820@DESKTOP-USV625L
+
+[2025-02-27 10:27:57 #2 server] 
+Server on port 6136 has stopped by 21820@DESKTOP-USV625L
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2025-02-27 10:34:27 #1 server] 
+Server on port 6136 has started by 1324@DESKTOP-USV625L
+
+[2025-02-27 10:34:33 #2 server] 
+Server on port 6136 has stopped by 1324@DESKTOP-USV625L
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2025-02-27 10:36:02 #1 server] 
+Server on port 6136 has started by 21396@DESKTOP-USV625L
+
+[2025-02-27 10:37:06 #2 store] 
+Database 'C:\Users\anton\git\tarea3ADT2\tarea3AD2024\scripts\objectdb-2.9.2\db\ODBPeregrinos.odb' is opened by 21396@DESKTOP-USV625L
+
+[2025-02-27 10:37:06 #3 store] 
+Configuration path: C:\Users\anton\git\tarea3ADT2\tarea3AD2024\scripts\objectdb-2.9.2\objectdb.conf
+
+[2025-02-27 10:38:26 #4 store] 
+Database 'C:\Users\anton\git\tarea3ADT2\tarea3AD2024\scripts\objectdb-2.9.2\db\ODBPeregrinos.odb' is closed by 21396@DESKTOP-USV625L
+
+[2025-02-27 10:39:54 #5 server] 
+Server on port 6136 has stopped by 21396@DESKTOP-USV625L
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2025-02-27 10:41:13 #1 server] 
+Server on port 6136 has started by 10776@DESKTOP-USV625L
+
+[2025-02-27 10:41:29 #2 store] 
+Database 'C:\Users\anton\git\tarea3ADT2\tarea3AD2024\scripts\objectdb-2.9.2\db\ODBPeregrinos.odb' is opened by 10776@DESKTOP-USV625L
+
+[2025-02-27 10:41:29 #3 store] 
+Configuration path: C:\Users\anton\git\tarea3ADT2\tarea3AD2024\scripts\objectdb-2.9.2\objectdb.conf
+
+[2025-02-27 10:41:44 #4 store] 
+Database 'C:\Users\anton\git\tarea3ADT2\tarea3AD2024\scripts\objectdb-2.9.2\db\ODBPeregrinos.odb' is closed by 10776@DESKTOP-USV625L
+
+[2025-02-27 10:50:35 #5 store] 
+Database 'C:\Users\anton\git\tarea3ADT2\tarea3AD2024\scripts\objectdb-2.9.2\db\ODBPeregrinos.odb' is opened by 10776@DESKTOP-USV625L
+
+[2025-02-27 10:50:35 #6 store] 
+Configuration path: C:\Users\anton\git\tarea3ADT2\tarea3AD2024\scripts\objectdb-2.9.2\objectdb.conf
+
+[2025-02-27 10:51:21 #7 store] 
+Database 'C:\Users\anton\git\tarea3ADT2\tarea3AD2024\scripts\objectdb-2.9.2\db\ODBPeregrinos.odb' is closed by 10776@DESKTOP-USV625L
+
