@@ -22,7 +22,7 @@ public enum FxmlView {
 
 		@Override
 		public String getFxmlFile() {
-			return "/fxml/MenuParada2.fxml";
+			return "/fxml/MenuMainAdmin.fxml";
 		}
 	},
 	ADMIN2 {
@@ -115,6 +115,19 @@ public String getFxmlFile() {
 @Override
 public String getFxmlFile() {
 	return "/fxml/MenuParada.fxml";
+}
+},
+	EDIT{
+	@Override
+	public String getTitle() {
+	return getStringFromResourceBundle("peregrino.title");
+	//change esto pa pulir
+}
+	
+
+@Override
+public String getFxmlFile() {
+	return "/fxml/EditarPeregrino.fxml";
 }
 },
 	SELLAR{

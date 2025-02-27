@@ -60,8 +60,11 @@ public class ExportController implements Initializable {
 	private Button btnExportar;
 	@FXML
 	private Button btnVolver;
+	
 	@FXML
 	private ImageView image;
+	@FXML
+	private Button btnEdit;
 	private Peregrino p = null;
 
 	@Override
@@ -112,6 +115,8 @@ public class ExportController implements Initializable {
 			alert.showAndWait();
 		}
 	}
+	
+	
 
 	@FXML
 	private void exportCarnet(ActionEvent event) throws IOException {
@@ -127,6 +132,10 @@ public class ExportController implements Initializable {
 		}
 	
 		// alert con info?
+	}
+	@FXML
+	private void eidt(ActionEvent event) throws IOException {
+		stageManager.switchScene(FxmlView.EDIT);
 	}
 
 	private void exportaAlert(Peregrino p) {
