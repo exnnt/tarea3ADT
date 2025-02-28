@@ -57,6 +57,7 @@ public class VerEnviosController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
+		lblLogin1.setText("Envios realizados desde: "+Tarea3Ad2024baseApplication.inicial.getNombre());
 		eId.setCellValueFactory(new PropertyValueFactory<>("id"));
 		eDireccion.setCellValueFactory(
 				cellData -> new SimpleStringProperty(cellData.getValue().getDireccion().getDireccion()));

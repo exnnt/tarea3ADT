@@ -219,16 +219,16 @@ public class ServiController implements Initializable {
 					for (Long x : serviciopasiempre.getParadas()) {
 						if (id.equals(x)) {
 							if (id.equals(x)) {
-								showAlert(Alert.AlertType.WARNING, "Atención", null,
-										"El servicio " + serviciopasiempre.getNombre()+" ya esta displonible para esta parada");
+								showAlert(Alert.AlertType.WARNING, "Atención", null, "El servicio "
+										+ serviciopasiempre.getNombre() + " ya esta displonible para esta parada");
 								return;
 							}
 						}
 					}
 				}
 
-				showAlert(Alert.AlertType.INFORMATION, "Éxito", null,
-						"El servicio " + serviciopasiempre.getNombre()+" ahora está disponible en " + sel.getNombre() + ".");
+				showAlert(Alert.AlertType.INFORMATION, "Éxito", null, "El servicio " + serviciopasiempre.getNombre()
+						+ " ahora está disponible en " + sel.getNombre() + ".");
 
 				serviciopasiempre.addParada(id);
 
@@ -312,15 +312,17 @@ public class ServiController implements Initializable {
 			double nuevoPrecio;
 			try {
 				nuevoPrecio = Double.parseDouble(nuevoprecio);
+				if (nuevoPrecio < 0)
+					throw new NumberFormatException();
 			} catch (NumberFormatException e) {
 				showAlert(Alert.AlertType.ERROR, "Error", "Formato no valido",
-						"El nombre debe ser un String y el precio un double con formato Numero.Numero");
+						"El numero debe ser positivo. Ej Valido: 20 20.15 0.14");
 				return;
 			}
 			editable.setNombre(nuevonombre);
 			editable.setPrecio(nuevoPrecio);
 			showAlert(Alert.AlertType.INFORMATION, "Operacion completada", "Servicio editado",
-					"Nombre: " + nuevonombre + "Precio: " + nuevoPrecio);
+					"Nombre: " + nuevonombre + " Precio: " + nuevoPrecio);
 			name.setText("");
 			precio.setText("");
 			servicioService.editar1(editable);

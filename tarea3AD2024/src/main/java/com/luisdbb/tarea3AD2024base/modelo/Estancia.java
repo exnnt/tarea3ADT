@@ -6,9 +6,10 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "estancias")
 public class Estancia {
-		public Estancia() {
-			
-		};
+	public Estancia() {
+
+	};
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -32,8 +33,9 @@ public class Estancia {
 
 	@Column(name = "vip", nullable = false, columnDefinition = "TINYINT(1)")
 	private boolean vip = false;
-	
+	@Transient
 	private String vipStatus;
+
 	public String getvipstring() {
 		return vipStatus;
 	}
@@ -45,14 +47,15 @@ public class Estancia {
 		this.peregrinoId = peregrinoId;
 		this.paradaId = paradaId;
 	}
-	 public Estancia(long id, String fecha, long peregrinoId, long paradaId, String vipStatus) {
-	        this.id = id;
-	        this.fechastring = fecha;
-	        this.peregrinoId = peregrinoId;
-	        this.paradaId = paradaId;
-	        this.vipStatus = vipStatus;
-	    }
-	
+
+	public Estancia(long id, String fecha, long peregrinoId, long paradaId, String vipStatus) {
+		this.id = id;
+		this.fechastring = fecha;
+		this.peregrinoId = peregrinoId;
+		this.paradaId = paradaId;
+		this.vipStatus = vipStatus;
+	}
+
 	@Override
 	public String toString() {
 		return "Estancia [id=" + id + ", peregrino=" + peregrino + ", parada=" + parada + ", peregrinoId=" + peregrinoId
@@ -60,16 +63,19 @@ public class Estancia {
 	}
 
 	public Estancia(boolean vip, Long peregrinoId, Long paradaId) {
-		
+
 		this.fecha = LocalDate.now();
 		this.vip = vip;
 		this.peregrinoId = peregrinoId;
 		this.paradaId = paradaId;
 	}
+	 @Transient
 	private String fechastring;
+
 	public String getFestring() {
 		return fechastring;
 	}
+
 	public Long getId() {
 		return id;
 	}

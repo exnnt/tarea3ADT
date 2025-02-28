@@ -109,12 +109,13 @@ public class ConjuntoController implements Initializable {
 
 	@FXML
 	private void back(ActionEvent event) throws IOException {
-		System.out.println("test");
+
 		stageManager.switchScene(FxmlView.ADMIN1);
 	}
 
 	public void mostrarAyuda() {
 		try {
+			// cambiar esta ayuda
 			WebView webView = new WebView();
 
 			String url = getClass().getResource("/help/html/admin.html").toExternalForm();
@@ -158,18 +159,16 @@ public class ConjuntoController implements Initializable {
 	}
 
 	public void getservicios() {
-		// xddd System.out.println(idEstancia);
 
 		List<Servicio> serviciosdb = servicioService.listarServicios();
 		List<Servicio> disponible = new ArrayList<>();
 		for (Servicio s : serviciosdb) {
 			if (s.getparadasString().contains(String.valueOf(main.inicial.getId()))) {
-				System.out.println(s.getNombre());
+
 				disponible.add(s);
-				
 
 			}
-			System.out.println("next");
+
 		}
 		servicios.setAll(disponible);
 		tableServicios.setItems(servicios);
@@ -178,32 +177,28 @@ public class ConjuntoController implements Initializable {
 	@FXML
 	public void lastSelected() {
 		Servicio sel = tableServicios.getSelectionModel().getSelectedItem();
-		System.out.println(sel.getId());
-		System.out.println(sel.getparadasString());
 		serviciopasiempre = sel;
 	}
 
 	@FXML
 	public void lastSelected2() {
 		Servicio sel = tableServicios1.getSelectionModel().getSelectedItem();
-		System.out.println(sel.getId());
-		System.out.println(sel.getparadasString());
 		serviciopasiempre2 = sel;
 	}
 
 	@FXML
 	public void addServicios() {
+		if (serviciopasiempre == null) {
+			showAlert(Alert.AlertType.ERROR, "Error", null, "No se ha seleccionado ningun servicio.");
+			return;
+		}
 		if (temp.addServicios(serviciopasiempre)) {
-			System.out.println("Conjnto temp tiene nosecuanto");
-			for (Servicio s : temp.getServiciosContratados()) {
-				System.out.println(s.getNombre() + " id: " + s.getId());
-			}
+
 			servicios2.add(serviciopasiempre);
 			tableServicios1.setItems(servicios2);
 
 		} else {
-			// cambiar con aletra al pulir
-			System.out.println("Conjunto ya añadido");
+			showAlert(Alert.AlertType.WARNING, "No es posible", null, "Este Servicio ya ha sido añadido");
 		}
 
 	}
@@ -226,8 +221,10 @@ public class ConjuntoController implements Initializable {
 
 			}
 		}
-		// cambiar con aletra al pulir
-		System.out.println("happens ns");
+		else {
+			showAlert(Alert.AlertType.ERROR, "Error", null, "No se ha seleccionado ningun servicio para borrar.");
+		}
+		
 	}
 
 	@FXML
@@ -242,7 +239,7 @@ public class ConjuntoController implements Initializable {
 				preciofinal += s.getPrecio();
 				if (s.getNombre().equals("Envio a Casa")) {
 					Envio = true;
-					System.out.println("asies");
+
 				}
 			}
 			temp.setPrecioTotal(preciofinal);
@@ -257,39 +254,39 @@ public class ConjuntoController implements Initializable {
 					pago = 'B';
 				}
 				temp.setModoPago(pago);
+				String extra = estra.getText();
+				temp.setExtras(extra);
+				conjuntoService.guardarconjunto(temp);
+				showAlert(Alert.AlertType.INFORMATION, "Estancia Confirmada", null,
+						"Ha contratado un Conjunto de Servicios por valor de "+preciofinal+" y ha decidido pagar con "+pago);
 				if (Envio) {
+					
+				
 					stageManager.switchScene(FxmlView.ENVIAR);
-					//llamar a pago desde envio por si cancela el envio q pague menos
-					// ye mucha movida rn 
 				} else {
-					fuera();
+					
+					
 					stageManager.switchScene(FxmlView.PARADA);
 				}
 			} else {
-				System.out.println("pago cant be null try again");
+				showAlert(Alert.AlertType.ERROR, "Error", null, "Debe seleccionar un tipo de pago");
 			}
-			
 
-			// ahora syso pa debug luego alerta pa qeste guapo
 		} else {
+			showAlert(Alert.AlertType.INFORMATION, "Estancia Confirmada", null,
+					"No ha seleccionado ningun servicio extra. Disfrute de su estancia");
 			stageManager.switchScene(FxmlView.PARADA);
 		}
 
 	}
 
-	public void fuera() {
-		String extra = estra.getText();
-		temp.setExtras(extra);
-		
-		conjuntoService.guardarconjunto(temp);
-
-		System.out.println(temp.toString());
-		List<ConjuntoContratado> s = conjuntoService.listarConjuntosContratados();
-		for (ConjuntoContratado t : s) {
-			System.out.println(t.toString2());
-		}
-	}
-		
-	}
 	
+	private void showAlert(AlertType e, String title, String header, String content) {
+		Alert alert = new Alert(e);
+		alert.setTitle(title);
+		alert.setHeaderText(header);
+		alert.setContentText(content);
+		alert.showAndWait();
+	}
 
+}

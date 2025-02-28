@@ -65,32 +65,51 @@ public class EnvioController implements Initializable {
 	@FXML
 	private void crea(ActionEvent event) throws IOException {
 
+		if (address.getText().isEmpty() || local.getText().isEmpty() || peso.getText().isEmpty()
+				|| largo.getText().isEmpty() || ancho.getText().isEmpty() || alto.getText().isEmpty()) {
+			showAlert(AlertType.ERROR, "Error", null , "Debes rellenar todos los campos");
+			return;
+		}
+	    double pesod=0;
+	    try {
+	        pesod= Double.parseDouble(peso.getText());
+	        if (pesod <= 0) {
+	            showAlert(AlertType.ERROR, "Error", "Peso no Valido", "No puede tener peso negativo");
+	            return;
+	        }
+	    } catch (NumberFormatException e) {
+	        showAlert(AlertType.ERROR, "Error", "Peso no Valido", "El peso tiene que ser un numero (Formato Numero.Numero Ej 20.2 ");
+	        return;
+	    }
 		Direccion direccion = new Direccion();
 		direccion.setDireccion(address.getText());
 		direccion.setLocalidad(local.getText());
 		direccion.setId(getLastEnvioId());
 
 		EnvioACasa envio = new EnvioACasa();
-		envio.setPeso(Double.parseDouble(peso.getText()));
-		// control errores aqui
-		envio.setLargo(Integer.parseInt(largo.getText()));
-		envio.setAncho(Integer.parseInt(ancho.getText()));
-		envio.setAlto(Integer.parseInt(alto.getText()));
+		envio.setPeso(pesod);
+		 int largon, anchon, alton;
+		    try {
+		        largon = Integer.parseInt(largo.getText());
+		        anchon = Integer.parseInt(ancho.getText());
+		        alton = Integer.parseInt(alto.getText());
+
+		        if (largon < 0 || anchon < 0 || alton < 0) {
+		            showAlert(AlertType.ERROR, "Error", "Dimensiones no validas", "No puede haber dimensiones negativas");
+		            return;
+		        }
+		    } catch (NumberFormatException e) {
+		        showAlert(AlertType.ERROR, "Error", "Dimensiones no validas", "Las dimensiones deben ser numeros enteros");
+		        return;
+		    }
+		envio.setLargo(largon);
+		envio.setAncho(anchon);
+		envio.setAlto(alton);
 		envio.setUrgente(urgente.isSelected());
 		envio.setDireccion(direccion);
 		envio.setIdParada(Tarea3Ad2024baseApplication.inicial.getId());
 		envioService.registrarEnvio(envio);
-		System.out.println("done id: " + envio.getId());
-		List<EnvioACasa> envios = envioService.getenvios();
-		if (envios.isEmpty()) {
-			System.out.println("No EnvioACasa objects found in the database.");
-		} else {
-			System.out.println("EnvioACasa objects in the database:");
-			for (EnvioACasa e : envios) {
-				System.out.println("ID: " + e.getId() + ", Localidad: " + e.getDireccion().getLocalidad());
-			}
-
-		}
+		  showAlert(AlertType.INFORMATION, "Operacion completada", "Envio realizado", "El envio a "+direccion.getDireccion()+" esta de camino a "+direccion.getLocalidad());
 		stageManager.switchScene(FxmlView.PARADA);
 	}
 
@@ -122,7 +141,7 @@ public class EnvioController implements Initializable {
 			String url = getClass().getResource("/help/html/admin.html").toExternalForm();
 			System.out.println(url);
 			webView.getEngine().load(url);
-			
+
 			Stage helpStage = new Stage();
 			helpStage.setTitle("Ayuda");
 
@@ -141,6 +160,14 @@ public class EnvioController implements Initializable {
 
 			alert.showAndWait();
 		}
+	}
+
+	private void showAlert(AlertType e, String title, String header, String content) {
+		Alert alert = new Alert(e);
+		alert.setTitle(title);
+		alert.setHeaderText(header);
+		alert.setContentText(content);
+		alert.showAndWait();
 	}
 
 }
