@@ -60,7 +60,7 @@ public class ExportController implements Initializable {
 	private Button btnExportar;
 	@FXML
 	private Button btnVolver;
-	
+
 	@FXML
 	private ImageView image;
 	@FXML
@@ -70,9 +70,9 @@ public class ExportController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		System.out.println("now we export");
+
 		p = peregrinoService.findbyiduser(Tarea3Ad2024baseApplication.useractivo.getId());
-		System.out.println(p.getId_user());
+
 		lblMecachis.setText("Bienvenido " + p.getNombre());
 
 	}
@@ -80,7 +80,6 @@ public class ExportController implements Initializable {
 	@FXML
 	private void volver(ActionEvent event) throws IOException {
 
-		System.out.println("test");
 		Tarea3Ad2024baseApplication.useractivo.setId(0);
 		Tarea3Ad2024baseApplication.useractivo.setNombre("Invitado");
 		Tarea3Ad2024baseApplication.useractivo.setPerfil(Perfil.INVITADO);
@@ -115,13 +114,9 @@ public class ExportController implements Initializable {
 			alert.showAndWait();
 		}
 	}
-	
-	
 
 	@FXML
 	private void exportCarnet(ActionEvent event) throws IOException {
-		// logic aqui
-
 		try {
 			carnetService.exportCarnet(p);
 			exportaAlert(p);
@@ -130,9 +125,8 @@ public class ExportController implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	
-		// alert con info?
 	}
+
 	@FXML
 	private void eidt(ActionEvent event) throws IOException {
 		stageManager.switchScene(FxmlView.EDIT);
@@ -158,28 +152,25 @@ public class ExportController implements Initializable {
 			System.out.println(url2);
 
 			if (url2 == null) {
-				System.err.println("No se encontró el archivo Carnet.jasper");
+
 				return;
 			}
-			System.out.println("before");
-			JasperReport reporte = (JasperReport) JRLoader.loadObject(url2);
-			System.out.println("after");
-			Long idPeregrino = peregrino.getId();
 
-			System.out.println("Valor de PEREGRINO_ID: " + idPeregrino);
+			JasperReport reporte = (JasperReport) JRLoader.loadObject(url2);
+
+			Long idPeregrino = peregrino.getId();
 
 			Map<String, Object> parametros = new HashMap<>();
 			parametros.put("id", idPeregrino);
 
 			DataSource ds = getDataSource();
 			conexion = ds.getConnection();
-			System.out.println("conectao");
+
 			JasperPrint print = JasperFillManager.fillReport(reporte, parametros, conexion);
 
 			String rutaSalida = "src/main/resources/escritura/" + name + "_peregrino.pdf";
-			System.out.println(rutaSalida);
+
 			JasperExportManager.exportReportToPdfFile(print, rutaSalida);
-			System.out.println("Informe generado correctamente en: " + rutaSalida);
 
 			abrirPDF(rutaSalida);
 
@@ -206,9 +197,9 @@ public class ExportController implements Initializable {
 		}
 		try {
 			Runtime.getRuntime().exec(new String[] { "cmd", "/c", "start", "", archivoPDF.getAbsolutePath() });
-			System.out.println("workin");
+
 		} catch (IOException e) {
-			e.printStackTrace();
+
 			System.err.println("Error al abrir el archivo PDF ");
 		}
 	}

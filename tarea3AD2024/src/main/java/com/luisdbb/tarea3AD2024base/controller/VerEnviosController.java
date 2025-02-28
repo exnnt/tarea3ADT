@@ -82,7 +82,7 @@ public class VerEnviosController implements Initializable {
 			WebView webView = new WebView();
 
 			String url = getClass().getResource("/help/html/admin.html").toExternalForm();
-			System.out.println(url);
+		
 			webView.getEngine().load(url);
 
 			Stage helpStage = new Stage();

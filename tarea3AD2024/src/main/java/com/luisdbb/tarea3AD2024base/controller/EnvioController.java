@@ -67,20 +67,21 @@ public class EnvioController implements Initializable {
 
 		if (address.getText().isEmpty() || local.getText().isEmpty() || peso.getText().isEmpty()
 				|| largo.getText().isEmpty() || ancho.getText().isEmpty() || alto.getText().isEmpty()) {
-			showAlert(AlertType.ERROR, "Error", null , "Debes rellenar todos los campos");
+			showAlert(AlertType.ERROR, "Error", null, "Debes rellenar todos los campos");
 			return;
 		}
-	    double pesod=0;
-	    try {
-	        pesod= Double.parseDouble(peso.getText());
-	        if (pesod <= 0) {
-	            showAlert(AlertType.ERROR, "Error", "Peso no Valido", "No puede tener peso negativo");
-	            return;
-	        }
-	    } catch (NumberFormatException e) {
-	        showAlert(AlertType.ERROR, "Error", "Peso no Valido", "El peso tiene que ser un numero (Formato Numero.Numero Ej 20.2 ");
-	        return;
-	    }
+		double pesod = 0;
+		try {
+			pesod = Double.parseDouble(peso.getText());
+			if (pesod <= 0) {
+				showAlert(AlertType.ERROR, "Error", "Peso no Valido", "No puede tener peso negativo");
+				return;
+			}
+		} catch (NumberFormatException e) {
+			showAlert(AlertType.ERROR, "Error", "Peso no Valido",
+					"El peso tiene que ser un numero (Formato Numero.Numero Ej 20.2 ");
+			return;
+		}
 		Direccion direccion = new Direccion();
 		direccion.setDireccion(address.getText());
 		direccion.setLocalidad(local.getText());
@@ -88,20 +89,20 @@ public class EnvioController implements Initializable {
 
 		EnvioACasa envio = new EnvioACasa();
 		envio.setPeso(pesod);
-		 int largon, anchon, alton;
-		    try {
-		        largon = Integer.parseInt(largo.getText());
-		        anchon = Integer.parseInt(ancho.getText());
-		        alton = Integer.parseInt(alto.getText());
+		int largon, anchon, alton;
+		try {
+			largon = Integer.parseInt(largo.getText());
+			anchon = Integer.parseInt(ancho.getText());
+			alton = Integer.parseInt(alto.getText());
 
-		        if (largon < 0 || anchon < 0 || alton < 0) {
-		            showAlert(AlertType.ERROR, "Error", "Dimensiones no validas", "No puede haber dimensiones negativas");
-		            return;
-		        }
-		    } catch (NumberFormatException e) {
-		        showAlert(AlertType.ERROR, "Error", "Dimensiones no validas", "Las dimensiones deben ser numeros enteros");
-		        return;
-		    }
+			if (largon < 0 || anchon < 0 || alton < 0) {
+				showAlert(AlertType.ERROR, "Error", "Dimensiones no validas", "No puede haber dimensiones negativas");
+				return;
+			}
+		} catch (NumberFormatException e) {
+			showAlert(AlertType.ERROR, "Error", "Dimensiones no validas", "Las dimensiones deben ser numeros enteros");
+			return;
+		}
 		envio.setLargo(largon);
 		envio.setAncho(anchon);
 		envio.setAlto(alton);
@@ -109,7 +110,8 @@ public class EnvioController implements Initializable {
 		envio.setDireccion(direccion);
 		envio.setIdParada(Tarea3Ad2024baseApplication.inicial.getId());
 		envioService.registrarEnvio(envio);
-		  showAlert(AlertType.INFORMATION, "Operacion completada", "Envio realizado", "El envio a "+direccion.getDireccion()+" esta de camino a "+direccion.getLocalidad());
+		showAlert(AlertType.INFORMATION, "Operacion completada", "Envio realizado",
+				"El envio a " + direccion.getDireccion() + " esta de camino a " + direccion.getLocalidad());
 		stageManager.switchScene(FxmlView.PARADA);
 	}
 

@@ -104,8 +104,7 @@ public class CU3and5Controller implements Initializable {
 			int usr = userService.authenticate(getUsername(), getPassword());
 			if (usr == 3) {
 				Peregrino p = peregrinoService.findbyiduser(userService.findByName(getUsername()).getId());
-				System.out.println(userService.findByName(getUsername()).getId());
-				System.out.println(p.getNombre());
+
 				rutaService.crearRuta(p.getId(), Tarea3Ad2024baseApplication.inicial.getId(), (float) 5.5);
 				if (estanciar.isSelected()) {
 					Estanciar(p);
@@ -159,30 +158,27 @@ public class CU3and5Controller implements Initializable {
 			return;
 		}
 		List<Estancia> a = estanciaService.findbyFecha(min, max);
-		System.out.println("xd");
+
 		for (Estancia e : a) {
-			System.out.println(String.valueOf(e.getId()));
-			System.out.println(e.getFecha().toString());
-			System.out.println(e.isVip());
+
 			String vipStatus = "Normal";
 			if (e.isVip())
 				vipStatus = "VIP";
 			Estancia row = new Estancia(e.getId(), e.getFecha().toString(), e.getPeregrinoId(), e.getParadaId(),
 					vipStatus);
 
-			System.out.println(row.getvipstring());
 			tableEstancia.getItems().add(row);
 
 		}
 		tableEstancia.refresh();
-		System.out.println("xdnt");
+
 	}
 
 	private void Estanciar(Peregrino p) {
 		boolean viper = vip.isSelected();
-		// maybe aqui?
+
 		idEstancia = estanciaService.creaEstancia(p, Tarea3Ad2024baseApplication.inicial, viper).getId();
-		System.out.println(idEstancia);
+
 		stageManager.switchScene(FxmlView.CONJUNTO);
 		// esto lo delayeo y lo pongo en el confirm de conjunto estanciaAlert(p, viper);
 
@@ -220,15 +216,16 @@ public class CU3and5Controller implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		lblLogin1.setText("Sellar/Estanciar: " + Tarea3Ad2024baseApplication.inicial.getNombre());
-		// esto es por no hacer otro controller nsq pq lo hice asi pero bueno mb
 
 		if (pcontrol.cu3) {
+			lblLogin1.setText("Ver estancias en : " + Tarea3Ad2024baseApplication.inicial.getNombre());
 			eId.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getId()));
 			eFecha.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getFestring()));
 			peid.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getPeregrinoId()));
 			pid.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getParadaId()));
 			vips.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getvipstring()));
+		} else {
+			lblLogin1.setText("Sellar/Estanciar: " + Tarea3Ad2024baseApplication.inicial.getNombre());
 		}
 	}
 
@@ -279,16 +276,6 @@ public class CU3and5Controller implements Initializable {
 		alert.setTitle("Sellado confirmado");
 		alert.setHeaderText(null);
 		alert.setContentText("Peregrino " + p.getNombre() + " sellado. Buen camino!");
-		alert.showAndWait();
-
-	}
-
-	private void estanciaAlert(Peregrino p, boolean vip) {
-
-		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("Estancia confirmada");
-		alert.setHeaderText(null);
-		alert.setContentText("Peregrino " + p.getNombre() + " sellado y estanciado. Vip: " + vip);
 		alert.showAndWait();
 
 	}

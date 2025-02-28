@@ -63,28 +63,24 @@ public class AdminController implements Initializable {
 
 	@FXML
 	private void back(ActionEvent event) throws IOException {
-		System.out.println("test");
 
 		stageManager.switchScene(FxmlView.ADMIN1);
 	}
 
 	@FXML
 	private void paradas(ActionEvent event) throws IOException {
-		System.out.println("test paradas");
 
 		stageManager.switchScene(FxmlView.ADMIN);
 	}
 
 	@FXML
 	private void servicios(ActionEvent event) throws IOException {
-		System.out.println("test lo otro");
 
 		stageManager.switchScene(FxmlView.ADMIN2);
 	}
 
 	@FXML
 	private void logout(ActionEvent event) throws IOException {
-		System.out.println("test");
 		Tarea3Ad2024baseApplication.useractivo.setPerfil(Perfil.INVITADO);
 		stageManager.switchScene(FxmlView.INVITADO);
 	}
@@ -133,6 +129,7 @@ public class AdminController implements Initializable {
 			String responsable = respons.getText();
 			responsable = responsable.replace(" ", "");
 			String passw = pass.getText();
+			passw = passw.replace(" ", "");
 			Parada temp = new Parada(nombre, r, responsable);
 			paradaService.crearParada(temp, passw);
 			System.out.println("");
@@ -142,13 +139,12 @@ public class AdminController implements Initializable {
 			successAlert.setHeaderText(null);
 			successAlert.setContentText("La parada " + temp.getNombre() + " con responsable " + responsable
 					+ " y contraseña " + passw + " ha sido creada.");
-			successAlert.showAndWait();		
+			successAlert.showAndWait();
 
 			stageManager.switchScene(FxmlView.ADMIN1);
 		} catch (Exception e) {
 			showAlert("Error de entrada", "Input missmatch", "Hay un error en algún campo");
-			System.out.println(e.getLocalizedMessage());
-			// lo handeleo luego
+
 		}
 
 	}

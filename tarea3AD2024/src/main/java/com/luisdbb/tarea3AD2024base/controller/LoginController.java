@@ -81,7 +81,7 @@ public class LoginController implements Initializable {
 			if (usr > 1) {
 				Usuario u = userService.findByName(getUsername());
 				Tarea3Ad2024baseApplication.useractivo.setId(u.getId());
-				System.out.println(u.getId());
+
 			}
 			switch (usr) {
 			case 1:
@@ -92,17 +92,15 @@ public class LoginController implements Initializable {
 				Parada p = paradaService.findbyrespons(getUsername());
 
 				Tarea3Ad2024baseApplication.setPinicial(p);
-				System.out.println(p.getNombre());
+
 				stageManager.switchScene(FxmlView.PARADA);
 
 				Tarea3Ad2024baseApplication.useractivo.setPerfil(Perfil.PARADA);
 				break;
 			case 3:
-				System.out.println("before ");
+
 				Peregrino pp = peregrinoService.findbyiduser(Tarea3Ad2024baseApplication.useractivo.getId());
 
-				System.out.println(pp.getNombre());
-				System.out.println("after");
 				stageManager.switchScene(FxmlView.PEREGRINO);
 
 				Tarea3Ad2024baseApplication.useractivo.setPerfil(Perfil.PEREGRINO);

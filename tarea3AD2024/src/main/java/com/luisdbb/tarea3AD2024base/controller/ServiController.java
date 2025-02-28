@@ -103,19 +103,19 @@ public class ServiController implements Initializable {
 
 	@FXML
 	private void back(ActionEvent event) throws IOException {
-		System.out.println("test");
+
 		stageManager.switchScene(FxmlView.ADMIN1);
 	}
 
 	@FXML
 	private void paradas(ActionEvent event) throws IOException {
-		System.out.println("test paradas");
+
 		stageManager.switchScene(FxmlView.ADMIN);
 	}
 
 	@FXML
 	private void logout(ActionEvent event) throws IOException {
-		System.out.println("test");
+
 		Tarea3Ad2024baseApplication.useractivo.setPerfil(Perfil.INVITADO);
 		stageManager.switchScene(FxmlView.INVITADO);
 	}
@@ -187,7 +187,7 @@ public class ServiController implements Initializable {
 
 		} catch (Exception e) {
 			showAlert(Alert.AlertType.ERROR, "Error", "Formato no valido",
-					"El nombre debe ser un String y el precio un double con formato Numero.Numero");
+					"El precio debe ser un numero positivo Ej 20.5 20");
 		}
 
 	}
@@ -208,8 +208,6 @@ public class ServiController implements Initializable {
 				return;
 			}
 			Long id = sel.getId();
-			System.out.println(id);
-
 			if (id != null) {
 				if (serviciopasiempre.getParadas() == null) {
 					serviciopasiempre.setParadas(new ArrayList<>());
@@ -253,8 +251,6 @@ public class ServiController implements Initializable {
 			showAlert(Alert.AlertType.ERROR, "Error", null, "No se ha seleccionado ningún servicio.");
 			return;
 		}
-		System.out.println(sel.getId());
-		System.out.println(sel.getparadasString());
 		serviciopasiempre = sel;
 	}
 
@@ -270,15 +266,13 @@ public class ServiController implements Initializable {
 			return;
 		}
 		Long id = sel.getId();
-		System.out.println(id);
+
 		List<Long> paradas = serviciopasiempre.getParadas();
 		if (paradas != null && paradas.contains(id)) {
-			System.out.println(serviciopasiempre.getparadasString());
+
 			paradas.remove(id);
 			serviciopasiempre.setParadas(paradas);
 			servicioService.editar1(serviciopasiempre);
-			System.out.println(id);
-			System.out.println(serviciopasiempre.getparadasString());
 
 			getservicios();
 		} else {

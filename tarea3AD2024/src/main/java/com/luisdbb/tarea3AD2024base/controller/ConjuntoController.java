@@ -119,7 +119,6 @@ public class ConjuntoController implements Initializable {
 			WebView webView = new WebView();
 
 			String url = getClass().getResource("/help/html/admin.html").toExternalForm();
-			System.out.println(url);
 			webView.getEngine().load(url);
 
 			Stage helpStage = new Stage();
@@ -156,6 +155,7 @@ public class ConjuntoController implements Initializable {
 		precioservicio1.setCellValueFactory(new PropertyValueFactory<>("precio"));
 		temp = new ConjuntoContratado(idEstancia);
 		servicios2.clear();
+		Envio = false;
 	}
 
 	public void getservicios() {
@@ -209,22 +209,18 @@ public class ConjuntoController implements Initializable {
 		if (serviciopasiempre2 != null) {
 
 			if (temp.deleteServicio(serviciopasiempre2)) {
-				System.out.println("Service removed from temp ConjuntoContratado");
-
-				for (Servicio s : temp.getServiciosContratados()) {
-					System.out.println(s.getNombre() + " id: " + s.getId());
-				}
+				// aqui no pongo alert q me parece saturar un poco y lo ve en la tabla asiq ye
+				// innecesario
 
 				servicios2.remove(serviciopasiempre2);
 
 				tableServicios1.setItems(servicios2);
 
 			}
-		}
-		else {
+		} else {
 			showAlert(Alert.AlertType.ERROR, "Error", null, "No se ha seleccionado ningun servicio para borrar.");
 		}
-		
+
 	}
 
 	@FXML
@@ -258,14 +254,14 @@ public class ConjuntoController implements Initializable {
 				temp.setExtras(extra);
 				conjuntoService.guardarconjunto(temp);
 				showAlert(Alert.AlertType.INFORMATION, "Estancia Confirmada", null,
-						"Ha contratado un Conjunto de Servicios por valor de "+preciofinal+" y ha decidido pagar con "+pago);
+						"Ha contratado un Conjunto de Servicios por valor de " + preciofinal
+								+ " y ha decidido pagar con " + pago);
+
 				if (Envio) {
-					
-				
 					stageManager.switchScene(FxmlView.ENVIAR);
+					Envio = false;
 				} else {
-					
-					
+
 					stageManager.switchScene(FxmlView.PARADA);
 				}
 			} else {
@@ -280,7 +276,6 @@ public class ConjuntoController implements Initializable {
 
 	}
 
-	
 	private void showAlert(AlertType e, String title, String header, String content) {
 		Alert alert = new Alert(e);
 		alert.setTitle(title);

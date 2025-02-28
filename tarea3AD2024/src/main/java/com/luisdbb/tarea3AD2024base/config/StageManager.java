@@ -28,13 +28,9 @@ public class StageManager {
     }
 
     public void switchScene(final FxmlView view) {
-    	System.out.println("test");
-    	System.out.println(getClass().getResource("/fxml/MenuAdmin.fxml"));
-    	System.out.println(view.name());
-    	System.out.println(view.getTitle());
-    	System.out.println(getClass().getResource(view.getFxmlFile()));
+    	
         Parent viewRootNodeHierarchy = loadViewNodeHierarchy(view.getFxmlFile());
-        System.out.println("testeao");
+
         show(viewRootNodeHierarchy, view.getTitle());
     }
     

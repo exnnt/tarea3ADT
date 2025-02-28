@@ -35,7 +35,7 @@ public class EditController implements Initializable {
 	private PeregrinoService peregrinoService;
 	@Autowired
 	private UserService userService;
-	
+
 	private Peregrino p = null;
 	private Usuario u = null;
 	@FXML
@@ -51,7 +51,6 @@ public class EditController implements Initializable {
 
 		p = peregrinoService.findbyiduser(Tarea3Ad2024baseApplication.useractivo.getId());
 		u = userService.find(Tarea3Ad2024baseApplication.useractivo.getId());
-		System.out.println(p.getId_user());
 		userId.setText(p.getNombre());
 
 	}
@@ -69,7 +68,7 @@ public class EditController implements Initializable {
 			errorAlert();
 		} else {
 			peregrinoService.actualizarPeregrino(p.getId(), e);
-			oleAlert() ;
+			oleAlert();
 			stageManager.switchScene(FxmlView.PEREGRINO);
 		}
 	}
@@ -82,12 +81,14 @@ public class EditController implements Initializable {
 		alert.showAndWait();
 
 	}
+
 	private void oleAlert() {
 		String e = userId.getText();
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Operacion Completada");
 		alert.setHeaderText(null);
-		alert.setContentText("Cambio de nombre efectuado, Buen camino "+e+"\n Tu nombre de usuario sigue siendo "+u.getName());
+		alert.setContentText(
+				"Cambio de nombre efectuado, Buen camino " + e + "\n Tu nombre de usuario sigue siendo " + u.getName());
 		alert.showAndWait();
 
 	}

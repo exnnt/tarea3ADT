@@ -131,6 +131,7 @@ public class InvitadoController implements Initializable {
 		String parada = cbParada.getValue();
 		System.out.println(parada);
 		String password = getPassword();
+		password = password.replace(" ", "");
 		// luego hago el validAlert
 		boolean valid = true;
 		if (!validate(pername)) {

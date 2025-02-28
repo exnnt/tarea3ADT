@@ -24,7 +24,7 @@ public class ObjectDBnsq {
 	public static void cerrar() {
 		if (emf != null && emf.isOpen()) {
 			emf.close();
-			System.out.println("close");
+		
 		}
 	}
 
@@ -46,7 +46,7 @@ public class ObjectDBnsq {
 				processBuilder.directory(exeFile.getParentFile());
 				processBuilder.start();
 				Thread.sleep(5000);
-				System.out.println("yeppers");
+				
 			} else {
 				System.out.println("error1");
 			}

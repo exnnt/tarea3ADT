@@ -53,7 +53,6 @@ public class ParadasController implements Initializable {
 
 	@FXML
 	private void logout(ActionEvent event) throws IOException {
-		System.out.println("test");
 		Tarea3Ad2024baseApplication.useractivo.setPerfil(Perfil.INVITADO);
 		stageManager.switchScene(FxmlView.INVITADO);
 	}
@@ -88,7 +87,7 @@ public class ParadasController implements Initializable {
 			WebView webView = new WebView();
 
 			String url = getClass().getResource("/help/html/parada.html").toExternalForm();
-			System.out.println(url);
+
 			webView.getEngine().load(url);
 
 			Stage helpStage = new Stage();
@@ -114,9 +113,9 @@ public class ParadasController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		System.out.println("beofre");
+
 		System.out.println(Tarea3Ad2024baseApplication.inicial.getNombre());
-		System.out.println("after");
+
 		lblLogin.setText("Bienvenido a " + Tarea3Ad2024baseApplication.inicial.getNombre());
 
 	}
