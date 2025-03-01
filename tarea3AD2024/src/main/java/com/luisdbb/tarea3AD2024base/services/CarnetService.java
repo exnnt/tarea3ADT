@@ -33,7 +33,6 @@ import com.luisdbb.tarea3AD2024base.repositorios.CarnetRepository;
 import com.luisdbb.tarea3AD2024base.repositorios.ParadaRepository;
 import com.luisdbb.tarea3AD2024base.repositorios.PeregrinoRepository;
 
-
 import jakarta.transaction.Transactional;
 
 @Service
@@ -41,7 +40,7 @@ public class CarnetService {
 	@Autowired
 	CarnetRepository carnetRepository;
 	@Autowired
-    private ParadaRepository paradaRepository;
+	private ParadaRepository paradaRepository;
 	@Autowired
 	private ParadaService paradaService;
 	@Autowired
@@ -50,203 +49,196 @@ public class CarnetService {
 	private EstanciaService estanciaService;
 	@Autowired
 	private RutaService rutaService;
+
 	@Transactional
-	public Carnet creaCarnet(Peregrino p,Parada user) {
-		Carnet carnetet = new Carnet(p, user);		
+	public Carnet creaCarnet(Peregrino p, Parada user) {
+		Carnet carnetet = new Carnet(p, user);
 		return carnetRepository.save(carnetet);
 	}
-	//luego el edit pa la distancia
-	 public void actualizarCarnet(Long Id, Float distancia, int nvips) {
-		 Carnet carnet = carnetRepository.findById(Id).orElse(null);
-		 if (carnet != null) {
-		   carnet.setDistancia((float) (carnet.getDistancia() + distancia));
-		   System.out.println(carnet.getNvips());
-           carnet.setNvips(carnet.getNvips() + nvips);
-           carnetRepository.save(carnet);
-           System.out.println("done");
-           System.out.println(carnet.getNvips());
-		 }
-           else {
-               System.out.println("sadgi");
-           }
-	 }
-	 public void actualizarCarnet(Long Id, int nvips) {
-		 Carnet carnet = carnetRepository.findById(Id).orElse(null);
-		 if (carnet != null) {
-		 
-		   System.out.println(carnet.getNvips());
-           carnet.setNvips(carnet.getNvips() + nvips);
-           carnetRepository.save(carnet);
-           System.out.println("done");
-           System.out.println(carnet.getNvips());
-		 }
-           else {
-               System.out.println("sadgi");
-           }
-	 }
-	  public void exportCarnet(Peregrino yo) throws SQLException {
-	    	
-	        try {
-	        	
-	        	// crea carnet
-	        	//crea peregrino
-	        	
-	            
-	        		
-	            Carnet mio =  carnetRepository.findById(yo.getId()).orElse(null);
-	            if (estanciaService.findbyPeregrino(yo.getId()) != null) {
-	            	
-	            yo.setEstancias(estanciaService.findbyPeregrino(yo.getId()));
-	            for(Estancia e: yo.getEstancias()) {
-	            	//ns como hice esto hace 2 meses tbh
-	            	e.setParada(paradaService.find(e.getParadaId()));            	
-	            }
-	            
-	            
-	            }
-	            //getParadabyPeregrinoId?
-	            List<Ruta> rutas = rutaService.obtenerRutasPorPeregrino(yo.getId());
-	            Set<Parada> peiredes = new HashSet<>();
-	            for(Ruta r : rutas) {
-	            	Parada temporalidad = paradaService.find(r.getParadaId());
-	            	peiredes.add(temporalidad);
-	            }
-	            yo.setParadas(peiredes);
-	            //tengo que cargar paradas y estancias a peregrino
-	            
-	         
-	            
-	            if (mio == null || yo == null) {
-	                System.out.println("Error: No se pudo encontrar el carnet o peregrino asociado al ID del usuario.");
-	                return;
-	            }
 
-	            // Create XML Document
-	            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-	            DocumentBuilder db = dbf.newDocumentBuilder();
-	            Document documento = db.newDocument();
+	// luego el edit pa la distancia
+	public void actualizarCarnet(Long Id, Float distancia, int nvips) {
+		Carnet carnet = carnetRepository.findById(Id).orElse(null);
+		if (carnet != null) {
+			carnet.setDistancia((float) (carnet.getDistancia() + distancia));
 
-	            // Root element
-	            Element root = documento.createElement("carnet");
-	            documento.appendChild(root);
+			carnet.setNvips(carnet.getNvips() + nvips);
+			carnetRepository.save(carnet);
 
-	            // Carnet ID
-	            Element ID_ELEMENT = documento.createElement("id");
-	            ID_ELEMENT.appendChild(documento.createTextNode(String.valueOf(mio.getId())));
-	            root.appendChild(ID_ELEMENT);
+		} else {
+			System.out.println("sadgi");
+		}
+	}
 
-	            // Fecha de Expedición
-	            DateTimeFormatter FORMATO_FECHA = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-	            String FECHA_FORMATADA = mio.getFechaexp().format(FORMATO_FECHA);
-	            Element FECHA_EXP = documento.createElement("fechaexp");
-	            FECHA_EXP.appendChild(documento.createTextNode(FECHA_FORMATADA));
-	            root.appendChild(FECHA_EXP);
+	public void actualizarCarnet(Long Id, int nvips) {
+		Carnet carnet = carnetRepository.findById(Id).orElse(null);
+		if (carnet != null) {
 
-	            // Parada Inicial
-	            Element EXPEDIDO_EN = documento.createElement("expedidoen");
-	            EXPEDIDO_EN.appendChild(documento.createTextNode(mio.getParada_inicial().getNombre()));
-	            root.appendChild(EXPEDIDO_EN);
+			carnet.setNvips(carnet.getNvips() + nvips);
+			carnetRepository.save(carnet);
 
-	            // Peregrino Information
-	            Element PEREGRINO_ELEMENT = documento.createElement("peregrino");
-	            root.appendChild(PEREGRINO_ELEMENT);
+		} else {
+			System.out.println("sadgi");
+		}
+	}
 
-	            Element NOMBRE = documento.createElement("nombre");
-	            NOMBRE.appendChild(documento.createTextNode(yo.getNombre()));
-	            PEREGRINO_ELEMENT.appendChild(NOMBRE);
+	public void exportCarnet(Peregrino yo) throws SQLException {
 
-	            Element NACIONALIDAD = documento.createElement("nacionalidad");
-	            NACIONALIDAD.appendChild(documento.createTextNode(yo.getNacionalidad()));
-	            PEREGRINO_ELEMENT.appendChild(NACIONALIDAD);
+		try {
 
-	            // Current Date
-	            Element HOY = documento.createElement("hoy");
-	            HOY.appendChild(documento.createTextNode(new SimpleDateFormat("dd-MM-yyyy").format(new Date())));
-	            root.appendChild(HOY);
+			// crea carnet
+			// crea peregrino
 
-	            // Distancia Total
-	            Element DISTANCIA_TOTAL_ELEMENT = documento.createElement("distanciatotal");
-	            DISTANCIA_TOTAL_ELEMENT.appendChild(documento.createTextNode(String.format("%.1f", mio.getDistancia())));
-	            root.appendChild(DISTANCIA_TOTAL_ELEMENT);
+			Carnet mio = carnetRepository.findById(yo.getId()).orElse(null);
+			if (estanciaService.findbyPeregrino(yo.getId()) != null) {
 
-	            // Paradas
-	            Element PARADAS_ELEMENT = documento.createElement("paradas");
-	            root.appendChild(PARADAS_ELEMENT);
+				yo.setEstancias(estanciaService.findbyPeregrino(yo.getId()));
+				for (Estancia e : yo.getEstancias()) {
+					// ns como hice esto hace 2 meses tbh
+					e.setParada(paradaService.find(e.getParadaId()));
+				}
 
-	            int ORDEN = 1;
-	            for (Parada parada : yo.getParadas()) {
-	                Element PARADA_ELEMENT = documento.createElement("parada");
+			}
+			// getParadabyPeregrinoId?
+			List<Ruta> rutas = rutaService.obtenerRutasPorPeregrino(yo.getId());
+			Set<Parada> peiredes = new HashSet<>();
+			for (Ruta r : rutas) {
+				Parada temporalidad = paradaService.find(r.getParadaId());
+				peiredes.add(temporalidad);
+			}
+			yo.setParadas(peiredes);
+			// tengo que cargar paradas y estancias a peregrino
 
-	                Element ORDEN_ELEMENT = documento.createElement("orden");
-	                ORDEN_ELEMENT.appendChild(documento.createTextNode(String.valueOf(ORDEN++)));
-	                PARADA_ELEMENT.appendChild(ORDEN_ELEMENT);
+			if (mio == null || yo == null) {
+				System.out.println("Error: No se pudo encontrar el carnet o peregrino asociado al ID del usuario.");
+				return;
+			}
 
-	                Element NOMBRE_PARADA = documento.createElement("nombre");
-	                NOMBRE_PARADA.appendChild(documento.createTextNode(parada.getNombre()));
-	                PARADA_ELEMENT.appendChild(NOMBRE_PARADA);
+			// Create XML Document
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			DocumentBuilder db = dbf.newDocumentBuilder();
+			Document documento = db.newDocument();
 
-	                Element REGION = documento.createElement("region");
-	                REGION.appendChild(documento.createTextNode(String.valueOf(parada.getRegion())));
-	                PARADA_ELEMENT.appendChild(REGION);
+			// Root element
+			Element root = documento.createElement("carnet");
+			documento.appendChild(root);
 
-	                PARADAS_ELEMENT.appendChild(PARADA_ELEMENT);
-	            }
+			// Carnet ID
+			Element ID_ELEMENT = documento.createElement("id");
+			ID_ELEMENT.appendChild(documento.createTextNode(String.valueOf(mio.getId())));
+			root.appendChild(ID_ELEMENT);
 
-	            // Estancias
-	            if (yo.getEstancias() != null) {
-	                Element ESTANCIAS_ELEMENT = documento.createElement("estancias");
-	                root.appendChild(ESTANCIAS_ELEMENT);
+			// Fecha de Expedición
+			DateTimeFormatter FORMATO_FECHA = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+			String FECHA_FORMATADA = mio.getFechaexp().format(FORMATO_FECHA);
+			Element FECHA_EXP = documento.createElement("fechaexp");
+			FECHA_EXP.appendChild(documento.createTextNode(FECHA_FORMATADA));
+			root.appendChild(FECHA_EXP);
 
-	                for (Estancia ESTANCIA : yo.getEstancias()) {
-	                    Element ELEMENTO_ESTANCIA = documento.createElement("estancia");
+			// Parada Inicial
+			Element EXPEDIDO_EN = documento.createElement("expedidoen");
+			EXPEDIDO_EN.appendChild(documento.createTextNode(mio.getParada_inicial().getNombre()));
+			root.appendChild(EXPEDIDO_EN);
 
-	                    Element ID_ESTANCIA = documento.createElement("id");
-	                    ID_ESTANCIA.appendChild(documento.createTextNode(String.valueOf(ESTANCIA.getId())));
-	                    ELEMENTO_ESTANCIA.appendChild(ID_ESTANCIA);
+			// Peregrino Information
+			Element PEREGRINO_ELEMENT = documento.createElement("peregrino");
+			root.appendChild(PEREGRINO_ELEMENT);
 
-	                    String FECHA_FORM = ESTANCIA.getFecha().format(FORMATO_FECHA);
-	                    Element FECHA = documento.createElement("fecha");
-	                    FECHA.appendChild(documento.createTextNode(FECHA_FORM));
-	                    ELEMENTO_ESTANCIA.appendChild(FECHA);
+			Element NOMBRE = documento.createElement("nombre");
+			NOMBRE.appendChild(documento.createTextNode(yo.getNombre()));
+			PEREGRINO_ELEMENT.appendChild(NOMBRE);
 
-	                    Element PARADA_ESTANCIA = documento.createElement("parada");
-	                    PARADA_ESTANCIA.appendChild(documento.createTextNode(ESTANCIA.getParada().getNombre()));
-	                    ELEMENTO_ESTANCIA.appendChild(PARADA_ESTANCIA);
+			Element NACIONALIDAD = documento.createElement("nacionalidad");
+			NACIONALIDAD.appendChild(documento.createTextNode(yo.getNacionalidad()));
+			PEREGRINO_ELEMENT.appendChild(NACIONALIDAD);
 
-	                    if (ESTANCIA.isVip()) {
-	                        Element VIP = documento.createElement("vip");
-	                        ELEMENTO_ESTANCIA.appendChild(VIP);
-	                    }
+			// Current Date
+			Element HOY = documento.createElement("hoy");
+			HOY.appendChild(documento.createTextNode(new SimpleDateFormat("dd-MM-yyyy").format(new Date())));
+			root.appendChild(HOY);
 
-	                    ESTANCIAS_ELEMENT.appendChild(ELEMENTO_ESTANCIA);
-	                }
-	            }
+			// Distancia Total
+			Element DISTANCIA_TOTAL_ELEMENT = documento.createElement("distanciatotal");
+			DISTANCIA_TOTAL_ELEMENT.appendChild(documento.createTextNode(String.format("%.1f", mio.getDistancia())));
+			root.appendChild(DISTANCIA_TOTAL_ELEMENT);
 
-	        	TransformerFactory tf = TransformerFactory.newInstance();
-				Transformer transformer;
-				try {
-					transformer = tf.newTransformer();
-					// configuro el transofrmer para identar el xml
-					transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-					transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+			// Paradas
+			Element PARADAS_ELEMENT = documento.createElement("paradas");
+			root.appendChild(PARADAS_ELEMENT);
 
-					// creo origen DOM y le doy el destino para guardar el xml
-					DOMSource ds = new DOMSource(documento);
-					String name= yo.getNombre().replaceAll(" ", "");
-					StreamResult sr = new StreamResult(new File("src/main/resources/escritura/" +name + "_peregrino.xml"));
-					//guardado en la ruta especificada
-					transformer.transform(ds, sr);
-					System.out.println("Carnet exportado, esta en /src/main/resources/escritura" +name+ "_peregrino.xml");
+			int ORDEN = 1;
+			for (Parada parada : yo.getParadas()) {
+				Element PARADA_ELEMENT = documento.createElement("parada");
 
-	   } catch (TransformerException e) {
+				Element ORDEN_ELEMENT = documento.createElement("orden");
+				ORDEN_ELEMENT.appendChild(documento.createTextNode(String.valueOf(ORDEN++)));
+				PARADA_ELEMENT.appendChild(ORDEN_ELEMENT);
+
+				Element NOMBRE_PARADA = documento.createElement("nombre");
+				NOMBRE_PARADA.appendChild(documento.createTextNode(parada.getNombre()));
+				PARADA_ELEMENT.appendChild(NOMBRE_PARADA);
+
+				Element REGION = documento.createElement("region");
+				REGION.appendChild(documento.createTextNode(String.valueOf(parada.getRegion())));
+				PARADA_ELEMENT.appendChild(REGION);
+
+				PARADAS_ELEMENT.appendChild(PARADA_ELEMENT);
+			}
+
+			// Estancias
+			if (yo.getEstancias() != null) {
+				Element ESTANCIAS_ELEMENT = documento.createElement("estancias");
+				root.appendChild(ESTANCIAS_ELEMENT);
+
+				for (Estancia ESTANCIA : yo.getEstancias()) {
+					Element ELEMENTO_ESTANCIA = documento.createElement("estancia");
+
+					Element ID_ESTANCIA = documento.createElement("id");
+					ID_ESTANCIA.appendChild(documento.createTextNode(String.valueOf(ESTANCIA.getId())));
+					ELEMENTO_ESTANCIA.appendChild(ID_ESTANCIA);
+
+					String FECHA_FORM = ESTANCIA.getFecha().format(FORMATO_FECHA);
+					Element FECHA = documento.createElement("fecha");
+					FECHA.appendChild(documento.createTextNode(FECHA_FORM));
+					ELEMENTO_ESTANCIA.appendChild(FECHA);
+
+					Element PARADA_ESTANCIA = documento.createElement("parada");
+					PARADA_ESTANCIA.appendChild(documento.createTextNode(ESTANCIA.getParada().getNombre()));
+					ELEMENTO_ESTANCIA.appendChild(PARADA_ESTANCIA);
+
+					if (ESTANCIA.isVip()) {
+						Element VIP = documento.createElement("vip");
+						ELEMENTO_ESTANCIA.appendChild(VIP);
+					}
+
+					ESTANCIAS_ELEMENT.appendChild(ELEMENTO_ESTANCIA);
+				}
+			}
+
+			TransformerFactory tf = TransformerFactory.newInstance();
+			Transformer transformer;
+			try {
+				transformer = tf.newTransformer();
+				// configuro el transofrmer para identar el xml
+				transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+				transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+
+				// creo origen DOM y le doy el destino para guardar el xml
+				DOMSource ds = new DOMSource(documento);
+				String name = yo.getNombre().replaceAll(" ", "");
+				StreamResult sr = new StreamResult(new File("src/main/resources/escritura/" + name + "_peregrino.xml"));
+				// guardado en la ruta especificada
+				transformer.transform(ds, sr);
+				System.out.println("Carnet exportado, esta en /src/main/resources/escritura" + name + "_peregrino.xml");
+
+			} catch (TransformerException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-				
-	        }catch (ParserConfigurationException e) {
-	            e.printStackTrace();
-	        }
-	    }
-	 
-		   
+
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+		}
+	}
+
 }

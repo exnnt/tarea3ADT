@@ -17,6 +17,7 @@ public class ParadaService {
 	private ParadaRepository paradaRepository;
 	@Autowired
 	private UserService userService;
+
 	@Transactional
 	public Parada crearParada(Parada user, String pass) {
 		pass = pass.replaceAll(" ", "");
@@ -24,21 +25,21 @@ public class ParadaService {
 		userService.crearUsuario(responsable);
 		return paradaRepository.save(user);
 	}
+
 	public Parada find(Long id) {
 		return paradaRepository.findById(id).get();
 	}
+
 	public Parada findbyName(String name) {
 		return paradaRepository.findBynombre(name);
 	}
+
 	public Parada findbyrespons(String r) {
-	//si no es B mayouscula explota 
-		//ÇÇÇ remember
 		return paradaRepository.findByResponsable(r);
 	}
-	
+
 	public List<Parada> findAll() {
 		return paradaRepository.findAll();
 	}
-
 
 }

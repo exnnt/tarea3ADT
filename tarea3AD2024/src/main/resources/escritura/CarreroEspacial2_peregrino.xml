@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<carnet>
+  <id>13</id>
+  <fechaexp>28-02-2025</fechaexp>
+  <expedidoen>Test Final</expedidoen>
+  <peregrino>
+    <nombre>Carrero Espacial 2</nombre>
+    <nacionalidad>Estados Unidos de América</nacionalidad>
+  </peregrino>
+  <hoy>28-02-2025</hoy>
+  <distanciatotal>0,0</distanciatotal>
+  <paradas>
+    <parada>
+      <orden>1</orden>
+      <nombre>Test Final</nombre>
+      <region>1</region>
+    </parada>
+  </paradas>
+  <estancias/>
+</carnet>
