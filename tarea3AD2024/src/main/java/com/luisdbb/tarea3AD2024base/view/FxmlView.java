@@ -28,7 +28,7 @@ public enum FxmlView {
 	ADMIN2 {
 		@Override
 		public String getTitle() {
-			return getStringFromResourceBundle("admin.title");
+			return getStringFromResourceBundle("servicios.title");
 		}
 
 		@Override
@@ -39,7 +39,7 @@ public enum FxmlView {
 	ENVIAR{
 		@Override
 		public String getTitle() {
-			return getStringFromResourceBundle("paradas.title");
+			return getStringFromResourceBundle("envio.title");
 		}
 
 		@Override
@@ -61,7 +61,7 @@ public enum FxmlView {
 	CONJUNTO {
 		@Override
 		public String getTitle() {
-			return getStringFromResourceBundle("login.title");
+			return getStringFromResourceBundle("servicios.title");
 		}
 
 		@Override
@@ -72,7 +72,7 @@ public enum FxmlView {
 	VERENVIOS {
 		@Override
 		public String getTitle() {
-			return getStringFromResourceBundle("login.title");
+			return getStringFromResourceBundle("ver.title");
 		}
 
 		@Override
@@ -131,8 +131,8 @@ public String getFxmlFile() {
 	EDIT{
 	@Override
 	public String getTitle() {
-	return getStringFromResourceBundle("peregrino.title");
-	//change esto pa pulir
+	return getStringFromResourceBundle("edit.title");
+	
 }
 	
 
@@ -145,7 +145,7 @@ public String getFxmlFile() {
 		@Override
 		public String getTitle() {
 		return getStringFromResourceBundle("sellar.title");
-		//change esto pa pulir
+	
 	}
 		
 

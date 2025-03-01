@@ -60,16 +60,16 @@ public class AdminController implements Initializable {
 	private StageManager stageManager;
 	@Autowired
 	private ParadaService paradaService;
-
+	boolean par =  false;
 	@FXML
 	private void back(ActionEvent event) throws IOException {
-
+		par=false;
 		stageManager.switchScene(FxmlView.ADMIN1);
 	}
 
 	@FXML
 	private void paradas(ActionEvent event) throws IOException {
-
+		par=true;
 		stageManager.switchScene(FxmlView.ADMIN);
 	}
 
@@ -87,10 +87,15 @@ public class AdminController implements Initializable {
 
 	public void mostrarAyuda() {
 		try {
-
+			String url ="";
 			WebView webView = new WebView();
-
-			String url = getClass().getResource("/help/html/admin.html").toExternalForm();
+			if(par) {
+				 url = getClass().getResource("/help/html/creaparadas.html").toExternalForm();
+				
+			}
+			else{
+				 url = getClass().getResource("/help/html/admin.html").toExternalForm();
+			}
 			System.out.println(url);
 			webView.getEngine().load(url);
 
