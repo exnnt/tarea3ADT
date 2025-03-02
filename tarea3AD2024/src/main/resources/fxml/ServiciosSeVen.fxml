@@ -21,7 +21,7 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="name" layoutX="33.0" layoutY="281.0" prefHeight="36.0" prefWidth="181.0" promptText="Nombre" />
+      <TextField fx:id="name" layoutX="33.0" layoutY="281.0" prefHeight="36.0" prefWidth="200.0" promptText="Nombre" />
       <Button fx:id="btnLogin" layoutX="33.0" layoutY="339.0" onAction="#addservicios" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: #4967EB;" text="_Crear" textFill="WHITE">
          <font>
             <Font size="15.0" />
@@ -29,7 +29,7 @@
          <effect>
             <DropShadow blurType="ONE_PASS_BOX" />
          </effect></Button>
-      <Button fx:id="btnLogout" layoutX="464.0" layoutY="339.0" onAction="#back" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: #4967EB;" styleClass="btnGreen" text="_Volver" textFill="WHITE">
+      <Button fx:id="btnLogout" layoutX="464.0" layoutY="339.0" onAction="#back" prefHeight="31.0" prefWidth="86.0" style="-fx-background-color: #4967EB;" styleClass="btnGreen" text="_Volver" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
@@ -87,7 +87,7 @@
           <TableColumn fx:id="colNombre" prefWidth="147.0" text="Nombre" />
         </columns>
       </TableView>
-      <Button fx:id="edit2" layoutX="260.0" layoutY="339.0" onAction="#confirmaedit" prefHeight="31.0" prefWidth="181.0" style="-fx-background-color: #4967EB;" text="_Guardar Cambios" textFill="WHITE">
+      <Button fx:id="edit2" layoutX="260.0" layoutY="339.0" onAction="#confirmaedit" prefHeight="31.0" prefWidth="190.0" style="-fx-background-color: #4967EB;" text="_Guardar Cambios" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
