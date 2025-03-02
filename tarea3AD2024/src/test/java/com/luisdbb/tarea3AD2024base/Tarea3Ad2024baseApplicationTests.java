@@ -1,6 +1,7 @@
 package com.luisdbb.tarea3AD2024base;
 
-import org.junit.jupiter.api.Test;
+
+import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
