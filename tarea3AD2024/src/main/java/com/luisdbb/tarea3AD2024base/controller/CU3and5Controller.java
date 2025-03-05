@@ -60,7 +60,7 @@ public class CU3and5Controller implements Initializable {
 	@Autowired
 	private EstanciaService estanciaService;
 	@FXML
-	private TextField userId;
+	public TextField userId;
 	@FXML
 	private CheckBox estanciar;
 	@FXML
@@ -72,7 +72,7 @@ public class CU3and5Controller implements Initializable {
 	@FXML
 	private Button btnVolver;
 	@FXML
-	private PasswordField pass;
+	public PasswordField pass;
 	@FXML
 	private Button btnBusc;
 	@FXML
@@ -99,7 +99,7 @@ public class CU3and5Controller implements Initializable {
 	private Long idEstancia;
 
 	@FXML
-	private void Sellar(ActionEvent event) throws IOException {
+	public void Sellar(ActionEvent event) throws IOException {
 		try {
 			int usr = userService.authenticate(getUsername(), getPassword());
 			if (usr == 3) {
@@ -237,7 +237,7 @@ public class CU3and5Controller implements Initializable {
 		return userId.getText();
 	}
 
-	private void saveAlert() {
+	public void saveAlert() {
 
 		Alert alert = new Alert(AlertType.ERROR);
 		alert.setTitle("Wrong Credentials");
