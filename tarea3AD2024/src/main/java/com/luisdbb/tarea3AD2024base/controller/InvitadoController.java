@@ -72,15 +72,15 @@ public class InvitadoController implements Initializable {
 	private Button btnLogIn;
 
 	@FXML
-	private TextField userId;
+	public TextField userId;
 
 	@FXML
-	private ComboBox<String> cbNa;
+	public ComboBox<String> cbNa;
 	@FXML
-	private ComboBox<String> cbParada;
+	public ComboBox<String> cbParada;
 
 	@FXML
-	private PasswordField pass;
+	public PasswordField pass;
 	@FXML
 	private Button btnAyuda;
 	@FXML
@@ -123,7 +123,7 @@ public class InvitadoController implements Initializable {
 	}
 
 	@FXML
-	private void registraUser(ActionEvent event) {
+	public void registraUser(ActionEvent event) {
 		// esto lo tengo q cambiar
 		String pername = userId.getText();
 		String username = userId.getText().replace(" ", "");
@@ -250,7 +250,7 @@ public class InvitadoController implements Initializable {
 				"The user " + user.getName() + " has been created and \n" + " pasword is " + user.getPass() + ".");
 		alert.showAndWait();
 	}
-	private void updateAlert() {
+	public void updateAlert() {
 
 		Alert alert = new Alert(AlertType.ERROR);
 		alert.setTitle("Invalid input");
@@ -356,7 +356,7 @@ public class InvitadoController implements Initializable {
 		Alert alert = new Alert(AlertType.WARNING);
 		alert.setTitle("Validation Error");
 		alert.setHeaderText(null);
-		if (field.equals("Role"))
+		if (field.equals(null))
 			alert.setContentText("Please Select " + field);
 		else {
 			if (empty)
@@ -366,5 +366,7 @@ public class InvitadoController implements Initializable {
 		}
 		alert.showAndWait();
 	}
+
+
 	
 }
