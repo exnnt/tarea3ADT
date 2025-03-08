@@ -140,7 +140,7 @@ public class EnvioController implements Initializable {
 
 			WebView webView = new WebView();
 
-			String url = getClass().getResource("/help/html/admin.html").toExternalForm();
+			String url = getClass().getResource("/help/html/envio.html").toExternalForm();
 			System.out.println(url);
 			webView.getEngine().load(url);
 

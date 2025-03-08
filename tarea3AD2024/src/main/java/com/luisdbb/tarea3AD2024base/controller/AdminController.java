@@ -60,16 +60,17 @@ public class AdminController implements Initializable {
 	private StageManager stageManager;
 	@Autowired
 	private ParadaService paradaService;
+	boolean par = false;
 
 	@FXML
 	private void back(ActionEvent event) throws IOException {
-
+		par = false;
 		stageManager.switchScene(FxmlView.ADMIN1);
 	}
 
 	@FXML
 	private void paradas(ActionEvent event) throws IOException {
-
+		par = true;
 		stageManager.switchScene(FxmlView.ADMIN);
 	}
 
@@ -87,10 +88,14 @@ public class AdminController implements Initializable {
 
 	public void mostrarAyuda() {
 		try {
-
+			String url = "";
 			WebView webView = new WebView();
+			if (par) {
+				url = getClass().getResource("/help/html/creaparadas.html").toExternalForm();
 
-			String url = getClass().getResource("/help/html/admin.html").toExternalForm();
+			} else {
+				url = getClass().getResource("/help/html/admin.html").toExternalForm();
+			}
 			System.out.println(url);
 			webView.getEngine().load(url);
 
@@ -115,12 +120,12 @@ public class AdminController implements Initializable {
 	}
 
 	@FXML
-	private void crea(ActionEvent event) throws IOException {
+	public void crea(ActionEvent event) throws IOException {
 		try {
 			if (name.getText().isEmpty() || reg.getText().isEmpty() || respons.getText().isEmpty()
 					|| pass.getText().isEmpty()) {
 
-				showAlert("Error de entrada", "Campos vacíos", "Todos los campos son obligatorios");
+				showAlert();
 				return;
 			}
 
@@ -134,16 +139,11 @@ public class AdminController implements Initializable {
 			paradaService.crearParada(temp, passw);
 			System.out.println("");
 			System.out.println(temp.getNombre());
-			Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
-			successAlert.setTitle("Parada creada");
-			successAlert.setHeaderText(null);
-			successAlert.setContentText("La parada " + temp.getNombre() + " con responsable " + responsable
-					+ " y contraseña " + passw + " ha sido creada.");
-			successAlert.showAndWait();
+			showAlert2(temp.getNombre(), responsable, passw);
 
 			stageManager.switchScene(FxmlView.ADMIN1);
 		} catch (Exception e) {
-			showAlert("Error de entrada", "Input missmatch", "Hay un error en algún campo");
+			showAlert();
 
 		}
 
@@ -155,12 +155,21 @@ public class AdminController implements Initializable {
 
 	}
 
-	private void showAlert(String title, String header, String content) {
+	public void showAlert() {
 		Alert alert = new Alert(Alert.AlertType.ERROR);
-		alert.setTitle(title);
-		alert.setHeaderText(header);
-		alert.setContentText(content);
+		alert.setTitle("Error de entrada");
+		alert.setHeaderText("Campos vacíos");
+		alert.setContentText("Todos los campos son obligatorios");
 		alert.showAndWait();
+	}
+
+	public void showAlert2(String a, String b, String c) {
+		Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+		successAlert.setTitle("Parada creada");
+		successAlert.setHeaderText(null);
+		successAlert
+				.setContentText("La parada " + a + " con responsable " + b + " y contraseña " + c + " ha sido creada.");
+		successAlert.showAndWait();
 	}
 
 }

@@ -46,23 +46,23 @@ import javafx.stage.Stage;
 public class LoginController implements Initializable {
 
 	@FXML
-	private Button btnLogin;
+	public Button btnLogin;
 	@FXML
-	private Button btnvolver;
+	public Button btnvolver;
 	@FXML
-	private ImageView imgpass;
+	public ImageView imgpass;
 	@FXML
-	private ToggleButton viewtoggle;
+	public ToggleButton viewtoggle;
 	@FXML
-	private PasswordField password;
+	public PasswordField password;
 	@FXML
-	private TextField passwordvisible;
+	public TextField passwordvisible;
 	@FXML
-	private TextField username;
+	public TextField username;
 	@FXML
-	private Label lblLogin;
+	public Label lblLogin;
 	@FXML
-	private Button btnAyuda;
+	public Button btnAyuda;
 
 	@Autowired
 	private UserService userService;
@@ -75,7 +75,7 @@ public class LoginController implements Initializable {
 	private StageManager stageManager;
 
 	@FXML
-	private void login(ActionEvent event) throws IOException {
+	public void login() {
 		int usr = userService.authenticate(getUsername(), getPassword());
 		if (usr > 0) {
 			if (usr > 1) {
@@ -138,7 +138,7 @@ public class LoginController implements Initializable {
 		stageManager.switchScene(FxmlView.INVITADO);
 	}
 
-	private void updateAlert() {
+	public void updateAlert() {
 
 		Alert alert = new Alert(AlertType.ERROR);
 		alert.setTitle("Credenciales Incorrectas");

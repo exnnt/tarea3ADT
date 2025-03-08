@@ -36,10 +36,10 @@ public class EditController implements Initializable {
 	@Autowired
 	private UserService userService;
 
-	private Peregrino p = null;
-	private Usuario u = null;
+	public Peregrino p = null;
+	public Usuario u = null;
 	@FXML
-	private TextField userId;
+	public TextField userId;
 	@FXML
 	private Button btnConfirm;
 	@FXML
@@ -61,8 +61,9 @@ public class EditController implements Initializable {
 	}
 
 	@FXML
-	private void editaUser() {
+	public void editaUser() {
 		String e = userId.getText();
+		System.out.println(e);
 		if (!checkname()) {
 			userId.setText(p.getNombre());
 			errorAlert();

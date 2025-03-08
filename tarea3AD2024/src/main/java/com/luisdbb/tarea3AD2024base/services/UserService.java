@@ -17,7 +17,7 @@ public class UserService {
 
 	@Autowired
 	private UserRepository userRepository;
-	
+
 	@Transactional
 	public Usuario crearUsuario(Usuario user) {
 		return userRepository.save(user);
@@ -27,7 +27,7 @@ public class UserService {
 		Usuario savedUser = userRepository.save(usuario);
 		return savedUser.getId();
 	}
-	
+
 	public Usuario findByName(String name) {
 		return userRepository.findByName(name);
 	}
@@ -57,7 +57,7 @@ public class UserService {
 			if (user == null) {
 				return 0;
 			} else {
-				//esto tenia q hacer un switc pero bueno works ig
+
 				if (password.equals(user.getPass()))
 					if (user.getType().equals("peregrino"))
 						return 3;

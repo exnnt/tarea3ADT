@@ -20,8 +20,7 @@ public class ServicioService {
 		s.setId(nuevoId());
 		s.setNombre(nombre);
 		s.setPrecio(precio);
-		System.out.println(nombre);
-		System.out.println(s.getId());
+
 		serviceRepository.guardarservi(s);
 		return s;
 	}
@@ -74,7 +73,7 @@ public class ServicioService {
 		List<Servicio> servicios = serviceRepository.listservicios();
 		for (Servicio servicio : servicios) {
 			servicio.getParadas().size();
-			System.out.println("Servicio: " + servicio.getId() + " Paradas: " + servicio.getparadasString());
+
 		}
 		return servicios;
 	}

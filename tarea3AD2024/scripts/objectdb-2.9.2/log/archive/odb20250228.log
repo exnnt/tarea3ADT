@@ -121,3 +121,12 @@ Configuration path: C:\Users\anton\git\tarea3ADT2\tarea3AD2024\scripts\objectdb-
 [2025-02-28 16:33:09 #13 store] 
 Database 'C:\Users\anton\git\tarea3ADT2\tarea3AD2024\scripts\objectdb-2.9.2\db\ODBPeregrinos.odb' is closed by 11408@DESKTOP-USV625L
 
+[2025-02-28 18:01:22 #14 store] 
+Database 'C:\Users\anton\git\tarea3ADT2\tarea3AD2024\scripts\objectdb-2.9.2\db\ODBPeregrinos.odb' is opened by 11408@DESKTOP-USV625L
+
+[2025-02-28 18:01:22 #15 store] 
+Configuration path: C:\Users\anton\git\tarea3ADT2\tarea3AD2024\scripts\objectdb-2.9.2\objectdb.conf
+
+[2025-02-28 18:52:05 #16 store] 
+Database 'C:\Users\anton\git\tarea3ADT2\tarea3AD2024\scripts\objectdb-2.9.2\db\ODBPeregrinos.odb' is closed by 11408@DESKTOP-USV625L
+

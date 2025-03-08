@@ -118,7 +118,7 @@ public class ConjuntoController implements Initializable {
 			// cambiar esta ayuda
 			WebView webView = new WebView();
 
-			String url = getClass().getResource("/help/html/admin.html").toExternalForm();
+			String url = getClass().getResource("/help/html/conjunto.html").toExternalForm();
 			webView.getEngine().load(url);
 
 			Stage helpStage = new Stage();

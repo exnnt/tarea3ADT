@@ -40,7 +40,7 @@
          </image></ImageView>
       <ImageView fitHeight="30.0" fitWidth="31.0" layoutX="357.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../icone-point-d-interrogation-question-orange.png" />
+            <Image url="@/images/icone-point-d-interrogation-question-orange.png" />
          </image>
       </ImageView>
       <Button fx:id="btnAyuda" layoutX="357.0" layoutY="23.0" mnemonicParsing="false" onAction="#mostrarAyuda" opacity="0.0" prefHeight="36.0" prefWidth="30.0" textFill="TRANSPARENT" />
