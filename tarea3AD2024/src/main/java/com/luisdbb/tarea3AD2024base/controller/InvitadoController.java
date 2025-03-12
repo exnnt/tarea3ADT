@@ -25,6 +25,7 @@ import org.w3c.dom.NodeList;
 
 import com.luisdbb.tarea3AD2024base.Tarea3Ad2024baseApplication;
 import com.luisdbb.tarea3AD2024base.config.StageManager;
+import com.luisdbb.tarea3AD2024base.config.existdb.ExistDBManageante;
 import com.luisdbb.tarea3AD2024base.modelo.Parada;
 import com.luisdbb.tarea3AD2024base.modelo.Peregrino;
 import com.luisdbb.tarea3AD2024base.modelo.Usuario;
@@ -180,14 +181,23 @@ public class InvitadoController implements Initializable {
 		Tarea3Ad2024baseApplication.useractivo.setPerfil(com.luisdbb.tarea3AD2024base.services.Perfil.PEREGRINO);
 
 		carnetService.creaCarnet(per, p);
-		
-		// crea ruta
-		rutaService.crearRuta(per.getId(),p.getId(),0);
-		saveAlert(newUser);
-		System.out.println("User: " + user.getName());
-		 stageManager.switchScene(FxmlView.PEREGRINO);
-		System.out.println("done working");
-		clearFields();
+		try {
+			String carnet = carnetService.exportCarnet(per);
+			File ccarnet = new File(
+					carnet);
+			ExistDBManageante.storeCarnet(p.getNombre(), ccarnet);
+			// crea ruta
+			rutaService.crearRuta(per.getId(),p.getId(),0);
+			saveAlert(newUser);
+			System.out.println("User: " + user.getName());
+			 stageManager.switchScene(FxmlView.PEREGRINO);
+			System.out.println("done working");
+			clearFields();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
 
 	}
 
@@ -307,37 +317,6 @@ public class InvitadoController implements Initializable {
 		// useless no? setColumnProperties();
 
 	}
-
-	/*
-	 * Set All userTable column properties
-	 */
-	private void setColumnProperties() {
-		/*
-		 * Override date format in table
-		 * colDOB.setCellFactory(TextFieldTableCell.forTableColumn(new
-		 * StringConverter<LocalDate>() { String pattern = "dd/MM/yyyy";
-		 * DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern);
-		 * 
-		 * @Override public String toString(LocalDate date) { if (date != null) { return
-		 * dateFormatter.format(date); } else { return ""; } }
-		 * 
-		 * @Override public LocalDate fromString(String string) { if (string != null &&
-		 * !string.isEmpty()) { return LocalDate.parse(string, dateFormatter); } else {
-		 * return null; } } }));
-		 */
-
-	}
-
-	/*
-	 * Add All users to observable list and update table
-	 */
-	private void loadUserDetails() {
-
-	}
-
-	/*
-	 * Validations
-	 */
 
 	private boolean validate(String input) {
 		return input.matches("[a-zA-Z0-9 ]+");

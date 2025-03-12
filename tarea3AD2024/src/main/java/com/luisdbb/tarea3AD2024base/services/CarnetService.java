@@ -82,7 +82,7 @@ public class CarnetService {
 		}
 	}
 
-	public void exportCarnet(Peregrino yo) throws SQLException {
+	public String exportCarnet(Peregrino yo) throws SQLException {
 
 		try {
 
@@ -111,7 +111,7 @@ public class CarnetService {
 
 			if (mio == null || yo == null) {
 				System.out.println("Error: No se pudo encontrar el carnet o peregrino asociado al ID del usuario.");
-				return;
+				return null;
 			}
 
 			// Create XML Document
@@ -230,6 +230,7 @@ public class CarnetService {
 				// guardado en la ruta especificada
 				transformer.transform(ds, sr);
 				System.out.println("Carnet exportado, esta en /src/main/resources/escritura" + name + "_peregrino.xml");
+				return "src/main/resources/escritura/" + name + "_peregrino.xml";
 
 			} catch (TransformerException e) {
 				// TODO Auto-generated catch block
@@ -239,6 +240,7 @@ public class CarnetService {
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
 		}
+		return null;
 	}
 
 }

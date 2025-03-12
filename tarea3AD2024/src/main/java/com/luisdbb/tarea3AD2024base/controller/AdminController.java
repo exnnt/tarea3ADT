@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 
 import com.luisdbb.tarea3AD2024base.Tarea3Ad2024baseApplication;
 import com.luisdbb.tarea3AD2024base.config.StageManager;
+import com.luisdbb.tarea3AD2024base.config.existdb.ExistDBManageante;
 import com.luisdbb.tarea3AD2024base.modelo.Parada;
 import com.luisdbb.tarea3AD2024base.services.ParadaService;
 import com.luisdbb.tarea3AD2024base.services.Perfil;
@@ -140,7 +141,7 @@ public class AdminController implements Initializable {
 			System.out.println("");
 			System.out.println(temp.getNombre());
 			showAlert2(temp.getNombre(), responsable, passw);
-
+			ExistDBManageante.parada(nombre);
 			stageManager.switchScene(FxmlView.ADMIN1);
 		} catch (Exception e) {
 			showAlert();

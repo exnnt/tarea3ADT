@@ -1,16 +1,13 @@
 package com.luisdbb.tarea3AD2024base.config.existdb;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
 import org.xmldb.api.DatabaseManager;
 import org.xmldb.api.base.Collection;
 import org.xmldb.api.base.Database;
 import org.xmldb.api.base.XMLDBException;
-import org.xmldb.api.modules.CollectionManagementService;
 import org.xmldb.api.modules.XMLResource;
+import org.xmldb.api.modules.CollectionManagementService;
 
 public class ExistDBManageante {
 
@@ -52,18 +49,22 @@ public class ExistDBManageante {
 			e.printStackTrace();
 		}
 	}
+	public static void parada(String name) {
+		String path = "/tarea5ad/" + name;
+		createCollection(path);
+	}
 
 	public static void storeCarnet(String parada, File carnetFile) {
 		testConexion();
 		if (!carnetFile.exists() || carnetFile.length() == 0) {
-			System.err.println(carnetFile.getName());
+			System.err.println("no valid file");
 			return;
 		}
 
-		try (FileInputStream fis = new FileInputStream(carnetFile)) {
+		try {
 			String path = "/tarea5ad/" + parada;
 			Collection colparada = DatabaseManager.getCollection(URI + path, USERNAME, PASSWORD);
-
+			
 			if (colparada == null) {
 				System.out.println("creando coleccoin parada : " + parada);
 				createCollection(path);
@@ -71,16 +72,19 @@ public class ExistDBManageante {
 			}
 
 			if (colparada != null) {
+				System.out.println("aqui");
 				XMLResource resource = (XMLResource) colparada.createResource(carnetFile.getName(), "XMLResource");
+				System.out.println("aqui2");
 				resource.setContent(carnetFile);
+				System.out.println("aqui3");
+				//en verdad me da donde falla el stacktrace pero por comprobar
 				colparada.storeResource(resource);
+				System.out.println("aqui5");
 				System.out.println("guardado en " + parada + " el carnet: " + carnetFile.getName());
 			} else {
 				System.out.println("quemovida no");
 			}
-		} catch (XMLDBException | FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
+		} catch (XMLDBException e) {
 			e.printStackTrace();
 		}
 	}
