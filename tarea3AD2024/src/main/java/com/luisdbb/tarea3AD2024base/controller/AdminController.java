@@ -11,7 +11,9 @@ import org.springframework.stereotype.Controller;
 import com.luisdbb.tarea3AD2024base.Tarea3Ad2024baseApplication;
 import com.luisdbb.tarea3AD2024base.config.StageManager;
 import com.luisdbb.tarea3AD2024base.config.existdb.ExistDBManageante;
+import com.luisdbb.tarea3AD2024base.config.mongodb.MongoDB;
 import com.luisdbb.tarea3AD2024base.modelo.Parada;
+import com.luisdbb.tarea3AD2024base.services.CarnetService;
 import com.luisdbb.tarea3AD2024base.services.ParadaService;
 import com.luisdbb.tarea3AD2024base.services.Perfil;
 import com.luisdbb.tarea3AD2024base.services.UserService;
@@ -56,11 +58,16 @@ public class AdminController implements Initializable {
 	private Button btnLogin;
 	@FXML
 	private ImageView img;
+	@FXML
+	private Button btnBackup;
 	@Lazy
 	@Autowired
 	private StageManager stageManager;
 	@Autowired
 	private ParadaService paradaService;
+	@Autowired
+	private CarnetService carnetService;
+	
 	boolean par = false;
 
 	@FXML
@@ -85,6 +92,11 @@ public class AdminController implements Initializable {
 	private void logout(ActionEvent event) throws IOException {
 		Tarea3Ad2024baseApplication.useractivo.setPerfil(Perfil.INVITADO);
 		stageManager.switchScene(FxmlView.INVITADO);
+	}
+	@FXML
+	private void backup() {
+		MongoDB m = new MongoDB(carnetService);
+		m.backupCarnets();
 	}
 
 	public void mostrarAyuda() {

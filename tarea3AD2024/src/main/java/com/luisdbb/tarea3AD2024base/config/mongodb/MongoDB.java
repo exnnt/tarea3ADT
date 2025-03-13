@@ -5,6 +5,7 @@ import org.bson.BsonInt64;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
@@ -29,7 +30,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-
+@Component
 public class MongoDB {
 	private static final String DB_NAME = "carnetsDB";
 	private static final String COLLECTION_BASE = "backups";
@@ -40,6 +41,11 @@ public class MongoDB {
 
 	public MongoDB() {
 		connect();
+	}
+	@Autowired
+	public MongoDB(CarnetService carnetService) {
+	    this.carnetservice = carnetService;
+	    connect();
 	}
 
 	private void connect() {
@@ -59,6 +65,25 @@ public class MongoDB {
 			throw new RuntimeException(e);
 		}
 	}
+    public void backupCarnets() {
+    	 List<Carnet> carnetList = carnetservice.getTodosCarnets();
+        String fecha = LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        String colcarnets = "backupcarnets<" + fecha+">";
+        //se q no hay q poner los <> pero me queda mejor ig
+        MongoCollection<Document> collection = database.getCollection(colcarnets);
+        
+        for (Carnet carnet : carnetList) {
+            Document doc = new Document("id", carnet.getId())
+                    .append("distancia", carnet.getDistancia())
+                    .append("fecha_exp", carnet.getFechaexp().toString())
+                    .append("n_vips", carnet.getNvips())
+                    .append("parada_inicial", carnet.getParada_inicial().getNombre());
+            
+            collection.insertOne(doc);
+        }
+        System.out.println("backup creado: " + colcarnets);
+    }
+
 
 	public void cerrarConexion() {
 		if (mongoClient != null) {
@@ -67,11 +92,5 @@ public class MongoDB {
 		}
 	}
 
-	public static void main(String[] args) {
-		System.out.println("yea");
-		MongoDB manager = new MongoDB();
 
-		manager.cerrarConexion();
-
-	}
 }
