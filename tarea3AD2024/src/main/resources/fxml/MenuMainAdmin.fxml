@@ -18,14 +18,14 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Button fx:id="btnParadas" layoutX="14.0" layoutY="195.0" onAction="#paradas" prefHeight="31.0" prefWidth="107.0" style="-fx-background-color: #4967EB;" styleClass="btnGreen" text="_Crear Parada" textFill="WHITE">
+      <Button fx:id="btnParadas" layoutX="14.0" layoutY="54.0" onAction="#paradas" prefHeight="31.0" prefWidth="138.0" style="-fx-background-color: #4967EB;" styleClass="btnGreen" text="_Crear Parada" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
          <effect>
             <DropShadow blurType="ONE_PASS_BOX" />
          </effect></Button>
-      <Button fx:id="btnServicios" layoutX="145.0" layoutY="195.0" onAction="#servicios" prefHeight="31.0" prefWidth="138.0" style="-fx-background-color: #4967EB;" styleClass="btnGreen" text="_Gestion Servicios" textFill="WHITE">
+      <Button fx:id="btnServicios" layoutX="14.0" layoutY="97.0" onAction="#servicios" prefHeight="31.0" prefWidth="138.0" style="-fx-background-color: #4967EB;" styleClass="btnGreen" text="_Gestion Servicios" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
@@ -33,12 +33,12 @@
             <DropShadow blurType="ONE_PASS_BOX" />
          </effect>
       </Button>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="125.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="180.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@/images/1.png" />
          </image>
       </ImageView>
-      <Button fx:id="btnLogout1" layoutX="301.0" layoutY="195.0" onAction="#logout" prefHeight="31.0" prefWidth="76.0" style="-fx-background-color: Red;" styleClass="btnGreen" text="_LogOut" textFill="WHITE">
+      <Button fx:id="btnLogout1" layoutX="14.0" layoutY="185.0" onAction="#logout" prefHeight="31.0" prefWidth="138.0" style="-fx-background-color: Red;" styleClass="btnGreen" text="_LogOut" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
@@ -52,6 +52,14 @@
          </image>
       </ImageView>
       <Button fx:id="btnAyuda" layoutX="361.0" layoutY="11.0" mnemonicParsing="false" onAction="#mostrarAyuda" opacity="0.0" prefHeight="36.0" prefWidth="30.0" textFill="TRANSPARENT" />
+      <Button fx:id="btnBackup" layoutX="14.0" layoutY="141.0" onAction="#backup" prefHeight="31.0" prefWidth="138.0" style="-fx-background-color: #4967EB;" styleClass="btnGreen" text="_Backup Carnets" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+         <effect>
+            <DropShadow blurType="ONE_PASS_BOX" />
+         </effect>
+      </Button>
    </children>
    <opaqueInsets>
       <Insets />
