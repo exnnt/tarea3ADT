@@ -1,6 +1,8 @@
 package com.luisdbb.tarea3AD2024base.config.existdb;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.xmldb.api.DatabaseManager;
 import org.xmldb.api.base.Collection;
@@ -101,5 +103,43 @@ public class ExistDBManageante {
 			e.printStackTrace();
 		}
 	}
+	 public static List<String> getCarnetsParada(String parada) {
+	        List<String> carnets = new ArrayList<>();
+	        String path = "/tarea5ad/" + parada;
+	        Collection collection = null;
+
+	        try {
+	            collection = DatabaseManager.getCollection(URI + path, USERNAME, PASSWORD);
+	            if (collection == null) {
+	                System.out.println("mecachi");
+	                return carnets;
+	            }
+	            
+	            String[] carnetsDB = collection.listResources();
+	            if (carnetsDB == null || carnetsDB.length == 0) {
+	                System.out.println("parda vacia");
+	                return carnets;
+	            }
+	            
+	            for (String carnet : carnetsDB) {
+	                XMLResource resource = (XMLResource) collection.getResource(carnet);
+	                if (resource != null) {
+	                    String xml = (String) resource.getContent();
+	                    carnets.add(xml);
+	                }
+	            }
+	        } catch (XMLDBException e) {
+	            e.printStackTrace();
+	        } finally {
+	            if (collection != null) {
+	                try {
+	                    collection.close();
+	                } catch (XMLDBException e) {
+	                    e.printStackTrace();
+	                }
+	            }
+	        }
+	        return carnets;
+	    }
 
 }

@@ -80,6 +80,11 @@ public class ParadasController implements Initializable {
 	private void goSellar(ActionEvent event) throws IOException {
 		stageManager.switchScene(FxmlView.SELLAR);
 	}
+	@FXML
+	private void goCarnets(ActionEvent event) throws IOException {
+		stageManager.switchScene(FxmlView.VERPEREGRINOS);
+	}
+
 
 	public void mostrarAyuda() {
 		try {

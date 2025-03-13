@@ -140,6 +140,18 @@ public String getFxmlFile() {
 public String getFxmlFile() {
 	return "/fxml/EditarPeregrino.fxml";
 }
+},VERPEREGRINOS{
+	@Override
+	public String getTitle() {
+	return getStringFromResourceBundle("peregrino.title");
+	
+}
+	
+
+@Override
+public String getFxmlFile() {
+	return "/fxml/CU11.fxml";
+}
 },
 	SELLAR{
 		@Override
