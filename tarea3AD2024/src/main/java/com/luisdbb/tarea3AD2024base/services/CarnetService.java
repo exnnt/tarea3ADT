@@ -55,6 +55,10 @@ public class CarnetService {
 		Carnet carnetet = new Carnet(p, user);
 		return carnetRepository.save(carnetet);
 	}
+	
+	public List<Carnet> getTodosCarnets() {
+	    return carnetRepository.findAll();
+	}
 
 	// luego el edit pa la distancia
 	public void actualizarCarnet(Long Id, Float distancia, int nvips) {
