@@ -70,6 +70,11 @@ public class MongoDB {
         String fecha = LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         String colcarnets = "backupcarnets<" + fecha+">";
         //se q no hay q poner los <> pero me queda mejor ig
+        //drop para actualizar si ya existe en el dia 
+        if (database.listCollectionNames().into(new ArrayList<>()).contains(colcarnets)) {
+            database.getCollection(colcarnets).drop();
+        }     
+                
         MongoCollection<Document> collection = database.getCollection(colcarnets);
         
         for (Carnet carnet : carnetList) {
