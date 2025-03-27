@@ -57,11 +57,13 @@ public class ParadasController implements Initializable {
 		Tarea3Ad2024baseApplication.useractivo.setPerfil(Perfil.INVITADO);
 		stageManager.switchScene(FxmlView.INVITADO);
 	}
+
 	public void ayudaF1(KeyEvent event) {
-		if(event.getCode().toString().equals("F1")) {
+		if (event.getCode().toString().equals("F1")) {
 			mostrarAyuda();
 		}
 	}
+
 	@FXML
 	private void goExport(ActionEvent event) throws IOException {
 		cu3 = true;
@@ -85,11 +87,11 @@ public class ParadasController implements Initializable {
 	private void goSellar(ActionEvent event) throws IOException {
 		stageManager.switchScene(FxmlView.SELLAR);
 	}
+
 	@FXML
 	private void goCarnets(ActionEvent event) throws IOException {
 		stageManager.switchScene(FxmlView.VERPEREGRINOS);
 	}
-
 
 	public void mostrarAyuda() {
 		try {
@@ -123,8 +125,6 @@ public class ParadasController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-
-		System.out.println(Tarea3Ad2024baseApplication.inicial.getNombre());
 
 		lblLogin.setText("Bienvenido a " + Tarea3Ad2024baseApplication.inicial.getNombre());
 

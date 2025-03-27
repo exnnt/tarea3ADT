@@ -51,6 +51,7 @@ public class ExistDBManageante {
 			e.printStackTrace();
 		}
 	}
+
 	public static void parada(String name) {
 		String path = "/tarea5ad/" + name;
 		createCollection(path);
@@ -66,7 +67,7 @@ public class ExistDBManageante {
 		try {
 			String path = "/tarea5ad/" + parada;
 			Collection colparada = DatabaseManager.getCollection(URI + path, USERNAME, PASSWORD);
-			
+
 			if (colparada == null) {
 				System.out.println("creando coleccoin parada : " + parada);
 				createCollection(path);
@@ -74,14 +75,12 @@ public class ExistDBManageante {
 			}
 
 			if (colparada != null) {
-				System.out.println("aqui");
+
 				XMLResource resource = (XMLResource) colparada.createResource(carnetFile.getName(), "XMLResource");
-				System.out.println("aqui2");
+
 				resource.setContent(carnetFile);
-				System.out.println("aqui3");
-				//en verdad me da donde falla el stacktrace pero por comprobar
+
 				colparada.storeResource(resource);
-				System.out.println("aqui5");
 				System.out.println("guardado en " + parada + " el carnet: " + carnetFile.getName());
 			} else {
 				System.out.println("quemovida no");
@@ -103,43 +102,44 @@ public class ExistDBManageante {
 			e.printStackTrace();
 		}
 	}
-	 public static List<String> getCarnetsParada(String parada) {
-	        List<String> carnets = new ArrayList<>();
-	        String path = "/tarea5ad/" + parada;
-	        Collection collection = null;
 
-	        try {
-	            collection = DatabaseManager.getCollection(URI + path, USERNAME, PASSWORD);
-	            if (collection == null) {
-	                System.out.println("mecachi");
-	                return carnets;
-	            }
-	            
-	            String[] carnetsDB = collection.listResources();
-	            if (carnetsDB == null || carnetsDB.length == 0) {
-	                System.out.println("parda vacia");
-	                return carnets;
-	            }
-	            
-	            for (String carnet : carnetsDB) {
-	                XMLResource resource = (XMLResource) collection.getResource(carnet);
-	                if (resource != null) {
-	                    String xml = (String) resource.getContent();
-	                    carnets.add(xml);
-	                }
-	            }
-	        } catch (XMLDBException e) {
-	            e.printStackTrace();
-	        } finally {
-	            if (collection != null) {
-	                try {
-	                    collection.close();
-	                } catch (XMLDBException e) {
-	                    e.printStackTrace();
-	                }
-	            }
-	        }
-	        return carnets;
-	    }
+	public static List<String> getCarnetsParada(String parada) {
+		List<String> carnets = new ArrayList<>();
+		String path = "/tarea5ad/" + parada;
+		Collection collection = null;
+
+		try {
+			collection = DatabaseManager.getCollection(URI + path, USERNAME, PASSWORD);
+			if (collection == null) {
+				System.out.println("mecachi");
+				return carnets;
+			}
+
+			String[] carnetsDB = collection.listResources();
+			if (carnetsDB == null || carnetsDB.length == 0) {
+				System.out.println("parda vacia");
+				return carnets;
+			}
+
+			for (String carnet : carnetsDB) {
+				XMLResource resource = (XMLResource) collection.getResource(carnet);
+				if (resource != null) {
+					String xml = (String) resource.getContent();
+					carnets.add(xml);
+				}
+			}
+		} catch (XMLDBException e) {
+			e.printStackTrace();
+		} finally {
+			if (collection != null) {
+				try {
+					collection.close();
+				} catch (XMLDBException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return carnets;
+	}
 
 }

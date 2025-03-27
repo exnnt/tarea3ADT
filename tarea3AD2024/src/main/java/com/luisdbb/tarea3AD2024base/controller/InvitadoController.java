@@ -61,12 +61,6 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.util.JRLoader;
 
-
-/**
- * @author Ram Alapure
- * @since 05-04-2017
- */
-
 @Controller
 public class InvitadoController implements Initializable {
 
@@ -105,6 +99,7 @@ public class InvitadoController implements Initializable {
 	private CarnetService carnetService;
 	@Autowired
 	private RutaService rutaService;
+
 	@FXML
 	private void exit(ActionEvent event) {
 		Platform.exit();
@@ -123,15 +118,16 @@ public class InvitadoController implements Initializable {
 	void reset(ActionEvent event) {
 		clearFields();
 	}
+
 	public void ayudaF1(KeyEvent event) {
-		if(event.getCode().toString().equals("F1")) {
+		if (event.getCode().toString().equals("F1")) {
 			mostrarAyuda();
 		}
 	}
 
 	@FXML
 	public void registraUser(ActionEvent event) {
-		// esto lo tengo q cambiar
+
 		String pername = userId.getText();
 		String username = userId.getText().replace(" ", "");
 		String nacion = cbNa.getValue();
@@ -189,21 +185,17 @@ public class InvitadoController implements Initializable {
 		carnetService.creaCarnet(per, p);
 		try {
 			String carnet = carnetService.exportCarnet(per);
-			File ccarnet = new File(
-					carnet);
+			File ccarnet = new File(carnet);
 			ExistDBManageante.storeCarnet(p.getNombre(), ccarnet);
 			// crea ruta
-			rutaService.crearRuta(per.getId(),p.getId(),0);
+			rutaService.crearRuta(per.getId(), p.getId(), 0);
 			saveAlert(newUser);
-			System.out.println("User: " + user.getName());
-			 stageManager.switchScene(FxmlView.PEREGRINO);
-			System.out.println("done working");
+			stageManager.switchScene(FxmlView.PEREGRINO);
 			clearFields();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	
 
 	}
 
@@ -266,6 +258,7 @@ public class InvitadoController implements Initializable {
 				"The user " + user.getName() + " has been created and \n" + " pasword is " + user.getPass() + ".");
 		alert.showAndWait();
 	}
+
 	public void updateAlert() {
 
 		Alert alert = new Alert(AlertType.ERROR);
@@ -274,42 +267,37 @@ public class InvitadoController implements Initializable {
 		alert.setContentText("Alguno de los campos esta vacio o invalido");
 		alert.showAndWait();
 	}
-	
+
 	public void mostrarAyuda() {
-        try {
-            
-            WebView webView = new WebView();
+		try {
 
-            URL test = getClass().getResource("/help/html/invitado.html");
-            System.out.println(test);
-            String url = getClass().getResource("/help/html/invitado.html").toExternalForm();
-            System.out.println(url);
-            webView.getEngine().load(url);
+			WebView webView = new WebView();
 
-           
-            Stage helpStage = new Stage();
-            helpStage.setTitle("Ayuda");
+			URL test = getClass().getResource("/help/html/invitado.html");
+			System.out.println(test);
+			String url = getClass().getResource("/help/html/invitado.html").toExternalForm();
+			System.out.println(url);
+			webView.getEngine().load(url);
 
-          
-            StackPane root = new StackPane(webView);
-            Scene helpScene = new Scene(root, 600, 400);
-            helpStage.setScene(helpScene);
+			Stage helpStage = new Stage();
+			helpStage.setTitle("Ayuda");
 
-          
-            helpStage.initModality(Modality.APPLICATION_MODAL);
-            helpStage.setResizable(true);
-            helpStage.show();
-            
-        } catch (NullPointerException e) {
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Archivo de Ayuda no encontrado");
-        
-            alert.showAndWait();
-        }
-    }
+			StackPane root = new StackPane(webView);
+			Scene helpScene = new Scene(root, 600, 400);
+			helpStage.setScene(helpScene);
 
-	
+			helpStage.initModality(Modality.APPLICATION_MODAL);
+			helpStage.setResizable(true);
+			helpStage.show();
+
+		} catch (NullPointerException e) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Error");
+			alert.setHeaderText("Archivo de Ayuda no encontrado");
+
+			alert.showAndWait();
+		}
+	}
 
 	public String getPassword() {
 		return pass.getText();
@@ -336,7 +324,8 @@ public class InvitadoController implements Initializable {
 			return false;
 		}
 	}
-	//COPIAR ESTO PA OTROS 
+
+	// COPIAR ESTO PA OTROS
 	private void validationAlert(String field, boolean empty) {
 		Alert alert = new Alert(AlertType.WARNING);
 		alert.setTitle("Validation Error");
@@ -352,6 +341,4 @@ public class InvitadoController implements Initializable {
 		alert.showAndWait();
 	}
 
-
-	
 }

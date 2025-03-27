@@ -71,7 +71,7 @@ public class AdminController implements Initializable {
 	private PeregrinoService peregrinoService;
 	@Autowired
 	private CarnetService carnetService;
-	
+
 	boolean par = false;
 
 	@FXML
@@ -97,16 +97,19 @@ public class AdminController implements Initializable {
 		Tarea3Ad2024baseApplication.useractivo.setPerfil(Perfil.INVITADO);
 		stageManager.switchScene(FxmlView.INVITADO);
 	}
+
 	@FXML
 	private void backup() {
 		MongoDB m = new MongoDB(carnetService, peregrinoService);
 		m.backupCarnets();
 	}
+
 	public void ayudaF1(KeyEvent event) {
-		if(event.getCode().toString().equals("F1")) {
+		if (event.getCode().toString().equals("F1")) {
 			mostrarAyuda();
 		}
 	}
+
 	public void mostrarAyuda() {
 		try {
 			String url = "";
@@ -173,7 +176,6 @@ public class AdminController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		
 
 	}
 

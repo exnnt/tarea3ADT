@@ -56,7 +56,6 @@ public class MongoDB {
 			if (collection.countDocuments() == 0) {
 				Document crea = new Document("init", true);
 				collection.insertOne(crea);
-				System.out.println("database creada creo");
 
 			}
 		} catch (Exception e) {
@@ -132,7 +131,7 @@ public class MongoDB {
 					}
 				}
 			}
-			
+
 			List<Document> estanciasList = new ArrayList<>();
 			NodeList estanciaNodes = root.getElementsByTagName("estancia");
 			if (estanciaNodes != null) {

@@ -26,7 +26,7 @@ public class EstanciaService {
 	@Transactional
 	public Estancia creaEstancia(Peregrino p, Parada user, boolean vip) {
 		Estancia carnetet = new Estancia(vip, p.getId(), user.getId());
-		
+
 		int vips = 0;
 		if (vip)
 			vips = 1;
@@ -36,7 +36,6 @@ public class EstanciaService {
 
 	}
 
-	// luego devolver para buscar por fecha
 	@Transactional
 	public List<Estancia> findbyFecha(LocalDate ini, LocalDate fin) {
 		return estanciaRepository.findByParadaIdAndFechaBetween(Tarea3Ad2024baseApplication.inicial.getId(), ini, fin);

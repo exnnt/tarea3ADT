@@ -114,7 +114,6 @@ public class CU3and5Controller implements Initializable {
 					pcontrol.cu3 = false;
 					stageManager.switchScene(FxmlView.PARADA);
 				}
-				// esto en conjunto?
 
 			} else {
 				saveAlert();
@@ -135,8 +134,9 @@ public class CU3and5Controller implements Initializable {
 	private LocalDate gFin() {
 		return fFin.getValue();
 	}
+
 	public void ayudaF1(KeyEvent event) {
-		if(event.getCode().toString().equals("F1")) {
+		if (event.getCode().toString().equals("F1")) {
 			mostrarAyuda();
 		}
 	}
@@ -186,7 +186,6 @@ public class CU3and5Controller implements Initializable {
 		idEstancia = estanciaService.creaEstancia(p, Tarea3Ad2024baseApplication.inicial, viper).getId();
 
 		stageManager.switchScene(FxmlView.CONJUNTO);
-		// esto lo delayeo y lo pongo en el confirm de conjunto estanciaAlert(p, viper);
 
 	};
 

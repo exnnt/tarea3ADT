@@ -180,8 +180,9 @@ public class ConjuntoController implements Initializable {
 		Servicio sel = tableServicios.getSelectionModel().getSelectedItem();
 		serviciopasiempre = sel;
 	}
+
 	public void ayudaF1(KeyEvent event) {
-		if(event.getCode().toString().equals("F1")) {
+		if (event.getCode().toString().equals("F1")) {
 			mostrarAyuda();
 		}
 	}
@@ -215,8 +216,6 @@ public class ConjuntoController implements Initializable {
 		if (serviciopasiempre2 != null) {
 
 			if (temp.deleteServicio(serviciopasiempre2)) {
-				// aqui no pongo alert q me parece saturar un poco y lo ve en la tabla asiq ye
-				// innecesario
 
 				servicios2.remove(serviciopasiempre2);
 
@@ -231,11 +230,7 @@ public class ConjuntoController implements Initializable {
 
 	@FXML
 	public void confirm() {
-		// calcula precio
-		// confirma radiobutton selected if not empty list2
-
 		if (!servicios2.isEmpty()) {
-			// esto a method y call envio if true
 			double preciofinal = 0.0;
 			for (Servicio s : servicios2) {
 				preciofinal += s.getPrecio();

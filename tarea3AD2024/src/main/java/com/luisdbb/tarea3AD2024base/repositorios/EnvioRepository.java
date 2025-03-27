@@ -9,9 +9,10 @@ import com.luisdbb.tarea3AD2024base.modelo.EnvioACasa;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
+
 @Repository
 public class EnvioRepository {
-		
+
 	public void guardarenvio(EnvioACasa envio) {
 
 		EntityManager em = ObjectDBnsq.getEntityManager();
@@ -44,6 +45,7 @@ public class EnvioRepository {
 
 		return envios;
 	}
+
 	public void abrir() {
 		ObjectDBnsq.iniciaDB();
 	}

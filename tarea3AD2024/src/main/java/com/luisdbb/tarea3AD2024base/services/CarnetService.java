@@ -57,12 +57,11 @@ public class CarnetService {
 		Carnet carnetet = new Carnet(p, user);
 		return carnetRepository.save(carnetet);
 	}
-	
+
 	public List<Carnet> getTodosCarnets() {
-	    return carnetRepository.findAll();
+		return carnetRepository.findAll();
 	}
 
-	// luego el edit pa la distancia
 	public void actualizarCarnet(Long Id, Float distancia, int nvips) {
 		Carnet carnet = carnetRepository.findById(Id).orElse(null);
 		if (carnet != null) {
@@ -91,31 +90,25 @@ public class CarnetService {
 	public String exportCarnet(Peregrino yo) throws SQLException {
 
 		try {
-
-			// crea carnet
-			// crea peregrino
-
 			Carnet mio = carnetRepository.findById(yo.getId()).orElse(null);
 			if (estanciaService.findbyPeregrino(yo.getId()) != null) {
 
 				yo.setEstancias(estanciaService.findbyPeregrino(yo.getId()));
 				for (Estancia e : yo.getEstancias()) {
-					// ns como hice esto hace 2 meses tbh
 					e.setParada(paradaService.find(e.getParadaId()));
 				}
 
 			}
-			// getParadabyPeregrinoId?
 			List<Ruta> rutas = rutaService.obtenerRutasPorPeregrino(yo.getId());
+			// con esto ordena por ruta
 			rutas.sort(Comparator.comparingInt(Ruta::getOrden));
 			List<Parada> peiredes = new ArrayList<>();
 			for (Ruta r : rutas) {
 				Parada temporalidad = paradaService.find(r.getParadaId());
 				peiredes.add(temporalidad);
 			}
-			
+
 			yo.setParadas(peiredes);
-			// tengo que cargar paradas y estancias a peregrino
 
 			if (mio == null || yo == null) {
 				System.out.println("Error: No se pudo encontrar el carnet o peregrino asociado al ID del usuario.");
@@ -181,7 +174,7 @@ public class CarnetService {
 				Element ORDEN_ELEMENT = documento.createElement("orden");
 				ORDEN_ELEMENT.appendChild(documento.createTextNode(String.valueOf(ORDEN++)));
 				PARADA_ELEMENT.appendChild(ORDEN_ELEMENT);
-					
+
 				Element NOMBRE_PARADA = documento.createElement("nombre");
 				NOMBRE_PARADA.appendChild(documento.createTextNode(parada.getNombre()));
 				PARADA_ELEMENT.appendChild(NOMBRE_PARADA);
@@ -237,7 +230,6 @@ public class CarnetService {
 				StreamResult sr = new StreamResult(new File("src/main/resources/escritura/" + name + "_peregrino.xml"));
 				// guardado en la ruta especificada
 				transformer.transform(ds, sr);
-				System.out.println("Carnet exportado, esta en /src/main/resources/escritura" + name + "_peregrino.xml");
 				return "src/main/resources/escritura/" + name + "_peregrino.xml";
 
 			} catch (TransformerException e) {

@@ -113,8 +113,9 @@ public class ServiController implements Initializable {
 
 		stageManager.switchScene(FxmlView.ADMIN);
 	}
+
 	public void ayudaF1(KeyEvent event) {
-		if(event.getCode().toString().equals("F1")) {
+		if (event.getCode().toString().equals("F1")) {
 			mostrarAyuda();
 		}
 	}

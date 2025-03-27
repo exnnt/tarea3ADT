@@ -13,8 +13,6 @@ import com.luisdbb.tarea3AD2024base.modelo.Servicio;
 public class ServiceRepository {
 	private ObjectContainer db;
 
-//luego lo muevo todo cuando funcione 
-
 	public ServiceRepository() {
 		this.db = DB4Onosecuantos.getInstance();
 	}

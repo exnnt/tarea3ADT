@@ -58,7 +58,7 @@ public class VerEnviosController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		lblLogin1.setText("Envios realizados desde: "+Tarea3Ad2024baseApplication.inicial.getNombre());
+		lblLogin1.setText("Envios realizados desde: " + Tarea3Ad2024baseApplication.inicial.getNombre());
 		eId.setCellValueFactory(new PropertyValueFactory<>("id"));
 		eDireccion.setCellValueFactory(
 				cellData -> new SimpleStringProperty(cellData.getValue().getDireccion().getDireccion()));
@@ -67,15 +67,16 @@ public class VerEnviosController implements Initializable {
 		ePeso.setCellValueFactory(new PropertyValueFactory<>("peso"));
 		eVolumen.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().volumenString()));
 		eUrgent.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().urgenteString()));
-		// logic rellenar cosas
 		List<EnvioACasa> oe = envioService.getenviosParada(Tarea3Ad2024baseApplication.inicial.getId());
 		tableViews.getItems().addAll(oe);
 	}
+
 	public void ayudaF1(KeyEvent event) {
-		if(event.getCode().toString().equals("F1")) {
+		if (event.getCode().toString().equals("F1")) {
 			mostrarAyuda();
 		}
 	}
+
 	@FXML
 	public void back() {
 		stageManager.switchScene(FxmlView.PARADA);
@@ -87,7 +88,7 @@ public class VerEnviosController implements Initializable {
 			WebView webView = new WebView();
 
 			String url = getClass().getResource("/help/html/parada.html").toExternalForm();
-		
+
 			webView.getEngine().load(url);
 
 			Stage helpStage = new Stage();
@@ -109,7 +110,5 @@ public class VerEnviosController implements Initializable {
 			alert.showAndWait();
 		}
 	}
-
-	
 
 }

@@ -19,7 +19,6 @@ public class ConjuntoRepository {
 
 	public void guardarconj(ConjuntoContratado conjuntoContratado) {
 		db.store(conjuntoContratado);
-		// creo q no hace falta tbh
 		db.commit();
 	}
 

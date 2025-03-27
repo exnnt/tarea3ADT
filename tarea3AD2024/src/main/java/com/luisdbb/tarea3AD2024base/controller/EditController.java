@@ -82,7 +82,7 @@ public class EditController implements Initializable {
 		alert.showAndWait();
 
 	}
-	
+
 	private void oleAlert() {
 		String e = userId.getText();
 		Alert alert = new Alert(AlertType.INFORMATION);

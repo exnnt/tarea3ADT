@@ -9,7 +9,6 @@ import com.luisdbb.tarea3AD2024base.modelo.Peregrino;
 
 @Repository
 public interface PeregrinoRepository extends JpaRepository<Peregrino, Long> {
-	//no me funcionaba sin el query pq me iba a user 
-	 @Query("SELECT p FROM Peregrino p WHERE p.id_user = :idUser")
-	    Peregrino findByIdUser(@Param("idUser") int idUser);
+	@Query("SELECT p FROM Peregrino p WHERE p.id_user = :idUser")
+	Peregrino findByIdUser(@Param("idUser") int idUser);
 }

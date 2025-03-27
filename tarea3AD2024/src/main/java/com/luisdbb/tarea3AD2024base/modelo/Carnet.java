@@ -31,25 +31,26 @@ public class Carnet implements Serializable {
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id")
 	private Peregrino user;
+
 	public Carnet() {
-		
+
 	}
+
 	public Carnet(Long id, Parada parada_inicial, Peregrino user) {
 		super();
 		this.id = id;
 		this.parada_inicial = parada_inicial;
 		this.user = user;
 	}
+
 	public Carnet(Peregrino user, Parada parada_inicial) {
 		super();
-		this.user=user;
-		this.parada_inicial=parada_inicial;
+		this.user = user;
+		this.parada_inicial = parada_inicial;
 		nvips = 0;
-		distancia=(float) 0.0;
-		this.fechaexp= LocalDate.now();
-		//cba to test it all rn tbh
-		// time
-		
+		distancia = (float) 0.0;
+		this.fechaexp = LocalDate.now();
+
 	}
 
 	public Carnet(Long id, Parada parada_inicial, Peregrino user, int nvips, Float distancia) {

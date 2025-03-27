@@ -38,11 +38,6 @@ import javafx.scene.web.WebView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-/**
- * @author Ram Alapure
- * @since 05-04-2017
- */
-
 @Controller
 public class LoginController implements Initializable {
 
@@ -112,11 +107,13 @@ public class LoginController implements Initializable {
 			updateAlert();
 		}
 	}
+
 	public void ayudaF1(KeyEvent event) {
-		if(event.getCode().toString().equals("F1")) {
+		if (event.getCode().toString().equals("F1")) {
 			mostrarAyuda();
 		}
 	}
+
 	public String getPassword() {
 		return password.getText();
 	}

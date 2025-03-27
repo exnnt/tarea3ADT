@@ -115,8 +115,9 @@ public class ExportController implements Initializable {
 			alert.showAndWait();
 		}
 	}
+
 	public void ayudaF1(KeyEvent event) {
-		if(event.getCode().toString().equals("F1")) {
+		if (event.getCode().toString().equals("F1")) {
 			mostrarAyuda();
 		}
 	}
@@ -177,8 +178,8 @@ public class ExportController implements Initializable {
 			String rutaSalida = "src/main/resources/escritura/" + name + "_peregrino.pdf";
 
 			JasperExportManager.exportReportToPdfFile(print, rutaSalida);
-
-			abrirPDF(rutaSalida);
+// no hace flata pa adat
+			// abrirPDF(rutaSalida);
 
 		} catch (JRException | SQLException e) {
 			System.out.println(e.getMessage());
@@ -206,7 +207,6 @@ public class ExportController implements Initializable {
 
 		} catch (IOException e) {
 
-			System.err.println("Error al abrir el archivo PDF ");
 		}
 	}
 

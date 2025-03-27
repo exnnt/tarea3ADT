@@ -115,8 +115,9 @@ public class EnvioController implements Initializable {
 				"El envio a " + direccion.getDireccion() + " esta de camino a " + direccion.getLocalidad());
 		stageManager.switchScene(FxmlView.PARADA);
 	}
+
 	public void ayudaF1(KeyEvent event) {
-		if(event.getCode().toString().equals("F1")) {
+		if (event.getCode().toString().equals("F1")) {
 			mostrarAyuda();
 		}
 	}

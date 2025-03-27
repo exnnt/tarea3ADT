@@ -81,11 +81,11 @@ public class CU11Controller implements Initializable {
 		return "a";
 
 	}
-	
+
 	@FXML
 	public void setxml() {
 		List<String> carnets = ExistDBManageante.getCarnetsParada(Tarea3Ad2024baseApplication.inicial.getNombre());
-		  int index = comboCarnet.getSelectionModel().getSelectedIndex();
-          tesarea.setText(carnets.get(index));
+		int index = comboCarnet.getSelectionModel().getSelectedIndex();
+		tesarea.setText(carnets.get(index));
 	}
 }
