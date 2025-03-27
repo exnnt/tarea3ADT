@@ -34,6 +34,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.web.WebView;
 import javafx.stage.Modality;
@@ -112,6 +113,11 @@ public class ExportController implements Initializable {
 			alert.setHeaderText("Archivo de Ayuda no encontrado");
 
 			alert.showAndWait();
+		}
+	}
+	public void ayudaF1(KeyEvent event) {
+		if(event.getCode().toString().equals("F1")) {
+			mostrarAyuda();
 		}
 	}
 

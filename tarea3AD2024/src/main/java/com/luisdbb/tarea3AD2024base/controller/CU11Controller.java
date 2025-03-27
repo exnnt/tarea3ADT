@@ -81,6 +81,7 @@ public class CU11Controller implements Initializable {
 		return "a";
 
 	}
+	
 	@FXML
 	public void setxml() {
 		List<String> carnets = ExistDBManageante.getCarnetsParada(Tarea3Ad2024baseApplication.inicial.getNombre());

@@ -34,6 +34,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.web.WebView;
@@ -178,6 +179,11 @@ public class ConjuntoController implements Initializable {
 	public void lastSelected() {
 		Servicio sel = tableServicios.getSelectionModel().getSelectedItem();
 		serviciopasiempre = sel;
+	}
+	public void ayudaF1(KeyEvent event) {
+		if(event.getCode().toString().equals("F1")) {
+			mostrarAyuda();
+		}
 	}
 
 	@FXML

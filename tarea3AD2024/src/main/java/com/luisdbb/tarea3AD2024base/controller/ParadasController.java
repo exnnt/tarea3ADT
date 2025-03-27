@@ -26,6 +26,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.web.WebView;
 import javafx.stage.Modality;
@@ -56,7 +57,11 @@ public class ParadasController implements Initializable {
 		Tarea3Ad2024baseApplication.useractivo.setPerfil(Perfil.INVITADO);
 		stageManager.switchScene(FxmlView.INVITADO);
 	}
-
+	public void ayudaF1(KeyEvent event) {
+		if(event.getCode().toString().equals("F1")) {
+			mostrarAyuda();
+		}
+	}
 	@FXML
 	private void goExport(ActionEvent event) throws IOException {
 		cu3 = true;

@@ -15,6 +15,7 @@ import com.luisdbb.tarea3AD2024base.config.mongodb.MongoDB;
 import com.luisdbb.tarea3AD2024base.modelo.Parada;
 import com.luisdbb.tarea3AD2024base.services.CarnetService;
 import com.luisdbb.tarea3AD2024base.services.ParadaService;
+import com.luisdbb.tarea3AD2024base.services.PeregrinoService;
 import com.luisdbb.tarea3AD2024base.services.Perfil;
 import com.luisdbb.tarea3AD2024base.services.UserService;
 import com.luisdbb.tarea3AD2024base.view.FxmlView;
@@ -30,6 +31,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.web.WebView;
 import javafx.stage.Modality;
@@ -66,6 +68,8 @@ public class AdminController implements Initializable {
 	@Autowired
 	private ParadaService paradaService;
 	@Autowired
+	private PeregrinoService peregrinoService;
+	@Autowired
 	private CarnetService carnetService;
 	
 	boolean par = false;
@@ -95,10 +99,14 @@ public class AdminController implements Initializable {
 	}
 	@FXML
 	private void backup() {
-		MongoDB m = new MongoDB(carnetService);
+		MongoDB m = new MongoDB(carnetService, peregrinoService);
 		m.backupCarnets();
 	}
-
+	public void ayudaF1(KeyEvent event) {
+		if(event.getCode().toString().equals("F1")) {
+			mostrarAyuda();
+		}
+	}
 	public void mostrarAyuda() {
 		try {
 			String url = "";
@@ -165,6 +173,7 @@ public class AdminController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
+		
 
 	}
 

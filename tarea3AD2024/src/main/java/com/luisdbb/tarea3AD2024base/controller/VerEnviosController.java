@@ -23,6 +23,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.StackPane;
 import javafx.scene.web.WebView;
@@ -70,7 +71,11 @@ public class VerEnviosController implements Initializable {
 		List<EnvioACasa> oe = envioService.getenviosParada(Tarea3Ad2024baseApplication.inicial.getId());
 		tableViews.getItems().addAll(oe);
 	}
-
+	public void ayudaF1(KeyEvent event) {
+		if(event.getCode().toString().equals("F1")) {
+			mostrarAyuda();
+		}
+	}
 	@FXML
 	public void back() {
 		stageManager.switchScene(FxmlView.PARADA);

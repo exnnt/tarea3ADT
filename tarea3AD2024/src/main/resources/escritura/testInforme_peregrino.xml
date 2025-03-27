@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <carnet>
-   <id>8</id>
-   <fechaexp>31-01-2025</fechaexp>
+   <id>11</id>
+   <fechaexp>25-02-2025</fechaexp>
    <expedidoen>Aviles</expedidoen>
    <peregrino>
-      <nombre>test final</nombre>
+      <nombre>testInforme</nombre>
       <nacionalidad>Austria</nacionalidad>
    </peregrino>
    <hoy>27-03-2025</hoy>

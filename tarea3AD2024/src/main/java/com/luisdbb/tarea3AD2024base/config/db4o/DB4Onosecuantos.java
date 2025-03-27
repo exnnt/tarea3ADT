@@ -1,16 +1,12 @@
 package com.luisdbb.tarea3AD2024base.config.db4o;
 
-import com.db4o.Db4o;
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
 import com.db4o.query.Predicate;
 import com.luisdbb.tarea3AD2024base.modelo.Servicio;
 
-import jakarta.annotation.PreDestroy;
-
 import org.springframework.stereotype.Component;
 
-import java.io.PrintStream;
 import java.util.List;
 
 @Component

@@ -1,36 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <carnet>
-   <id>7</id>
+   <id>6</id>
    <fechaexp>31-01-2025</fechaexp>
-   <expedidoen>Aviles</expedidoen>
+   <expedidoen>Ferrol</expedidoen>
    <peregrino>
-      <nombre>role</nombre>
-      <nacionalidad>Principado de Liechtenstein</nacionalidad>
+      <nombre>antonio</nombre>
+      <nacionalidad>Chile</nacionalidad>
    </peregrino>
    <hoy>27-03-2025</hoy>
-   <distanciatotal>11,0</distanciatotal>
+   <distanciatotal>5,5</distanciatotal>
    <paradas>
       <parada>
          <orden>1</orden>
-         <nombre>Aviles</nombre>
-         <region>A</region>
+         <nombre>Ferrol</nombre>
+         <region>F</region>
       </parada>
       <parada>
          <orden>2</orden>
          <nombre>Ribadeo</nombre>
          <region>R</region>
       </parada>
-      <parada>
-         <orden>3</orden>
-         <nombre>Ribadeo</nombre>
-         <region>R</region>
-      </parada>
    </paradas>
    <estancias>
       <estancia>
-         <id>7</id>
+         <id>8</id>
          <fecha>31-01-2025</fecha>
          <parada>Ribadeo</parada>
+         <vip/>
       </estancia>
    </estancias>
 </carnet>

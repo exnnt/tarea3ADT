@@ -1,7 +1,9 @@
 package com.luisdbb.tarea3AD2024base.modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import jakarta.persistence.*;
@@ -69,7 +71,7 @@ public class Peregrino implements Serializable {
 	@ManyToMany(cascade = { CascadeType.ALL })
 	@JoinTable(name = "ruta", joinColumns = { @JoinColumn(name = "peregrino_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "parada_id") })
-	private Set<Parada> paradas = new HashSet<Parada>();
+	private List<Parada> paradas = new ArrayList<Parada>();
 
 	public Long getId() {
 		return id;
@@ -103,11 +105,11 @@ public class Peregrino implements Serializable {
 		this.estancias = estancias;
 	}
 
-	public Set<Parada> getParadas() {
+	public List<Parada> getParadas() {
 		return paradas;
 	}
 
-	public void setParadas(Set<Parada> paradas) {
+	public void setParadas(List<Parada> paradas) {
 		this.paradas = paradas;
 	}
 

@@ -27,6 +27,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.web.WebView;
 import javafx.stage.Modality;
@@ -113,6 +114,11 @@ public class EnvioController implements Initializable {
 		showAlert(AlertType.INFORMATION, "Operacion completada", "Envio realizado",
 				"El envio a " + direccion.getDireccion() + " esta de camino a " + direccion.getLocalidad());
 		stageManager.switchScene(FxmlView.PARADA);
+	}
+	public void ayudaF1(KeyEvent event) {
+		if(event.getCode().toString().equals("F1")) {
+			mostrarAyuda();
+		}
 	}
 
 	public Long getLastEnvioId() {

@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <carnet>
-   <id>8</id>
-   <fechaexp>31-01-2025</fechaexp>
-   <expedidoen>Aviles</expedidoen>
+   <id>13</id>
+   <fechaexp>26-03-2025</fechaexp>
+   <expedidoen>Test1</expedidoen>
    <peregrino>
-      <nombre>test final</nombre>
-      <nacionalidad>Austria</nacionalidad>
+      <nombre>holaluis</nombre>
+      <nacionalidad>Emiratos Árabes Unidos</nacionalidad>
    </peregrino>
    <hoy>27-03-2025</hoy>
    <distanciatotal>0,0</distanciatotal>
    <paradas>
       <parada>
          <orden>1</orden>
-         <nombre>Aviles</nombre>
+         <nombre>Test1</nombre>
          <region>A</region>
       </parada>
    </paradas>

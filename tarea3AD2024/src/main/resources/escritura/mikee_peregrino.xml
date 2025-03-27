@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<carnet>
+   <id>14</id>
+   <fechaexp>27-03-2025</fechaexp>
+   <expedidoen>Las Arenas</expedidoen>
+   <peregrino>
+      <nombre>mikee</nombre>
+      <nacionalidad>Brasil</nacionalidad>
+   </peregrino>
+   <hoy>27-03-2025</hoy>
+   <distanciatotal>11,0</distanciatotal>
+   <paradas>
+      <parada>
+         <orden>1</orden>
+         <nombre>Las Arenas</nombre>
+         <region>L</region>
+      </parada>
+      <parada>
+         <orden>2</orden>
+         <nombre>Sevilla</nombre>
+         <region>S</region>
+      </parada>
+      <parada>
+         <orden>3</orden>
+         <nombre>Madrid</nombre>
+         <region>M</region>
+      </parada>
+   </paradas>
+   <estancias>
+      <estancia>
+         <id>12</id>
+         <fecha>27-03-2025</fecha>
+         <parada>Sevilla</parada>
+         <vip/>
+      </estancia>
+   </estancias>
+</carnet>

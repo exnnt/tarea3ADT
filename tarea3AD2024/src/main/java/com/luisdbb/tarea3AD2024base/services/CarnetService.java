@@ -4,6 +4,8 @@ import java.io.File;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -105,11 +107,13 @@ public class CarnetService {
 			}
 			// getParadabyPeregrinoId?
 			List<Ruta> rutas = rutaService.obtenerRutasPorPeregrino(yo.getId());
-			Set<Parada> peiredes = new HashSet<>();
+			rutas.sort(Comparator.comparingInt(Ruta::getOrden));
+			List<Parada> peiredes = new ArrayList<>();
 			for (Ruta r : rutas) {
 				Parada temporalidad = paradaService.find(r.getParadaId());
 				peiredes.add(temporalidad);
 			}
+			
 			yo.setParadas(peiredes);
 			// tengo que cargar paradas y estancias a peregrino
 
@@ -177,7 +181,7 @@ public class CarnetService {
 				Element ORDEN_ELEMENT = documento.createElement("orden");
 				ORDEN_ELEMENT.appendChild(documento.createTextNode(String.valueOf(ORDEN++)));
 				PARADA_ELEMENT.appendChild(ORDEN_ELEMENT);
-
+					
 				Element NOMBRE_PARADA = documento.createElement("nombre");
 				NOMBRE_PARADA.appendChild(documento.createTextNode(parada.getNombre()));
 				PARADA_ELEMENT.appendChild(NOMBRE_PARADA);

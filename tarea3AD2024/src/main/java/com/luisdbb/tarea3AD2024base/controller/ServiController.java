@@ -37,6 +37,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.web.WebView;
@@ -111,6 +112,11 @@ public class ServiController implements Initializable {
 	private void paradas(ActionEvent event) throws IOException {
 
 		stageManager.switchScene(FxmlView.ADMIN);
+	}
+	public void ayudaF1(KeyEvent event) {
+		if(event.getCode().toString().equals("F1")) {
+			mostrarAyuda();
+		}
 	}
 
 	@FXML

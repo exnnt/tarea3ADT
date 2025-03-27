@@ -7,73 +7,57 @@
       <nombre>luis</nombre>
       <nacionalidad>Austria</nacionalidad>
    </peregrino>
-   <hoy>08-03-2025</hoy>
-   <distanciatotal>33,0</distanciatotal>
+   <hoy>27-03-2025</hoy>
+   <distanciatotal>27,5</distanciatotal>
    <paradas>
       <parada>
          <orden>1</orden>
-         <nombre>Ribadeo</nombre>
-         <region>R</region>
-      </parada>
-      <parada>
-         <orden>2</orden>
          <nombre>Aviles</nombre>
          <region>A</region>
       </parada>
       <parada>
+         <orden>2</orden>
+         <nombre>Gijon</nombre>
+         <region>G</region>
+      </parada>
+      <parada>
          <orden>3</orden>
-         <nombre>Ferrol</nombre>
-         <region>F</region>
+         <nombre>Gijon</nombre>
+         <region>G</region>
       </parada>
       <parada>
          <orden>4</orden>
-         <nombre>Ferrol</nombre>
-         <region>F</region>
+         <nombre>Gijon</nombre>
+         <region>G</region>
       </parada>
       <parada>
          <orden>5</orden>
-         <nombre>Ferrol</nombre>
-         <region>F</region>
+         <nombre>Sevilla</nombre>
+         <region>S</region>
       </parada>
       <parada>
          <orden>6</orden>
-         <nombre>Ferrol</nombre>
-         <region>F</region>
-      </parada>
-      <parada>
-         <orden>7</orden>
-         <nombre>Ferrol</nombre>
-         <region>F</region>
+         <nombre>Madrid</nombre>
+         <region>M</region>
       </parada>
    </paradas>
    <estancias>
       <estancia>
-         <id>17</id>
-         <fecha>28-02-2025</fecha>
-         <parada>Ribadeo</parada>
+         <id>9</id>
+         <fecha>05-02-2025</fecha>
+         <parada>Gijon</parada>
          <vip/>
       </estancia>
       <estancia>
-         <id>18</id>
-         <fecha>28-02-2025</fecha>
-         <parada>Ferrol</parada>
+         <id>10</id>
+         <fecha>25-02-2025</fecha>
+         <parada>Gijon</parada>
+      </estancia>
+      <estancia>
+         <id>11</id>
+         <fecha>27-03-2025</fecha>
+         <parada>Madrid</parada>
          <vip/>
-      </estancia>
-      <estancia>
-         <id>19</id>
-         <fecha>28-02-2025</fecha>
-         <parada>Ferrol</parada>
-         <vip/>
-      </estancia>
-      <estancia>
-         <id>22</id>
-         <fecha>01-03-2025</fecha>
-         <parada>Ferrol</parada>
-      </estancia>
-      <estancia>
-         <id>23</id>
-         <fecha>02-03-2025</fecha>
-         <parada>Ferrol</parada>
       </estancia>
    </estancias>
 </carnet>
