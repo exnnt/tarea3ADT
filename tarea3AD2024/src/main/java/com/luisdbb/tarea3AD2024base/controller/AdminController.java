@@ -2,6 +2,7 @@ package com.luisdbb.tarea3AD2024base.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import com.luisdbb.tarea3AD2024base.config.StageManager;
 import com.luisdbb.tarea3AD2024base.config.existdb.ExistDBManageante;
 import com.luisdbb.tarea3AD2024base.config.mongodb.MongoDB;
 import com.luisdbb.tarea3AD2024base.modelo.Parada;
+import com.luisdbb.tarea3AD2024base.modelo.Usuario;
 import com.luisdbb.tarea3AD2024base.services.CarnetService;
 import com.luisdbb.tarea3AD2024base.services.ParadaService;
 import com.luisdbb.tarea3AD2024base.services.PeregrinoService;
@@ -95,7 +97,7 @@ public class AdminController implements Initializable {
 	@FXML
 	private void logout(ActionEvent event) throws IOException {
 		Tarea3Ad2024baseApplication.useractivo.setPerfil(Perfil.INVITADO);
-		stageManager.switchScene(FxmlView.INVITADO);
+		stageManager.switchScene(FxmlView.LOGIN);
 	}
 
 	@FXML
@@ -155,23 +157,50 @@ public class AdminController implements Initializable {
 
 			String nombre = name.getText();
 			char r = reg.getText().charAt(0);
-			String responsable = respons.getText();
-			responsable = responsable.replace(" ", "");
+			String user = respons.getText();
 			String passw = pass.getText();
-			passw = passw.replace(" ", "");
-			Parada temp = new Parada(nombre, r, responsable);
-			paradaService.crearParada(temp, passw);
-			System.out.println("");
-			System.out.println(temp.getNombre());
-			showAlert2(temp.getNombre(), responsable, passw);
-			ExistDBManageante.parada(nombre);
-			stageManager.switchScene(FxmlView.ADMIN1);
+			if (!user.equals(user.replaceAll(" ", "")) || !passw.equals(passw.replaceAll(" ", ""))) {
+				passAlert();
+				return;
+			}
+			try {
+				Parada temp = new Parada(nombre, r, user);
+				paradaService.crearParada(temp, user, passw);
+				showAlert2(temp.getNombre(), user, passw);
+				ExistDBManageante.parada(nombre);
+				stageManager.switchScene(FxmlView.ADMIN1);
+
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+
+				userAlert(user);
+			}
+
 		} catch (Exception e) {
 			showAlert();
 
 		}
 
 	}
+
+	public void passAlert() {
+
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setTitle("Invalid input");
+		alert.setHeaderText(null);
+		alert.setContentText("Ni el usuario ni la contraseña pueden tener espacios");
+		alert.showAndWait();
+	}
+	private void userAlert(String user) {
+
+		Alert alert = new Alert(AlertType.WARNING);
+		alert.setTitle("No se pudo crear la parada");
+		alert.setHeaderText(null);
+		alert.setContentText(
+				"El nombre de usuario " + user + " no esta disponible, pruebe con otro.");
+		alert.showAndWait();
+	}
+
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -191,8 +220,8 @@ public class AdminController implements Initializable {
 		Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
 		successAlert.setTitle("Parada creada");
 		successAlert.setHeaderText(null);
-		successAlert
-				.setContentText("La parada " + a + " con responsable " + b + " y contraseña " + c + " ha sido creada.");
+		successAlert.setContentText(
+				"La parada " + a + " con responsable " + b + "\n" + " y contraseña " + c + " ha sido creada.");
 		successAlert.showAndWait();
 	}
 

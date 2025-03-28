@@ -19,10 +19,9 @@ public class ParadaService {
 	private UserService userService;
 
 	@Transactional
-	public Parada crearParada(Parada user, String pass) {
-		pass = pass.replaceAll(" ", "");
-		Usuario responsable = new Usuario(user.getResponsable(), pass, "parada");
-		userService.crearUsuario(responsable);
+	public Parada crearParada(Parada user,String responsable, String pass) {		
+		Usuario respons= new Usuario(responsable, pass, "parada");
+		userService.crearUsuario(respons);
 		return paradaRepository.save(user);
 	}
 

@@ -29,7 +29,7 @@
 				<DropShadow blurType="ONE_PASS_BOX" />
 			</effect>
 		</Button>
-		<Label fx:id="lblMecachis" layoutX="76.0" layoutY="14.0" prefHeight="54.0" prefWidth="311.0" text="Welcome temporal lar" textFill="WHITE">
+		<Label fx:id="lblMecachis" layoutX="21.0" layoutY="14.0" prefHeight="54.0" prefWidth="366.0" text="Welcome temporal lar" textFill="WHITE">
 			<font>
 				<Font size="24.0" />
 			</font>

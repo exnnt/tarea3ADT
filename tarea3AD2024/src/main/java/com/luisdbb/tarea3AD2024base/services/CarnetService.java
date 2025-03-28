@@ -100,7 +100,7 @@ public class CarnetService {
 
 			}
 			List<Ruta> rutas = rutaService.obtenerRutasPorPeregrino(yo.getId());
-			// con esto ordena por ruta
+
 			rutas.sort(Comparator.comparingInt(Ruta::getOrden));
 			List<Parada> peiredes = new ArrayList<>();
 			for (Ruta r : rutas) {
@@ -115,33 +115,27 @@ public class CarnetService {
 				return null;
 			}
 
-			// Create XML Document
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			Document documento = db.newDocument();
 
-			// Root element
 			Element root = documento.createElement("carnet");
 			documento.appendChild(root);
 
-			// Carnet ID
 			Element ID_ELEMENT = documento.createElement("id");
 			ID_ELEMENT.appendChild(documento.createTextNode(String.valueOf(mio.getId())));
 			root.appendChild(ID_ELEMENT);
 
-			// Fecha de Expedición
 			DateTimeFormatter FORMATO_FECHA = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 			String FECHA_FORMATADA = mio.getFechaexp().format(FORMATO_FECHA);
 			Element FECHA_EXP = documento.createElement("fechaexp");
 			FECHA_EXP.appendChild(documento.createTextNode(FECHA_FORMATADA));
 			root.appendChild(FECHA_EXP);
 
-			// Parada Inicial
 			Element EXPEDIDO_EN = documento.createElement("expedidoen");
 			EXPEDIDO_EN.appendChild(documento.createTextNode(mio.getParada_inicial().getNombre()));
 			root.appendChild(EXPEDIDO_EN);
 
-			// Peregrino Information
 			Element PEREGRINO_ELEMENT = documento.createElement("peregrino");
 			root.appendChild(PEREGRINO_ELEMENT);
 
@@ -153,17 +147,14 @@ public class CarnetService {
 			NACIONALIDAD.appendChild(documento.createTextNode(yo.getNacionalidad()));
 			PEREGRINO_ELEMENT.appendChild(NACIONALIDAD);
 
-			// Current Date
 			Element HOY = documento.createElement("hoy");
 			HOY.appendChild(documento.createTextNode(new SimpleDateFormat("dd-MM-yyyy").format(new Date())));
 			root.appendChild(HOY);
 
-			// Distancia Total
 			Element DISTANCIA_TOTAL_ELEMENT = documento.createElement("distanciatotal");
 			DISTANCIA_TOTAL_ELEMENT.appendChild(documento.createTextNode(String.format("%.1f", mio.getDistancia())));
 			root.appendChild(DISTANCIA_TOTAL_ELEMENT);
 
-			// Paradas
 			Element PARADAS_ELEMENT = documento.createElement("paradas");
 			root.appendChild(PARADAS_ELEMENT);
 
@@ -186,7 +177,6 @@ public class CarnetService {
 				PARADAS_ELEMENT.appendChild(PARADA_ELEMENT);
 			}
 
-			// Estancias
 			if (yo.getEstancias() != null) {
 				Element ESTANCIAS_ELEMENT = documento.createElement("estancias");
 				root.appendChild(ESTANCIAS_ELEMENT);
@@ -220,15 +210,13 @@ public class CarnetService {
 			Transformer transformer;
 			try {
 				transformer = tf.newTransformer();
-				// configuro el transofrmer para identar el xml
 				transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 				transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
 
-				// creo origen DOM y le doy el destino para guardar el xml
 				DOMSource ds = new DOMSource(documento);
 				String name = yo.getNombre().replaceAll(" ", "");
 				StreamResult sr = new StreamResult(new File("src/main/resources/escritura/" + name + "_peregrino.xml"));
-				// guardado en la ruta especificada
+
 				transformer.transform(ds, sr);
 				return "src/main/resources/escritura/" + name + "_peregrino.xml";
 

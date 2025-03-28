@@ -35,7 +35,7 @@ public class Estancia {
 	private boolean vip = false;
 	@Transient
 	private String vipStatus;
-
+	@Transient
 	public String getvipstring() {
 		return vipStatus;
 	}
@@ -71,7 +71,7 @@ public class Estancia {
 	}
 	 @Transient
 	private String fechastring;
-
+	 
 	public String getFestring() {
 		return fechastring;
 	}

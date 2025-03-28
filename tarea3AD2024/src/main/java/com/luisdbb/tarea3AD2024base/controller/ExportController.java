@@ -84,7 +84,7 @@ public class ExportController implements Initializable {
 		Tarea3Ad2024baseApplication.useractivo.setId(0);
 		Tarea3Ad2024baseApplication.useractivo.setNombre("Invitado");
 		Tarea3Ad2024baseApplication.useractivo.setPerfil(Perfil.INVITADO);
-		stageManager.switchScene(FxmlView.INVITADO);
+		stageManager.switchScene(FxmlView.LOGIN);
 	}
 
 	public void mostrarAyuda() {
@@ -127,7 +127,7 @@ public class ExportController implements Initializable {
 		try {
 			carnetService.exportCarnet(p);
 			exportaAlert(p);
-			informe(p);
+			//informe(p);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

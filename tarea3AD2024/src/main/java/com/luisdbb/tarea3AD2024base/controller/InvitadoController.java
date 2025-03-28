@@ -84,7 +84,8 @@ public class InvitadoController implements Initializable {
 
 	@FXML
 	private Button saveUser;
-
+	@FXML
+	private TextField nombre;
 	@Lazy
 	@Autowired
 	private StageManager stageManager;
@@ -128,13 +129,12 @@ public class InvitadoController implements Initializable {
 	@FXML
 	public void registraUser(ActionEvent event) {
 
-		String pername = userId.getText();
-		String username = userId.getText().replace(" ", "");
+		String pername = nombre.getText();
+		String username = userId.getText();
 		String nacion = cbNa.getValue();
 		String parada = cbParada.getValue();
-		System.out.println(parada);
 		String password = getPassword();
-		password = password.replace(" ", "");
+
 		// luego hago el validAlert
 		boolean valid = true;
 		if (!validate(pername)) {
@@ -162,6 +162,11 @@ public class InvitadoController implements Initializable {
 			return;
 		}
 
+		if (!username.equals(username.replaceAll(" ", "")) || !password.equals(password.replaceAll(" ", ""))) {
+			passAlert();
+			return;
+		}
+
 		Usuario user = new Usuario();
 		user.setName(username);
 		user.setType("peregrino");
@@ -170,31 +175,31 @@ public class InvitadoController implements Initializable {
 		per.setNombre(pername);
 		per.setNacionalidad(nacion);
 
-		Usuario newUser = userService.crearUsuario(user);
-		int id_user = newUser.getId();
-		per.setId_user(id_user);
-		peregrinoService.creaPeregrino(per);
-		Parada p = paradaService.findbyName(parada);
-
-		Tarea3Ad2024baseApplication.useractivo.setId(id_user);
-
-		Tarea3Ad2024baseApplication.useractivo.setNombre(user.getName());
-
-		Tarea3Ad2024baseApplication.useractivo.setPerfil(com.luisdbb.tarea3AD2024base.services.Perfil.PEREGRINO);
-
-		carnetService.creaCarnet(per, p);
 		try {
+			Usuario newUser = userService.crearUsuario(user);
+			int id_user = newUser.getId();
+			per.setId_user(id_user);
+			peregrinoService.creaPeregrino(per);
+			Parada p = paradaService.findbyName(parada);
+
+			Tarea3Ad2024baseApplication.useractivo.setId(id_user);
+
+			Tarea3Ad2024baseApplication.useractivo.setNombre(user.getName());
+
+			Tarea3Ad2024baseApplication.useractivo.setPerfil(com.luisdbb.tarea3AD2024base.services.Perfil.PEREGRINO);
+			rutaService.crearRuta(per.getId(), p.getId(), 0);
+			carnetService.creaCarnet(per, p);
 			String carnet = carnetService.exportCarnet(per);
 			File ccarnet = new File(carnet);
 			ExistDBManageante.storeCarnet(p.getNombre(), ccarnet);
 			// crea ruta
-			rutaService.crearRuta(per.getId(), p.getId(), 0);
+	
 			saveAlert(newUser);
 			stageManager.switchScene(FxmlView.PEREGRINO);
 			clearFields();
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			userAlert(user);
 		}
 
 	}
@@ -239,8 +244,6 @@ public class InvitadoController implements Initializable {
 		cbParada.setItems(paradas);
 	}
 
-	// lo puedo usar para crear mas rapido ig luego lo borro
-
 	private void clearFields() {
 		userId.setText(null);
 
@@ -259,12 +262,30 @@ public class InvitadoController implements Initializable {
 		alert.showAndWait();
 	}
 
+	private void userAlert(Usuario user) {
+
+		Alert alert = new Alert(AlertType.WARNING);
+		alert.setTitle("No se pudo crear el usuario");
+		alert.setHeaderText(null);
+		alert.setContentText("El nombre de usuario " + user.getName() + " no esta disponible, pruebe con otro.");
+		alert.showAndWait();
+	}
+
 	public void updateAlert() {
 
 		Alert alert = new Alert(AlertType.ERROR);
 		alert.setTitle("Invalid input");
 		alert.setHeaderText(null);
 		alert.setContentText("Alguno de los campos esta vacio o invalido");
+		alert.showAndWait();
+	}
+
+	public void passAlert() {
+
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setTitle("Invalid input");
+		alert.setHeaderText(null);
+		alert.setContentText("Ni el usuario ni la contraseña pueden tener espacios");
 		alert.showAndWait();
 	}
 
@@ -308,7 +329,6 @@ public class InvitadoController implements Initializable {
 
 		loadCountries();
 		loadPinicial();
-		// useless no? setColumnProperties();
 
 	}
 
@@ -325,7 +345,6 @@ public class InvitadoController implements Initializable {
 		}
 	}
 
-	// COPIAR ESTO PA OTROS
 	private void validationAlert(String field, boolean empty) {
 		Alert alert = new Alert(AlertType.WARNING);
 		alert.setTitle("Validation Error");

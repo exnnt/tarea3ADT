@@ -41,7 +41,6 @@ public class ExistDBManageante {
 			Collection col = DatabaseManager.getCollection(URI + "/" + path, USERNAME, PASSWORD);
 
 			if (col == null) {
-				System.out.println("creando: " + path);
 				mgtService.createCollection(path);
 
 			} else {
@@ -60,7 +59,6 @@ public class ExistDBManageante {
 	public static void storeCarnet(String parada, File carnetFile) {
 		testConexion();
 		if (!carnetFile.exists() || carnetFile.length() == 0) {
-			System.err.println("no valid file");
 			return;
 		}
 
@@ -69,7 +67,6 @@ public class ExistDBManageante {
 			Collection colparada = DatabaseManager.getCollection(URI + path, USERNAME, PASSWORD);
 
 			if (colparada == null) {
-				System.out.println("creando coleccoin parada : " + parada);
 				createCollection(path);
 				colparada = DatabaseManager.getCollection(URI + path, USERNAME, PASSWORD);
 			}
@@ -81,10 +78,7 @@ public class ExistDBManageante {
 				resource.setContent(carnetFile);
 
 				colparada.storeResource(resource);
-				System.out.println("guardado en " + parada + " el carnet: " + carnetFile.getName());
-			} else {
-				System.out.println("quemovida no");
-			}
+			} 
 		} catch (XMLDBException e) {
 			e.printStackTrace();
 		}
@@ -95,9 +89,7 @@ public class ExistDBManageante {
 			Collection col = DatabaseManager.getCollection(URI, USERNAME, PASSWORD);
 			if (col == null) {
 				System.err.println("sadgi");
-			} else {
-				System.out.println("oe");
-			}
+			} 
 		} catch (XMLDBException e) {
 			e.printStackTrace();
 		}
@@ -111,13 +103,11 @@ public class ExistDBManageante {
 		try {
 			collection = DatabaseManager.getCollection(URI + path, USERNAME, PASSWORD);
 			if (collection == null) {
-				System.out.println("mecachi");
 				return carnets;
 			}
 
 			String[] carnetsDB = collection.listResources();
 			if (carnetsDB == null || carnetsDB.length == 0) {
-				System.out.println("parda vacia");
 				return carnets;
 			}
 

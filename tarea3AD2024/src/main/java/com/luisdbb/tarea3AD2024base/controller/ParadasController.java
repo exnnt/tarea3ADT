@@ -55,7 +55,7 @@ public class ParadasController implements Initializable {
 	@FXML
 	private void logout(ActionEvent event) throws IOException {
 		Tarea3Ad2024baseApplication.useractivo.setPerfil(Perfil.INVITADO);
-		stageManager.switchScene(FxmlView.INVITADO);
+		stageManager.switchScene(FxmlView.LOGIN);
 	}
 
 	public void ayudaF1(KeyEvent event) {

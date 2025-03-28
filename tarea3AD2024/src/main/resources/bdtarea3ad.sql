@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-01-2025 a las 18:28:07
+-- Tiempo de generación: 28-03-2025 a las 14:16:18
 -- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.0.30
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -45,10 +45,40 @@ INSERT INTO `carnets` (`id`, `distancia`, `fecha_exp`, `n_vip`, `pinicial_id`) V
 (3, 0.0, '2025-01-31', 0, 3),
 (4, 0.0, '2025-01-31', 0, 4),
 (5, 11.0, '2025-01-31', 1, 5),
-(6, 5.5, '2025-01-31', 1, 4),
+(6, 11.0, '2025-01-31', 2, 4),
 (7, 11.0, '2025-01-31', 0, 2),
 (8, 0.0, '2025-01-31', 0, 2),
-(9, 0.0, '2025-01-31', 0, 3);
+(9, 0.0, '2025-01-31', 0, 3),
+(10, 0.0, '2025-03-28', 0, 6),
+(11, 0.0, '2025-03-28', 0, 1),
+(12, 33.0, '2025-03-28', 5, 8);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `direccion`
+--
+
+CREATE TABLE `direccion` (
+  `id` bigint(20) NOT NULL,
+  `direccion` varchar(255) DEFAULT NULL,
+  `localidad` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `envioacasa`
+--
+
+CREATE TABLE `envioacasa` (
+  `id` bigint(20) NOT NULL,
+  `id_parada` bigint(20) DEFAULT NULL,
+  `peso` double NOT NULL,
+  `urgente` bit(1) NOT NULL,
+  `volumen` varbinary(255) DEFAULT NULL,
+  `direccion_id` bigint(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -61,24 +91,29 @@ CREATE TABLE `estancias` (
   `fecha` date NOT NULL,
   `parada_id` bigint(20) NOT NULL,
   `peregrino_id` bigint(20) NOT NULL,
-  `vip` tinyint(1) NOT NULL,
-  `fechastring` varchar(255) DEFAULT NULL,
-  `vip_status` varchar(255) DEFAULT NULL
+  `vip` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `estancias`
 --
 
-INSERT INTO `estancias` (`id`, `fecha`, `parada_id`, `peregrino_id`, `vip`, `fechastring`, `vip_status`) VALUES
-(1, '2025-01-31', 1, 1, 0, NULL, NULL),
-(2, '2025-01-31', 1, 1, 1, NULL, NULL),
-(3, '2025-01-31', 5, 1, 1, NULL, NULL),
-(4, '2025-01-31', 5, 1, 0, NULL, NULL),
-(5, '2025-01-31', 4, 1, 1, NULL, NULL),
-(6, '2025-01-31', 1, 5, 1, NULL, NULL),
-(7, '2025-01-31', 3, 7, 0, NULL, NULL),
-(8, '2025-01-31', 3, 6, 1, NULL, NULL);
+INSERT INTO `estancias` (`id`, `fecha`, `parada_id`, `peregrino_id`, `vip`) VALUES
+(1, '2025-01-31', 1, 1, 0),
+(2, '2025-01-31', 1, 1, 1),
+(3, '2025-01-31', 5, 1, 1),
+(4, '2025-01-31', 5, 1, 0),
+(5, '2025-01-31', 4, 1, 1),
+(6, '2025-01-31', 1, 5, 1),
+(7, '2025-01-31', 3, 7, 0),
+(8, '2025-01-31', 3, 6, 1),
+(9, '2025-03-28', 1, 6, 1),
+(10, '2025-03-28', 1, 12, 0),
+(11, '2025-03-28', 1, 12, 1),
+(12, '2025-03-28', 1, 12, 1),
+(13, '2025-03-28', 2, 12, 1),
+(14, '2025-03-28', 2, 12, 1),
+(15, '2025-03-28', 2, 12, 1);
 
 -- --------------------------------------------------------
 
@@ -102,7 +137,10 @@ INSERT INTO `paradas` (`id`, `nombre`, `region`, `responsable`) VALUES
 (2, 'Aviles', 'A', 'aviles'),
 (3, 'Ribadeo', 'R', 'ribadeo'),
 (4, 'Ferrol', 'F', 'ferrol'),
-(5, 'Oviedo', 'O', 'oviedo');
+(5, 'Oviedo', 'O', 'oviedo'),
+(6, 'Las Arenas', 'L', 'lasarenas'),
+(7, 'Parada espacios', 'R', 'paradaespacios'),
+(8, 'Sevilla', 'S', 'sevilla');
 
 -- --------------------------------------------------------
 
@@ -123,14 +161,15 @@ CREATE TABLE `peregrinos` (
 
 INSERT INTO `peregrinos` (`id`, `id_user`, `nacionalidad`, `nombre`) VALUES
 (1, 6, 'Emiratos Árabes Unidos', 'natxo espacio test'),
-(2, 7, 'Austria', 'luis'),
+(2, 7, 'Austria', 'Luis Nombre'),
 (3, 8, 'Australia', 'marta'),
 (4, 9, 'Brasil', 'laura'),
 (5, 10, 'Canadá', 'miriam'),
 (6, 11, 'Chile', 'antonio'),
 (7, 12, 'Principado de Liechtenstein', 'role'),
-(8, 13, 'Austria', 'test final'),
-(9, 14, 'Suiza', 'test final final');
+(10, 16, 'Austria', 'Alberto espacio2'),
+(11, 18, 'Austria', 'Aberto'),
+(12, 23, 'Austria', 'Elyoya Peregrino');
 
 -- --------------------------------------------------------
 
@@ -172,8 +211,16 @@ INSERT INTO `ruta` (`id`, `distancia`, `orden`, `parada_id`, `peregrino_id`) VAL
 (19, 5.5, 3, 3, 7),
 (20, 5.5, 2, 3, 6),
 (21, 5.5, 10, 3, 1),
-(22, 0.0, 1, 2, 8),
-(23, 0.0, 1, 3, 9);
+(24, 0.0, 1, 6, 10),
+(25, 0.0, 1, 1, 11),
+(26, 5.5, 3, 1, 6),
+(27, 0.0, 1, 8, 12),
+(28, 5.5, 2, 1, 12),
+(29, 5.5, 3, 1, 12),
+(30, 5.5, 4, 1, 12),
+(31, 5.5, 5, 2, 12),
+(32, 5.5, 6, 2, 12),
+(33, 5.5, 7, 2, 12);
 
 -- --------------------------------------------------------
 
@@ -222,8 +269,12 @@ INSERT INTO `usuarios` (`id_user`, `nombre`, `password`, `perfil`) VALUES
 (10, 'miriam', 'miriam', 'peregrino'),
 (11, 'antonio', 'antonio', 'peregrino'),
 (12, 'role', 'role', 'peregrino'),
-(13, 'testfinal', 'final', 'peregrino'),
-(14, 'testfinalfinal', 'final', 'peregrino');
+(15, 'lasarenas', 'lasarenas', 'parada'),
+(16, 'alberto', 'alberto', 'peregrino'),
+(18, 'alberto2', 'alberto', 'peregrino'),
+(19, 'paradaespacios', 'paradaespacios', 'parada'),
+(21, 'sevilla', 'sevilla', 'parada'),
+(23, 'elyoya', 'elyoya', 'peregrino');
 
 --
 -- Índices para tablas volcadas
@@ -235,6 +286,19 @@ INSERT INTO `usuarios` (`id_user`, `nombre`, `password`, `perfil`) VALUES
 ALTER TABLE `carnets`
   ADD PRIMARY KEY (`id`),
   ADD KEY `FK8l3vu4n95ut611pmhq8h3k7px` (`pinicial_id`);
+
+--
+-- Indices de la tabla `direccion`
+--
+ALTER TABLE `direccion`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `envioacasa`
+--
+ALTER TABLE `envioacasa`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `UKou9a35ptwj8g1e12yoixyfgyr` (`direccion_id`);
 
 --
 -- Indices de la tabla `estancias`
@@ -287,31 +351,43 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `carnets`
 --
 ALTER TABLE `carnets`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT de la tabla `direccion`
+--
+ALTER TABLE `direccion`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `envioacasa`
+--
+ALTER TABLE `envioacasa`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `estancias`
 --
 ALTER TABLE `estancias`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `paradas`
 --
 ALTER TABLE `paradas`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `peregrinos`
 --
 ALTER TABLE `peregrinos`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `ruta`
 --
 ALTER TABLE `ruta`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT de la tabla `user`
@@ -323,7 +399,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- Restricciones para tablas volcadas
@@ -334,6 +410,12 @@ ALTER TABLE `usuarios`
 --
 ALTER TABLE `carnets`
   ADD CONSTRAINT `FK8l3vu4n95ut611pmhq8h3k7px` FOREIGN KEY (`pinicial_id`) REFERENCES `paradas` (`id`);
+
+--
+-- Filtros para la tabla `envioacasa`
+--
+ALTER TABLE `envioacasa`
+  ADD CONSTRAINT `FKm5cpiqg3ne49gx15tmv8j0hc0` FOREIGN KEY (`direccion_id`) REFERENCES `direccion` (`id`);
 
 --
 -- Filtros para la tabla `estancias`

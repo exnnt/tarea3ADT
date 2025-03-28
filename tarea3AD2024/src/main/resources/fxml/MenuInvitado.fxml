@@ -15,28 +15,28 @@
 
 <AnchorPane stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.luisdbb.tarea3AD2024base.controller.InvitadoController">
    <children>
-      <Rectangle fill="DODGERBLUE" height="250.0" stroke="#ffffff8b" strokeType="INSIDE" width="400.0" />
+      <Rectangle fill="DODGERBLUE" height="302.0" stroke="#ffffff8b" strokeType="INSIDE" width="400.0" />
       <Label fx:id="lblLogin" layoutX="130.0" layoutY="14.0" text="Crear Peregrino" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="userId" layoutX="14.0" layoutY="44.0" prefHeight="36.0" prefWidth="204.0" promptText="Usuario" />
-      <PasswordField fx:id="pass" layoutX="14.0" layoutY="153.0" onAction="#login" prefHeight="36.0" prefWidth="204.0" promptText="Contraseña" />
-      <Button fx:id="btnSignIn" layoutX="17.0" layoutY="204.0" onAction="#registraUser" prefHeight="31.0" prefWidth="95.0" style="-fx-background-color: #4967EB;" styleClass="btnGreen" text="_Registrarse" textFill="WHITE">
+      <TextField fx:id="userId" layoutX="14.0" layoutY="93.0" prefHeight="36.0" prefWidth="204.0" promptText="Usuario" />
+      <PasswordField fx:id="pass" layoutX="14.0" layoutY="212.0" onAction="#login" prefHeight="36.0" prefWidth="204.0" promptText="Contraseña" />
+      <Button fx:id="btnSignIn" layoutX="14.0" layoutY="258.0" onAction="#registraUser" prefHeight="31.0" prefWidth="95.0" style="-fx-background-color: #4967EB;" styleClass="btnGreen" text="_Registrarse" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
          <effect>
             <DropShadow blurType="ONE_PASS_BOX" />
          </effect></Button>
-      <ComboBox fx:id="cbNa" layoutX="14.0" layoutY="86.0" prefHeight="26.0" prefWidth="204.0" promptText="Nacionalidad" />
-      <ComboBox fx:id="cbParada" layoutX="14.0" layoutY="119.0" prefHeight="26.0" prefWidth="204.0" promptText="Parada Inicial" />
+      <ComboBox fx:id="cbNa" layoutX="14.0" layoutY="138.0" prefHeight="26.0" prefWidth="204.0" promptText="Nacionalidad" />
+      <ComboBox fx:id="cbParada" layoutX="14.0" layoutY="178.0" prefHeight="26.0" prefWidth="204.0" promptText="Parada Inicial" />
       <ImageView fitHeight="147.0" fitWidth="166.0" layoutX="225.0" layoutY="44.0" pickOnBounds="true" smooth="false">
          <image>
             <Image url="@/images/4.png" />
          </image></ImageView>
-      <Button fx:id="btnLogIn" layoutX="130.0" layoutY="204.0" onAction="#login" prefHeight="31.0" prefWidth="88.0" style="-fx-background-color: #4967EB;" styleClass="btnGreen" text="_Acceder" textFill="WHITE">
+      <Button fx:id="btnLogIn" layoutX="130.0" layoutY="258.0" onAction="#login" prefHeight="31.0" prefWidth="88.0" style="-fx-background-color: #4967EB;" styleClass="btnGreen" text="_Acceder" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
@@ -50,6 +50,7 @@
          </image>
       </ImageView>
       <Button fx:id="btnAyuda" layoutX="361.0" layoutY="11.0" mnemonicParsing="false" onAction="#mostrarAyuda" opacity="0.0" prefHeight="36.0" prefWidth="30.0" textFill="TRANSPARENT" />
+      <TextField fx:id="nombre" layoutX="14.0" layoutY="47.0" prefHeight="36.0" prefWidth="204.0" promptText="Nombre" />
    </children>
    <opaqueInsets>
       <Insets />
